@@ -370,11 +370,13 @@ export default function App() {
                     {/* Decorative Background Grid */}
                     <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
                     
-                    {/* Glowing Avatar Placeholder */}
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-indigo-400 to-sky-300 p-1 shadow-lg shadow-indigo-500/30 mb-4 relative z-10 group">
-                      <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-2xl font-extrabold text-indigo-300 font-mono">
-                        RB
-                      </div>
+                    {/* Glowing Avatar / Profile Photo */}
+                    <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-sky-400 p-[3px] shadow-xl shadow-indigo-500/30 mb-4 relative z-10 group">
+                      <img
+                        src="/avatar.png"
+                        alt="Rogger Brosco"
+                        className="w-full h-full rounded-full object-cover bg-slate-900 group-hover:scale-105 transition-transform duration-300 shadow-inner"
+                      />
                     </div>
 
                     <div className="relative z-10 space-y-1">
