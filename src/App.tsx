@@ -301,47 +301,47 @@ export default function App() {
       {/* Main Container */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-24 space-y-28">
 
-        {/* HERO SECTION WITH 3D NEURAL WAVE BACKGROUND */}
-        <section id="about" className="relative rounded-3xl overflow-hidden min-h-[500px] sm:min-h-[560px] flex items-center p-6 sm:p-12 border border-slate-200/60 dark:border-slate-800/80 bg-gradient-to-b from-slate-900/40 via-slate-950/70 to-slate-900/90 backdrop-blur-md">
+        {/* HERO SECTION WITH 3D NEURAL WAVE BACKGROUND (CENTERED & POLISHED) */}
+        <section id="about" className="relative rounded-3xl overflow-hidden min-h-[580px] sm:min-h-[640px] flex flex-col items-center justify-center text-center p-6 sm:p-14 border border-slate-200/60 dark:border-slate-800/80 bg-gradient-to-b from-slate-900/60 via-slate-950/80 to-slate-900/95 backdrop-blur-md shadow-2xl">
           
-          {/* 3D Wave Canvas Layer */}
+          {/* 3D Wave Canvas Layer (Full Ambient Depth) */}
           <Hero3DScene theme={theme} />
 
-          {/* Hero Foreground Content */}
-          <div className="relative z-10 max-w-3xl space-y-6">
+          {/* Hero Centered Content */}
+          <div className="relative z-10 max-w-3xl mx-auto space-y-6 flex flex-col items-center">
             
-            {/* Top Greeting & Live Status */}
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-bold tracking-wide backdrop-blur-md">
+            {/* Top Greeting & Live Status Pills */}
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-bold tracking-wide backdrop-blur-md shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-                <span>ROGGER BROSCO</span>
+                <span>ROGGGER BROSCO</span>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-semibold backdrop-blur-md">
+              <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold backdrop-blur-md shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                 <span>DISPONÍVEL PARA PROJETOS</span>
               </div>
             </div>
 
-            {/* Headline */}
-            <div className="space-y-4">
+            {/* Main Headline */}
+            <div className="space-y-3">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
                 CTO & Full-Stack{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-sky-400">
+                <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-sky-400">
                   Software Architect
                 </span>
               </h1>
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+              <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal mx-auto pt-2">
                 Especialista em construir <strong>SaaS de alta escala</strong>, interfaces ultrarrápidas em <strong>Next.js 15 & React 19</strong>, arquitetura relacional em <strong>PostgreSQL 17</strong> e <strong>automações com Inteligência Artificial</strong> para acelerar negócios.
               </p>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
               <a
                 href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20quero%20conversar%20sobre%20um%20novo%20projeto"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/30 cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/40 hover:scale-[1.02] cursor-pointer"
               >
                 <span>Iniciar Meu Projeto</span>
                 <ArrowRight className="w-4 h-4" />
@@ -349,40 +349,35 @@ export default function App() {
 
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-slate-900/80 hover:bg-slate-800 border border-slate-700 text-slate-100 font-semibold text-sm transition shadow-sm backdrop-blur-md"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-100 font-semibold text-sm transition shadow-sm backdrop-blur-md hover:scale-[1.02]"
               >
                 <Boxes className="w-4 h-4 text-indigo-400" />
                 <span>Ver Portfólio em Produção</span>
               </a>
             </div>
 
-            {/* Micro Profile Strip */}
-            <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-sky-400 p-[2px] shadow-sm shrink-0">
-                  <img
-                    src="/avatar.png"
-                    alt="Rogger Brosco"
-                    className="w-full h-full rounded-full object-cover bg-slate-900"
-                  />
-                </div>
-                <div>
-                  <div className="text-sm font-bold text-white">Rogger Brosco</div>
-                  <div className="text-xs text-indigo-400 font-semibold">CTO @ EasyDev • Lead Architect</div>
-                </div>
+            {/* Executive Identity & Social Bar (Centered, Single Clean Card) */}
+            <div className="pt-6 border-t border-slate-800/80 w-full flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-300">
+              <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 backdrop-blur-md">
+                <img
+                  src="/avatar.png"
+                  alt="Rogger Brosco"
+                  className="w-6 h-6 rounded-full object-cover border border-indigo-400"
+                />
+                <span className="text-white font-bold">Rogger Brosco</span>
+                <span className="text-slate-500">•</span>
+                <span className="text-indigo-400 font-semibold">CTO @ EasyDev</span>
               </div>
 
-              <div className="flex items-center gap-2 text-xs font-mono">
-                <a
-                  href="https://github.com/rbrosco"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-slate-700 text-slate-200 flex items-center gap-1.5 transition"
-                >
-                  <Github className="w-3.5 h-3.5" />
-                  <span>github.com/rbrosco</span>
-                </a>
-              </div>
+              <a
+                href="https://github.com/rbrosco"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition font-mono backdrop-blur-md"
+              >
+                <Github className="w-3.5 h-3.5" />
+                <span>github.com/rbrosco</span>
+              </a>
             </div>
 
           </div>
