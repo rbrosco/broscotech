@@ -80,6 +80,7 @@ export default function App() {
       description: 'Ecossistema integrado para empresas de desenvolvimento de software, unindo gestão de desenvolvedores, controle financeiro de planos/descontos, CMS dinâmico e monitoramento de serviços.',
       tags: ['Next.js 15', 'TypeScript', 'TypeORM', 'Tailwind CSS', 'Docker', 'PostgreSQL'],
       status: 'Core Enterprise',
+      link: 'https://dev.easydev.com.br',
       color: 'from-blue-500/20 to-indigo-500/10',
       borderColor: 'border-blue-500/30',
       badgeColor: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
@@ -128,6 +129,7 @@ export default function App() {
     {
       role: 'CTO & Co-Founder',
       company: 'EasyDev',
+      companyUrl: 'https://dev.easydev.com.br',
       period: '2023 — Presente',
       description: 'Liderança técnica, definição da arquitetura de software de todos os produtos, estruturação de pipelines de CI/CD, microsserviços Docker e governança de código.'
     },
@@ -185,13 +187,13 @@ export default function App() {
               Disponível para Projetos
             </div>
             <a
-              href="https://wa.me/5519999999999?text=Ol%C3%A1%20Rogger,%20vi%20seu%20portf%C3%B3lio%20na%20Broscotech"
+              href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vi%20seu%20portf%C3%B3lio%20na%20Broscotech"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs transition shadow-lg shadow-emerald-500/20"
             >
               <Phone className="w-3.5 h-3.5" />
-              <span className="hidden xs:inline">WhatsApp</span>
+              <span className="hidden xs:inline">(41) 99174-7318</span>
             </a>
           </div>
         </div>
@@ -459,7 +461,14 @@ export default function App() {
                   <div className="flex items-center gap-2">
                     <h3 className="text-lg font-bold text-white">{item.role}</h3>
                     <span className="text-zinc-500">•</span>
-                    <span className="text-emerald-400 font-semibold text-sm">{item.company}</span>
+                    {item.companyUrl ? (
+                      <a href={item.companyUrl} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 font-semibold text-sm inline-flex items-center gap-1 transition">
+                        {item.company}
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    ) : (
+                      <span className="text-emerald-400 font-semibold text-sm">{item.company}</span>
+                    )}
                   </div>
                   <p className="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
                 </div>
@@ -488,13 +497,13 @@ export default function App() {
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               <a
-                href="https://wa.me/5519999999999?text=Ol%C3%A1%20Rogger,%20vamos%20conversar%20sobre%20um%20projeto"
+                href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vamos%20conversar%20sobre%20um%20projeto"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-sm transition shadow-xl shadow-emerald-500/25"
               >
                 <Phone className="w-4 h-4" />
-                Conversar no WhatsApp
+                Conversar no WhatsApp ((41) 99174-7318)
               </a>
               <a
                 href="mailto:contato@broscotech.com.br"
@@ -520,14 +529,14 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4 font-mono">
-            <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition">
-              GitHub
-            </a>
-            <a href="#" className="hover:text-emerald-400 transition">
-              LinkedIn
+            <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition">
+              EasyDev
             </a>
             <a href="https://planner-sdr.broscotech.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition">
               Planner SDR
+            </a>
+            <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition">
+              GitHub
             </a>
           </div>
         </div>
