@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Code2,
-  Terminal,
   Cpu,
   Layers,
   Server,
@@ -12,7 +11,6 @@ import {
   CheckCircle2,
   ExternalLink,
   Github,
-  Linkedin,
   Mail,
   ArrowRight,
   Database,
@@ -22,107 +20,160 @@ import {
   Phone,
   FileCode2,
   GitBranch,
-  Monitor
+  Terminal,
+  Compass,
+  Workflow,
+  Boxes,
+  Award,
+  TrendingUp,
+  MapPin,
+  Send,
+  UserCheck
 } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'all' | 'frontend' | 'backend' | 'ai' | 'devops'>('all');
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [copied, setCopied] = useState(false);
 
   const stats = [
-    { label: 'Anos de Experiência', value: '+7', desc: 'Engenharia de Software' },
-    { label: 'SLA em Produção', value: '99.9%', desc: 'Infraestrutura Robusta' },
-    { label: 'SaaS & Projetos', value: '+20', desc: 'Entregues com Excelência' },
-    { label: 'Fleet de IA', value: '5 Agentes', desc: 'Automação Operacional' },
+    { label: 'Anos de Experiência', value: '+7', subtitle: 'Engenharia de Software', icon: Award },
+    { label: 'SaaS em Produção', value: '+20', subtitle: 'Projetos de Alto Impacto', icon: Boxes },
+    { label: 'Frota de IA Ativa', value: '5 Agentes', subtitle: 'Automação Operacional', icon: Bot },
+    { label: 'SLA Operacional', value: '99.9%', subtitle: 'Alta Disponibilidade', icon: ShieldCheck },
+  ];
+
+  const services = [
+    {
+      icon: Code2,
+      badge: 'Full-Stack Moderno',
+      title: 'Arquitetura SaaS & Web Apps',
+      description: 'Construção de plataformas completas e escaláveis utilizando Next.js 15 (App Router), React 19, TypeScript estrito e Tailwind CSS v4 com precisão de design.',
+      color: 'from-indigo-500 to-blue-500',
+      tagColor: 'bg-indigo-50 text-indigo-700 border-indigo-100',
+    },
+    {
+      icon: Database,
+      badge: 'Backend & Dados',
+      title: 'Engenharia Backend & Alta Performance',
+      description: 'Desenvolvimento de APIs robustas com Node.js / Bun, modelagem relacional em PostgreSQL 17, otimização de queries, TypeORM e camadas de cache no Redis.',
+      color: 'from-violet-500 to-purple-500',
+      tagColor: 'bg-violet-50 text-violet-700 border-violet-100',
+    },
+    {
+      icon: Bot,
+      badge: 'Inteligência Artificial',
+      title: 'Agentes Autônomos & IA com Reasoning',
+      description: 'Implementação de pipelines com LLMs, Vercel AI SDK, orquestração multi-agente Hermes, automação de processos via n8n e integração com WhatsApp via Evolution API.',
+      color: 'from-cyan-500 to-teal-500',
+      tagColor: 'bg-cyan-50 text-cyan-700 border-cyan-100',
+    },
+    {
+      icon: Server,
+      badge: 'Infra & DevOps',
+      title: 'Infraestrutura Cloud & Confiabilidade',
+      description: 'Conteinerização com Docker e Compose, servidores Linux Ubuntu, proxies reversos Nginx com SSL automático, tuning de kernel, swap e segurança com Fail2ban.',
+      color: 'from-amber-500 to-orange-500',
+      tagColor: 'bg-amber-50 text-amber-700 border-amber-100',
+    },
   ];
 
   const skills = [
-    { name: 'TypeScript & JavaScript', category: 'frontend', level: 'Especialista', icon: FileCode2, highlight: true },
-    { name: 'React 19 & Next.js 15 (App Router)', category: 'frontend', level: 'Especialista', icon: Code2, highlight: true },
-    { name: 'Tailwind CSS v4 & UI Precision', category: 'frontend', level: 'Avançado', icon: Sparkles, highlight: false },
-    { name: 'Node.js & Bun Runtime', category: 'backend', level: 'Especialista', icon: Zap, highlight: true },
-    { name: 'PostgreSQL 17 & TypeORM', category: 'backend', level: 'Especialista', icon: Database, highlight: true },
-    { name: 'Redis & Caching Strategy', category: 'backend', level: 'Avançado', icon: Server, highlight: false },
-    { name: 'Vercel AI SDK & LLMs Reasoning', category: 'ai', level: 'Especialista', icon: Bot, highlight: true },
-    { name: 'Arquitetura Multi-Agente (Hermes)', category: 'ai', level: 'Especialista', icon: Cpu, highlight: true },
-    { name: 'Evolution API & Baileys (WhatsApp)', category: 'ai', level: 'Avançado', icon: MessageSquare, highlight: true },
-    { name: 'n8n Workflow Automation', category: 'ai', level: 'Avançado', icon: GitBranch, highlight: false },
-    { name: 'Docker & Docker Compose', category: 'devops', level: 'Especialista', icon: Layers, highlight: true },
-    { name: 'Nginx, Reverse Proxies & SSL', category: 'devops', level: 'Avançado', icon: Cloud, highlight: false },
-    { name: 'Linux Server (Ubuntu/Oracle OCI)', category: 'devops', level: 'Avançado', icon: Terminal, highlight: false },
-    { name: 'Segurança & Fail2ban / UFW', category: 'devops', level: 'Avançado', icon: ShieldCheck, highlight: false },
+    { name: 'TypeScript', level: 'Especialista', category: 'frontend', icon: FileCode2, highlight: true },
+    { name: 'React 19 & Next.js 15', level: 'Especialista', category: 'frontend', icon: Code2, highlight: true },
+    { name: 'Tailwind CSS v4', level: 'Especialista', category: 'frontend', icon: Sparkles, highlight: true },
+    { name: 'Bun & Node.js Runtime', level: 'Especialista', category: 'backend', icon: Zap, highlight: true },
+    { name: 'PostgreSQL 17 & TypeORM', level: 'Especialista', category: 'backend', icon: Database, highlight: true },
+    { name: 'Redis Cache & Queues', level: 'Avançado', category: 'backend', icon: Server, highlight: false },
+    { name: 'Vercel AI SDK & LLMs', level: 'Especialista', category: 'ai', icon: Bot, highlight: true },
+    { name: 'Hermes Multi-Agent Fleet', level: 'Especialista', category: 'ai', icon: Cpu, highlight: true },
+    { name: 'Evolution API (WhatsApp)', level: 'Especialista', category: 'ai', icon: MessageSquare, highlight: true },
+    { name: 'n8n Workflow Automation', level: 'Avançado', category: 'ai', icon: GitBranch, highlight: false },
+    { name: 'Docker & Docker Compose', level: 'Especialista', category: 'devops', icon: Layers, highlight: true },
+    { name: 'Nginx, Reverse Proxy & SSL', level: 'Avançado', category: 'devops', icon: Cloud, highlight: false },
+    { name: 'Linux Ubuntu / Oracle OCI', level: 'Avançado', category: 'devops', icon: Terminal, highlight: false },
+    { name: 'Segurança & Fail2ban', level: 'Avançado', category: 'devops', icon: ShieldCheck, highlight: false },
   ];
 
-  const filteredSkills = activeTab === 'all' 
-    ? skills 
+  const filteredSkills = activeTab === 'all'
+    ? skills
     : skills.filter(s => s.category === activeTab);
 
   const projects = [
     {
       title: 'Planner SDR',
-      subtitle: 'SaaS de Gestão de Projetos com IA Nativa',
-      description: 'Plataforma completa de gerenciamento de tarefas em equipe com assistente de IA explicável, relatórios automáticos semanais zero-input, Kanban interativo (@dnd-kit) e notificações via WhatsApp.',
-      tags: ['Next.js 15', 'React 19', 'TypeORM', 'PostgreSQL 17', 'Vercel AI SDK', 'WhatsApp', 'Tailwind v4'],
-      status: 'Em Produção',
+      category: 'SaaS / IA Produtiva',
+      badge: 'Em Produção',
+      subtitle: 'Plataforma de Gestão com Assistente de IA Explicável',
+      description: 'SaaS completo de tarefas e projetos com IA nativa auditável via Vercel AI SDK, relatórios automáticos semanais zero-input, Kanban interativo (@dnd-kit) e notificações via WhatsApp e E-mail.',
+      tags: ['Next.js 15', 'React 19', 'PostgreSQL 17', 'TypeORM', 'Vercel AI SDK', 'Brevo SMTP', 'Tailwind v4'],
       link: 'https://planner-sdr.broscotech.com.br',
-      color: 'from-emerald-500/20 to-cyan-500/10',
-      borderColor: 'border-emerald-500/30',
-      badgeColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-      features: [
-        'Relatório semanal automatizado com rastreabilidade de eventos',
-        'Sugestão de priorização com reasoning auditável',
-        'Autenticação NextAuth v4 e multi-tenant isolado por workspace',
-        'Board Kanban dinâmico com drag-and-drop de alta fluidez'
+      color: 'from-indigo-600 to-violet-600',
+      bgGlow: 'bg-indigo-500/10',
+      highlights: [
+        'Relatórios de status executivos gerados por IA com reasoning transparente',
+        'Board Kanban fluído com atualização em tempo real e drag-and-drop',
+        'Notificações transacionais integradas com WhatsApp e Brevo SMTP',
+        'Arquitetura multi-workspace isolada com autenticação NextAuth'
       ]
     },
     {
       title: 'EasyDev Suite & CRM',
-      subtitle: 'Plataforma Corporativa & Gestão de Micro-serviços',
-      description: 'Ecossistema integrado para empresas de desenvolvimento de software, unindo gestão de desenvolvedores, controle financeiro de planos/descontos, CMS dinâmico e monitoramento de serviços.',
-      tags: ['Next.js 15', 'TypeScript', 'TypeORM', 'Tailwind CSS', 'Docker', 'PostgreSQL'],
-      status: 'Core Enterprise',
+      category: 'Enterprise / Core',
+      badge: 'Corporativo',
+      subtitle: 'Ecossistema Integrado de Gestão e Microsserviços',
+      description: 'Plataforma robusta para gestão de desenvolvedores, controle financeiro de planos e descontos progressivos, CMS dinâmico de projetos e monitoramento de serviços em tempo real.',
+      tags: ['Next.js 15', 'TypeScript', 'TypeORM', 'Docker', 'PostgreSQL', 'Tailwind CSS'],
       link: 'https://dev.easydev.com.br',
-      color: 'from-blue-500/20 to-indigo-500/10',
-      borderColor: 'border-blue-500/30',
-      badgeColor: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-      features: [
-        'Painel administrativo para gestão de desenvolvedores e portfólio',
-        'Controle de faturamento, planos e cálculo dinâmico de descontos',
-        'Integrações com bancos de dados relacionais e APIs REST',
-        'Interface responsiva com rigor técnico de pixel-precision'
+      color: 'from-blue-600 to-cyan-600',
+      bgGlow: 'bg-blue-500/10',
+      highlights: [
+        'Painel corporativo com rigor técnico de pixel-precision na interface',
+        'Cálculo dinâmico e automatizado de taxas, faturamento e planos',
+        'Painéis de CMS dinâmico para showcase e portfólio de engenheiros',
+        'Infraestrutura conteinerizada e monitorada com alta disponibilidade'
       ]
     },
     {
-      title: 'Hermes Fleet (Multi-Agente)',
-      subtitle: 'Arquitetura Autônoma de 5 Agentes de IA',
-      description: 'Frota coordenada de agentes autônomos (Orchestrator, Scout, Scribe, Reach, Dev) operando com persistência de memória, centro de comando no Telegram e auditoria operacional SQLite.',
+      title: 'Hermes Multi-Agent Fleet',
+      category: 'Automação & IA',
+      badge: 'Ativo 24/7',
+      subtitle: 'Orquestração de 5 Agentes Autônomos de Alta Performance',
+      description: 'Frota coordenada de agentes autônomos (Orchestrator, Scout, Scribe, Reach, Dev) operando com persistência de memória, centro de comando por tópicos no Telegram e auditoria de logs em SQLite.',
       tags: ['Hermes Agent', 'Python', 'SQLite', 'Telegram Bot API', 'Docker', 'Autonomous AI'],
-      status: 'Ativo 24/7',
-      color: 'from-purple-500/20 to-pink-500/10',
-      borderColor: 'border-purple-500/30',
-      badgeColor: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-      features: [
-        'Roteamento por tópicos no Telegram com perfis e SOUL.md dedicados',
-        'Sistema de telemetria e auditoria de logs com expiração automatizada',
-        'Execução autônoma de tarefas de pesquisa, desenvolvimento e monitoramento',
-        'Zero tolerância a falhas e integração com ambientes de produção'
+      color: 'from-purple-600 to-pink-600',
+      bgGlow: 'bg-purple-500/10',
+      highlights: [
+        'Roteamento inteligente por tópicos com perfis e SOUL.md independentes',
+        'Auditoria completa de logs e telemetria operacional com retenção inteligente',
+        'Execução autônoma de pesquisas, coding, testes e deploys em servidores',
+        'Zero tolerância a erros e integração direta com ambientes produtivos'
       ]
     },
     {
-      title: 'Evolution & n8n Automation Hub',
-      subtitle: 'Infraestrutura de Mensageria e Fluxos Assíncronos',
-      description: 'Ambiente escalável de automação de processos, integrando WhatsApp via WebSockets (Evolution API v2) e pipelines visuais no n8n conectados a bancos de dados e webhooks.',
-      tags: ['Evolution API', 'n8n', 'Redis', 'PostgreSQL', 'WebSockets', 'Docker Compose'],
-      status: 'Infraestrutura',
-      color: 'from-amber-500/20 to-orange-500/10',
-      borderColor: 'border-amber-500/30',
-      badgeColor: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-      features: [
-        'Instâncias de WhatsApp conectadas para notificações transacionais',
-        'Pipelines de dados automatizados com tolerância a falhas',
-        'Proxy reverso Nginx com SSL automático Let Encrypt',
-        'Monitoramento de integridade dos containers via watchdog'
+      title: 'Evolution & n8n Hub',
+      category: 'Infra & Webhooks',
+      badge: 'Infraestrutura',
+      subtitle: 'Hub de Mensageria em Escala e Fluxos Assíncronos',
+      description: 'Ambiente conteinerizado de alta vazão unindo Evolution API v2 para instâncias de WhatsApp e pipelines visuais no n8n conectados a bancos de dados, webhooks e relays SMTP da Brevo.',
+      tags: ['Evolution API', 'n8n', 'Redis', 'PostgreSQL 17', 'WebSockets', 'Docker Compose'],
+      color: 'from-amber-600 to-orange-600',
+      bgGlow: 'bg-amber-500/10',
+      highlights: [
+        'Gateway de WhatsApp com WebSockets e envio transacional em tempo real',
+        'Workflows no n8n com disparo de e-mails transacionais via Brevo',
+        'Proxy reverso Nginx com certificados Let Encrypt automatizados',
+        'Tuning de swapfile e isolamento total de recursos por container'
       ]
-    }
+    },
+  ];
+
+  const processSteps = [
+    { num: '01', title: 'Descoberta & Escopo', desc: 'Alinhamento direto de objetivos de negócio, requisitos técnicos e restrições de arquitetura.' },
+    { num: '02', title: 'Design & Arquitetura', desc: 'Modelagem de dados no Postgres, definição da stack (Next.js/Bun) e prototipagem visual.' },
+    { num: '03', title: 'Desenvolvimento Ágil', desc: 'Código limpo com tipagem rigorosa, YAGNI, validações Zod e sem sobrecargas desnecessárias.' },
+    { num: '04', title: 'Testes & Verificação', desc: 'Validação funcional, testes de integração, auditoria de performance e segurança.' },
+    { num: '05', title: 'Deploy & Telemetria', desc: 'Publicação em servidores Linux via Docker/Nginx com monitoramento ativo 24/7.' },
   ];
 
   const timeline = [
@@ -131,158 +182,401 @@ export default function App() {
       company: 'EasyDev',
       companyUrl: 'https://dev.easydev.com.br',
       period: '2023 — Presente',
-      description: 'Liderança técnica, definição da arquitetura de software de todos os produtos, estruturação de pipelines de CI/CD, microsserviços Docker e governança de código.'
+      description: 'Liderança técnica geral, definição de arquitetura de software de todas as plataformas, automações com IA, infraestrutura Docker conteinerizada e governança de código.'
     },
     {
       role: 'Senior Technical Support Analyst',
       company: 'UBVA',
       period: 'Atuação Contínua',
-      description: 'Análise técnica sênior de infraestrutura, resolução de problemas complexos em sistemas críticos, otimização de banco de dados e garantia de estabilidade operacional.'
+      description: 'Análise técnica avançada de infraestrutura e suporte a ambientes críticos de alta demanda, troubleshooting de banco de dados e garantia de estabilidade.'
     },
     {
       role: 'Full-Stack Software Architect',
       company: 'Broscotech',
       period: 'Evolução Contínua',
-      description: 'Desenvolvimento e arquitetura de soluções SaaS, plataformas web escaláveis em Next.js/Node.js, implantação de servidores Linux e sistemas orientados a IA.'
+      description: 'Criação e arquitetura de aplicações SaaS completas, sistemas escaláveis no ecossistema TypeScript/React, agentes autônomos de IA e servidores Linux em produção.'
     }
   ];
 
+  const handleWhatsAppSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = encodeURIComponent(
+      `Olá Rogger! Meu nome é ${formData.name || 'Cliente'}.\nE-mail: ${formData.email}\nAssunto: ${formData.subject}\n\nMensagem:\n${formData.message}`
+    );
+    window.open(`https://wa.me/5541991747318?text=${text}`, '_blank');
+  };
+
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 relative overflow-x-hidden">
-      {/* Background Ambient Glows */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[140px] glow-ambient" />
-        <div className="absolute top-[40%] right-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[160px] glow-ambient" style={{ animationDelay: '-4s' }} />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[160px] glow-ambient" style={{ animationDelay: '-2s' }} />
+    <div className="min-h-screen bg-[#F4F6FB] text-slate-800 relative overflow-x-hidden selection:bg-indigo-500/20 selection:text-indigo-900">
+      
+      {/* Dynamic Ambient Background Blobs */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Soft Lavender Orb */}
+        <div className="absolute -top-32 -left-32 w-[650px] h-[650px] bg-gradient-to-br from-indigo-200/50 via-purple-200/40 to-transparent rounded-full blur-[120px] animate-glow-1" />
+        {/* Soft Sky Blue Orb */}
+        <div className="absolute top-[35%] -right-40 w-[700px] h-[700px] bg-gradient-to-br from-sky-200/50 via-blue-200/30 to-transparent rounded-full blur-[140px] animate-glow-2" />
+        {/* Soft Violet Bottom Orb */}
+        <div className="absolute -bottom-40 left-[20%] w-[600px] h-[600px] bg-gradient-to-tr from-violet-200/40 via-pink-100/30 to-transparent rounded-full blur-[130px] animate-glow-1" />
       </div>
 
-      {/* Header / Navbar */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/80 border-b border-zinc-800/60">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 p-[1px] flex items-center justify-center shadow-lg shadow-emerald-500/20">
-              <div className="w-full h-full bg-zinc-950 rounded-[11px] flex items-center justify-center transition group-hover:bg-zinc-900">
-                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 font-mono text-sm">RB</span>
+      {/* Floating Glass Header */}
+      <header className="sticky top-4 z-50 max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="glass-panel rounded-full px-5 py-3 flex items-center justify-between shadow-sm">
+          {/* Brand Logo */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-sky-400 p-[2px] shadow-sm group-hover:scale-105 transition-transform duration-300">
+              <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
+                <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 font-mono text-sm tracking-tight">RB</span>
               </div>
             </div>
             <div>
-              <span className="font-bold text-zinc-100 tracking-tight text-base group-hover:text-emerald-400 transition">Rogger Brosco</span>
-              <span className="text-xs text-zinc-500 block font-mono">Broscotech</span>
+              <span className="font-bold text-slate-900 text-sm tracking-tight group-hover:text-indigo-600 transition">Rogger Brosco</span>
+              <span className="text-[11px] text-slate-500 block font-medium">Broscotech</span>
             </div>
           </a>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-400">
-            <a href="#sobre" className="hover:text-emerald-400 transition">Sobre</a>
-            <a href="#habilidades" className="hover:text-emerald-400 transition">Habilidades</a>
-            <a href="#projetos" className="hover:text-emerald-400 transition">Projetos</a>
-            <a href="#experiencia" className="hover:text-emerald-400 transition">Trajetória</a>
-            <a href="#contato" className="hover:text-emerald-400 transition">Contato</a>
+          {/* Navigation Capsule */}
+          <nav className="hidden md:flex items-center gap-7 text-xs font-semibold text-slate-600">
+            <a href="#about" className="hover:text-indigo-600 transition">Sobre</a>
+            <a href="#services" className="hover:text-indigo-600 transition">Especialidades</a>
+            <a href="#projects" className="hover:text-indigo-600 transition">Projetos</a>
+            <a href="#skills" className="hover:text-indigo-600 transition">Stack</a>
+            <a href="#timeline" className="hover:text-indigo-600 transition">Carreira</a>
           </nav>
 
-          {/* Status Badge & Direct Action */}
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-medium text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Disponível para Projetos
-            </div>
+          {/* Direct CTA */}
+          <div className="flex items-center gap-2">
             <a
               href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vi%20seu%20portf%C3%B3lio%20na%20Broscotech"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs transition shadow-lg shadow-emerald-500/20"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 hover:bg-indigo-600 text-white font-semibold text-xs transition duration-200 shadow-sm shadow-slate-900/10"
             >
-              <Phone className="w-3.5 h-3.5" />
-              <span className="hidden xs:inline">(41) 99174-7318</span>
+              <Phone className="w-3.5 h-3.5 text-indigo-300" />
+              <span>Falar Comigo</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
       </header>
 
-      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-20 space-y-24">
-        
-        {/* HERO SECTION */}
-        <section id="sobre" className="space-y-8 pt-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 backdrop-blur-sm shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-cyan-400" />
-            CTO @ EasyDev • Engenheiro de Software & Arquiteto de IA
-          </div>
+      {/* Main Content Container */}
+      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-24 space-y-28">
 
-          <div className="space-y-4 max-w-4xl">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
-              Construindo sistemas escaláveis, SaaS de alta performance e{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500">
-                agentes autônomos de IA
-              </span>.
-            </h1>
-            <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-3xl">
-              Sou <strong>Rogger Brosco</strong>, desenvolvedor Full-Stack sênior e líder técnico. Especializado em ecossistema TypeScript moderno (<code className="text-emerald-400 font-mono text-base">Next.js 15</code>, <code className="text-emerald-400 font-mono text-base">React 19</code>, <code className="text-emerald-400 font-mono text-base">Bun</code>, <code className="text-emerald-400 font-mono text-base">PostgreSQL</code>), infraestrutura Docker conteinerizada e sistemas com inteligência artificial aplicada.
+        {/* HERO SECTION - Refined Neo-Glassmorphism Layout */}
+        <section id="about" className="pt-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left Column: Intro & Value Prop (7 cols) */}
+            <div className="lg:col-span-7 space-y-6">
+              
+              {/* Top Greeting Badge */}
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-indigo-50/80 border border-indigo-100 text-indigo-700 text-xs font-bold tracking-wide shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+                <span>👋 HELLO, I'M ROGGER BROSCO</span>
+              </div>
+
+              {/* Main Headline */}
+              <div className="space-y-3">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
+                  CTO & Full-Stack{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500">
+                    Software Architect
+                  </span>
+                </h1>
+                <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl font-normal">
+                  Especialista em construir <strong>SaaS de alta escala</strong>, interfaces ultrarrápidas em <strong>Next.js 15 & React 19</strong>, arquitetura de dados em <strong>PostgreSQL 17</strong> e <strong>sistemas autônomos de Inteligência Artificial</strong>.
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <a
+                  href="#projects"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 hover:bg-indigo-600 text-white font-bold text-sm transition shadow-lg shadow-slate-900/15"
+                >
+                  <span>Ver Projetos em Destaque</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+
+                <a
+                  href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vamos%20conversar%20sobre%20um%20projeto"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass-panel hover:bg-white text-slate-800 font-semibold text-sm transition shadow-sm"
+                >
+                  <Phone className="w-4 h-4 text-emerald-600" />
+                  <span>(41) 99174-7318</span>
+                </a>
+              </div>
+
+              {/* Quick Trust Badges */}
+              <div className="pt-6 border-t border-slate-200/80">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Core Stack & Especialidades</p>
+                <div className="flex flex-wrap items-center gap-2">
+                  {['Next.js 15', 'React 19', 'TypeScript', 'Bun', 'PostgreSQL 17', 'Docker', 'Vercel AI SDK', 'Tailwind v4'].map((tech, i) => (
+                    <span key={i} className="px-3 py-1 rounded-lg bg-white/80 border border-slate-200/80 text-xs font-semibold text-slate-700 shadow-xs">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right Column: Hero Visual Glass Showcase Card (5 cols) */}
+            <div className="lg:col-span-5 relative">
+              
+              {/* Ambient Glow behind card */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-purple-500/10 to-sky-400/20 rounded-3xl blur-2xl transform scale-95" />
+
+              {/* Main Profile Glass Showcase */}
+              <div className="relative glass-panel rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
+                
+                {/* Visual Avatar / Hero Container */}
+                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-sky-500 p-[2px] shadow-md">
+                  <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-[14px] p-8 text-center text-white relative overflow-hidden min-h-[260px] flex flex-col items-center justify-center">
+                    
+                    {/* Decorative Background Grid */}
+                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+                    
+                    {/* Glowing Avatar Placeholder */}
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-indigo-400 to-sky-300 p-1 shadow-lg shadow-indigo-500/30 mb-4 relative z-10 group">
+                      <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-2xl font-extrabold text-indigo-300 font-mono">
+                        RB
+                      </div>
+                    </div>
+
+                    <div className="relative z-10 space-y-1">
+                      <h3 className="text-xl font-extrabold tracking-tight text-white">Rogger Brosco</h3>
+                      <p className="text-xs text-indigo-200 font-medium">CTO @ EasyDev • Lead Architect</p>
+                      <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[11px] font-semibold mt-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Disponível para Projetos & Consultoria
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* Floating Micro-Card 1: Experience & SLA */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3.5 rounded-xl bg-white/90 border border-slate-100 shadow-xs flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                      <Award className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-base font-extrabold text-slate-900 font-mono">+7 Anos</div>
+                      <div className="text-[11px] text-slate-500 font-medium">Experiência Real</div>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-white/90 border border-slate-100 shadow-xs flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-base font-extrabold text-slate-900 font-mono">99.9% SLA</div>
+                      <div className="text-[11px] text-slate-500 font-medium">Em Produção</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Social & Contact Mini Links */}
+                <div className="flex items-center justify-between pt-2 border-t border-slate-200/70 text-xs font-semibold text-slate-600">
+                  <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-indigo-600 transition">
+                    <Github className="w-4 h-4 text-slate-800" />
+                    <span>github.com/rbrosco</span>
+                  </a>
+                  <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-indigo-600 hover:text-indigo-700 transition">
+                    <span>EasyDev</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        {/* METRICS & STATS PANEL */}
+        <section className="glass-panel rounded-3xl p-6 sm:p-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div key={idx} className="space-y-1.5 text-center md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-2 text-indigo-600">
+                    <Icon className="w-4 h-4" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400">{item.label}</span>
+                  </div>
+                  <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-mono tracking-tight">{item.value}</div>
+                  <div className="text-xs text-slate-500 font-medium">{item.subtitle}</div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* SERVICES / EXPERTISE SECTION (Matching reference 4 cards style) */}
+        <section id="services" className="space-y-8 scroll-mt-28">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+                <Compass className="w-3.5 h-3.5" />
+                SOLUÇÕES & EXPERTISE
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+                O que construo com excelência
+              </h2>
+            </div>
+            <p className="text-slate-500 text-sm max-w-md font-normal">
+              Soluções completas desenhadas para performance extrema, segurança e zero tolerância a falhas em produção.
             </p>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
-            <a
-              href="#projetos"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-sm transition shadow-xl shadow-emerald-500/20"
-            >
-              Explorar Projetos
-              <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
-              href="https://github.com/rbrosco"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-200 font-medium text-sm transition"
-            >
-              <Github className="w-4 h-4 text-zinc-400" />
-              GitHub
-            </a>
-            <a
-              href="#contato"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900/50 hover:bg-zinc-800/50 border border-zinc-800/60 text-zinc-300 font-medium text-sm transition"
-            >
-              <Mail className="w-4 h-4 text-zinc-400" />
-              Entrar em Contato
-            </a>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {services.map((srv, idx) => {
+              const Icon = srv.icon;
+              return (
+                <div
+                  key={idx}
+                  className="glass-card rounded-3xl p-7 sm:p-8 space-y-4 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${srv.color} text-white flex items-center justify-center shadow-md shadow-indigo-500/20 group-hover:scale-110 transition-transform`}>
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className={`text-[11px] font-bold px-3 py-1 rounded-full border ${srv.tagColor}`}>
+                      {srv.badge}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-slate-900 tracking-tight">{srv.title}</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed font-normal">{srv.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* SELECTED WORK / PROJECTS SECTION */}
+        <section id="projects" className="space-y-8 scroll-mt-28">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+                <Boxes className="w-3.5 h-3.5" />
+                PORTFÓLIO EM DESTAQUE
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+                Projetos & Aplicações em Produção
+              </h2>
+            </div>
+            <p className="text-slate-500 text-sm max-w-md font-normal">
+              Aplicações reais com arquiteturas de ponta a ponta e usuários ativos.
+            </p>
           </div>
 
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6">
-            {stats.map((stat, i) => (
-              <div key={i} className="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/70 backdrop-blur-sm hover:border-zinc-700 transition">
-                <div className="text-3xl font-extrabold text-white font-mono tracking-tight">{stat.value}</div>
-                <div className="text-sm font-semibold text-zinc-200 mt-1">{stat.label}</div>
-                <div className="text-xs text-zinc-500 mt-0.5">{stat.desc}</div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {projects.map((proj, idx) => (
+              <div
+                key={idx}
+                className="glass-panel rounded-3xl p-7 sm:p-8 flex flex-col justify-between space-y-6 hover:shadow-xl transition-all duration-300 group"
+              >
+                <div className="space-y-4">
+                  
+                  {/* Card Header */}
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 font-mono">{proj.category}</span>
+                        <span className="text-slate-300">•</span>
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+                          {proj.badge}
+                        </span>
+                      </div>
+                      <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight mt-1 group-hover:text-indigo-600 transition">
+                        {proj.title}
+                      </h3>
+                      <p className="text-xs text-slate-500 font-medium">{proj.subtitle}</p>
+                    </div>
+
+                    {proj.link && (
+                      <a
+                        href={proj.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-slate-900 hover:bg-indigo-600 text-white flex items-center justify-center transition shrink-0 shadow-sm"
+                        title="Visitar Aplicação"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
+
+                  <p className="text-slate-600 text-sm leading-relaxed">{proj.description}</p>
+
+                  {/* Highlights Bullet Points */}
+                  <div className="space-y-2 pt-3 border-t border-slate-200/70">
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Principais Entregas:</span>
+                    {proj.highlights.map((h, hIdx) => (
+                      <div key={hIdx} className="flex items-start gap-2 text-xs text-slate-700">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600 shrink-0 mt-0.5" />
+                        <span>{h}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                </div>
+
+                {/* Tech Tags Footer */}
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-200/70">
+                  {proj.tags.map((tag, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="px-2.5 py-1 rounded-md bg-white/90 border border-slate-200/80 text-slate-700 font-mono text-[11px] font-medium shadow-2xs"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
               </div>
             ))}
           </div>
         </section>
 
-        {/* SKILLS & STACK SECTION */}
-        <section id="habilidades" className="space-y-8 scroll-mt-24">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-800 pb-6">
+        {/* TECHNOLOGIES & SKILLS SECTION */}
+        <section id="skills" className="space-y-8 scroll-mt-28">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6">
             <div>
-              <div className="text-xs font-mono text-emerald-400 font-semibold uppercase tracking-wider">Stack Técnica & Competências</div>
-              <h2 className="text-3xl font-bold text-white tracking-tight mt-1">Tecnologias de Ponta a Ponta</h2>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+                <Workflow className="w-3.5 h-3.5" />
+                STACK & FERRAMENTAS
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+                Tecnologias que domino
+              </h2>
             </div>
 
-            {/* Filter Tabs */}
-            <div className="flex flex-wrap gap-2">
+            {/* Filter Buttons */}
+            <div className="flex flex-wrap gap-1.5">
               {[
                 { id: 'all', label: 'Todas' },
                 { id: 'frontend', label: 'Frontend' },
                 { id: 'backend', label: 'Backend & DB' },
                 { id: 'ai', label: 'IA & Automação' },
-                { id: 'devops', label: 'Infra & Cloud' },
+                { id: 'devops', label: 'Cloud & Infra' },
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     activeTab === tab.id
-                      ? 'bg-emerald-500 text-zinc-950 font-bold shadow-md shadow-emerald-500/20'
-                      : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 border border-zinc-800'
+                      ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/20'
+                      : 'bg-white/80 hover:bg-white text-slate-600 border border-slate-200'
                   }`}
                 >
                   {tab.label}
@@ -291,30 +585,23 @@ export default function App() {
             </div>
           </div>
 
-          {/* Skills Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {filteredSkills.map((skill, index) => {
               const Icon = skill.icon;
               return (
                 <div
                   key={index}
-                  className={`p-4 rounded-xl border transition group flex items-start gap-3.5 ${
-                    skill.highlight
-                      ? 'bg-zinc-900/60 border-zinc-800 hover:border-emerald-500/40 hover:bg-zinc-900/90'
-                      : 'bg-zinc-900/30 border-zinc-800/60 hover:border-zinc-700'
-                  }`}
+                  className="glass-card rounded-2xl p-4 flex items-center gap-3 hover:bg-white transition-all shadow-xs"
                 >
-                  <div className="p-2.5 rounded-lg bg-zinc-800/80 border border-zinc-700/50 text-emerald-400 group-hover:scale-105 transition">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2">
-                      <h3 className="font-semibold text-zinc-200 text-sm truncate group-hover:text-white">{skill.name}</h3>
-                      <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-400 border border-zinc-700/50 shrink-0">
-                        {skill.level}
-                      </span>
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-bold text-slate-900 text-sm truncate">{skill.name}</h4>
+                    <div className="flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                      <span className="capitalize">{skill.category}</span>
+                      <span className="font-semibold text-indigo-600">{skill.level}</span>
                     </div>
-                    <span className="text-xs text-zinc-500 capitalize font-mono mt-1 block">{skill.category}</span>
                   </div>
                 </div>
               );
@@ -322,157 +609,66 @@ export default function App() {
           </div>
         </section>
 
-        {/* PROJECTS SECTION */}
-        <section id="projetos" className="space-y-8 scroll-mt-24">
-          <div className="border-b border-zinc-800 pb-6">
-            <div className="text-xs font-mono text-emerald-400 font-semibold uppercase tracking-wider">Portfólio em Destaque</div>
-            <h2 className="text-3xl font-bold text-white tracking-tight mt-1">Projetos & Aplicações em Produção</h2>
-            <p className="text-zinc-400 text-sm mt-2 max-w-2xl">
-              Soluções reais desenvolvidas com arquiteturas sólidas, escalabilidade, segurança e foco em experiência de usuário.
-            </p>
+        {/* ENGINEERING PROCESS (5 Step Workflow) */}
+        <section className="glass-panel rounded-3xl p-8 sm:p-10 space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+              MÉTODO DE ENGENHARIA
+            </div>
+            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Como eu entrego resultados</h2>
+            <p className="text-slate-500 text-sm">Processo rigoroso para garantir código limpo, arquitetura sólida e previsibilidade.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {projects.map((proj, idx) => (
-              <div
-                key={idx}
-                className={`flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-zinc-900/40 border backdrop-blur-sm transition hover:shadow-2xl ${proj.borderColor} hover:bg-zinc-900/60`}
-              >
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <span className={`text-[11px] font-mono font-semibold px-2.5 py-1 rounded-md border inline-block ${proj.badgeColor}`}>
-                        {proj.status}
-                      </span>
-                      <h3 className="text-2xl font-bold text-white tracking-tight mt-2">{proj.title}</h3>
-                      <div className="text-xs font-mono text-zinc-400 mt-0.5">{proj.subtitle}</div>
-                    </div>
-
-                    {proj.link && (
-                      <a
-                        href={proj.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition border border-zinc-700/60 shrink-0"
-                        title="Acessar site"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
-                  </div>
-
-                  <p className="text-zinc-300 text-sm leading-relaxed">{proj.description}</p>
-
-                  {/* Highlights List */}
-                  <div className="space-y-2 pt-2 border-t border-zinc-800/80">
-                    <div className="text-xs font-mono text-zinc-400 font-medium">Principais Destaques:</div>
-                    {proj.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-start gap-2 text-xs text-zinc-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                        <span>{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Tech Tags */}
-                <div className="flex flex-wrap gap-1.5 pt-6 mt-4 border-t border-zinc-800/60">
-                  {proj.tags.map((tag, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-2.5 py-1 rounded-md bg-zinc-800/80 border border-zinc-700/50 text-zinc-300 font-mono text-[11px]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-4">
+            {processSteps.map((step, idx) => (
+              <div key={idx} className="p-5 rounded-2xl bg-white/70 border border-slate-100 space-y-2 shadow-2xs">
+                <div className="text-2xl font-extrabold text-indigo-600 font-mono">{step.num}</div>
+                <h4 className="font-bold text-slate-900 text-sm">{step.title}</h4>
+                <p className="text-slate-500 text-xs leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ARCHITECTURE & PRINCIPLES */}
-        <section className="space-y-8 p-8 rounded-3xl bg-gradient-to-br from-zinc-900/90 via-zinc-900/40 to-zinc-950 border border-zinc-800">
-          <div className="max-w-2xl">
-            <div className="text-xs font-mono text-cyan-400 font-semibold uppercase tracking-wider">Engenharia & Filosofia</div>
-            <h2 className="text-3xl font-bold text-white tracking-tight mt-1">Pilares de Construção</h2>
-            <p className="text-zinc-400 text-sm mt-2">
-              Qualidade técnica inegociável em cada linha de código e na infraestrutura de produção.
-            </p>
+        {/* TIMELINE / CAREER HISTORY */}
+        <section id="timeline" className="space-y-8 scroll-mt-28">
+          <div className="border-b border-slate-200 pb-6">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+              HISTÓRICO PROFISSIONAL
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+              Trajetória & Liderança Técnica
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-            <div className="p-5 rounded-2xl bg-zinc-950/60 border border-zinc-800/80">
-              <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-3">
-                <Zap className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-white text-base">Performance Extrema</h3>
-              <p className="text-xs text-zinc-400 mt-1.5 leading-relaxed">
-                Aplicações otimizadas com SSR inteligente, bundling moderno via Bun/Vite e cache estratégico no Redis.
-              </p>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-zinc-950/60 border border-zinc-800/80">
-              <div className="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mb-3">
-                <Code2 className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-white text-base">Código Limpo & YAGNI</h3>
-              <p className="text-xs text-zinc-400 mt-1.5 leading-relaxed">
-                Tipagem estrita com TypeScript, validação estruturada com Zod e sem excesso desnecessário de dependências.
-              </p>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-zinc-950/60 border border-zinc-800/80">
-              <div className="w-9 h-9 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-3">
-                <Bot className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-white text-base">IA com Reasoning</h3>
-              <p className="text-xs text-zinc-400 mt-1.5 leading-relaxed">
-                Inteligência artificial auditável, com dados estruturados via Zod e sem alterações silenciosas ou caixas pretas.
-              </p>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-zinc-950/60 border border-zinc-800/80">
-              <div className="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-3">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-white text-base">Alta Disponibilidade</h3>
-              <p className="text-xs text-zinc-400 mt-1.5 leading-relaxed">
-                Containers Docker com health-checks, monitoramento com watchdog, Fail2ban e certificados SSL automáticos.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* TIMELINE / EXPERIENCE */}
-        <section id="experiencia" className="space-y-8 scroll-mt-24">
-          <div className="border-b border-zinc-800 pb-6">
-            <div className="text-xs font-mono text-emerald-400 font-semibold uppercase tracking-wider">Histórico Profissional</div>
-            <h2 className="text-3xl font-bold text-white tracking-tight mt-1">Trajetória & Liderança</h2>
-          </div>
-
-          <div className="space-y-6">
-            {timeline.map((item, index) => (
+          <div className="space-y-4">
+            {timeline.map((item, idx) => (
               <div
-                key={index}
-                className="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800 flex flex-col md:flex-row md:items-start justify-between gap-4 hover:border-zinc-700 transition"
+                key={idx}
+                className="glass-panel rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md transition"
               >
                 <div className="space-y-1.5 max-w-2xl">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-bold text-white">{item.role}</h3>
-                    <span className="text-zinc-500">•</span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-lg font-bold text-slate-900">{item.role}</h3>
+                    <span className="text-slate-300">•</span>
                     {item.companyUrl ? (
-                      <a href={item.companyUrl} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 font-semibold text-sm inline-flex items-center gap-1 transition">
+                      <a
+                        href={item.companyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-indigo-600 hover:text-indigo-700 font-bold text-sm inline-flex items-center gap-1 transition"
+                      >
                         {item.company}
-                        <ExternalLink className="w-3 h-3" />
+                        <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     ) : (
-                      <span className="text-emerald-400 font-semibold text-sm">{item.company}</span>
+                      <span className="text-indigo-600 font-bold text-sm">{item.company}</span>
                     )}
                   </div>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
+                  <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
                 </div>
-                <div className="font-mono text-xs text-zinc-500 px-3 py-1 rounded-md bg-zinc-800/60 border border-zinc-700/40 self-start shrink-0">
+
+                <div className="px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-bold font-mono self-start md:self-center shrink-0">
                   {item.period}
                 </div>
               </div>
@@ -480,67 +676,163 @@ export default function App() {
           </div>
         </section>
 
-        {/* CONTACT / CTA SECTION */}
-        <section id="contato" className="p-8 sm:p-12 rounded-3xl bg-zinc-900/60 border border-zinc-800 text-center relative overflow-hidden">
-          <div className="max-w-2xl mx-auto space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-400 font-mono">
-              Vamos construir algo incrível juntos?
-            </div>
+        {/* CONTACT / CTA SECTION - Dual Form & Contact Card */}
+        <section id="contact" className="glass-panel rounded-3xl p-8 sm:p-12 scroll-mt-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Pronto para elevar seu produto ou infraestrutura ao próximo nível.
-            </h2>
-            
-            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
-              Disponível para consultorias técnicas, desenvolvimento de soluções SaaS, arquitetura de sistemas com IA e liderança de engenharia.
-            </p>
+            {/* Contact Details Left (5 cols) */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+                VAMOS CONVERSAR?
+              </div>
+              
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                Pronto para transformar sua ideia em um produto de alto impacto.
+              </h2>
+              
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Disponível para novos projetos SaaS, liderança de engenharia, arquiteturas com inteligência artificial autônoma e consultoria técnica.
+              </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-              <a
-                href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vamos%20conversar%20sobre%20um%20projeto"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-sm transition shadow-xl shadow-emerald-500/25"
-              >
-                <Phone className="w-4 h-4" />
-                Conversar no WhatsApp ((41) 99174-7318)
-              </a>
-              <a
-                href="mailto:contato@broscotech.com.br"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 font-medium text-sm transition"
-              >
-                <Mail className="w-4 h-4 text-zinc-400" />
-                contato@broscotech.com.br
-              </a>
+              {/* Direct Info List */}
+              <div className="space-y-3 pt-2">
+                <a
+                  href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vamos%20conversar%20sobre%20um%20projeto"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/80 border border-slate-200/80 hover:bg-white text-slate-800 transition group shadow-2xs"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-bold text-slate-400 uppercase">WhatsApp Direto</div>
+                    <div className="text-sm font-bold text-slate-900 font-mono">(41) 99174-7318</div>
+                  </div>
+                </a>
+
+                <a
+                  href="mailto:contato@broscotech.com.br"
+                  className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/80 border border-slate-200/80 hover:bg-white text-slate-800 transition group shadow-2xs"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-bold text-slate-400 uppercase">E-mail Profissional</div>
+                    <div className="text-sm font-bold text-slate-900 font-mono">contato@broscotech.com.br</div>
+                  </div>
+                </a>
+
+                <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/80 border border-slate-200/80 text-slate-800 shadow-2xs">
+                  <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-bold text-slate-400 uppercase">Localização</div>
+                    <div className="text-sm font-bold text-slate-900">Curitiba / São Paulo, Brasil (Remoto Global)</div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            {/* Direct Form Right (7 cols) */}
+            <div className="lg:col-span-7 bg-white/85 rounded-2xl p-6 sm:p-8 border border-slate-100 shadow-sm">
+              <h3 className="text-xl font-bold text-slate-900 tracking-tight mb-2">Envie uma Mensagem Direta</h3>
+              <p className="text-xs text-slate-500 mb-6">Preencha os campos abaixo para abrir a conversa estruturada no WhatsApp.</p>
+
+              <form onSubmit={handleWhatsAppSend} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700">Seu Nome</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Ex: Carlos Silva"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-hidden focus:border-indigo-500 focus:bg-white transition"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700">Seu E-mail</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="Ex: carlos@empresa.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-hidden focus:border-indigo-500 focus:bg-white transition"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700">Tipo de Projeto / Assunto</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Ex: Desenvolvimento SaaS em Next.js / Arquitetura de IA"
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-hidden focus:border-indigo-500 focus:bg-white transition"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700">Detalhes da Mensagem</label>
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="Conte um pouco sobre as necessidades técnicas, prazos ou objetivos..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-hidden focus:border-indigo-500 focus:bg-white transition resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white font-bold text-sm transition flex items-center justify-center gap-2 shadow-md shadow-slate-900/10 cursor-pointer"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>Enviar Mensagem via WhatsApp</span>
+                </button>
+              </form>
+            </div>
+
           </div>
         </section>
 
       </main>
 
       {/* FOOTER */}
-      <footer className="border-t border-zinc-800/80 bg-zinc-950 py-8 relative z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+      <footer className="border-t border-slate-200 bg-white/70 py-8 relative z-10 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-zinc-300 font-mono">Broscotech</span>
+            <span className="font-bold text-slate-800 font-mono">Broscotech</span>
             <span>© {new Date().getFullYear()}</span>
             <span>•</span>
-            <span>Rogger Brosco</span>
+            <span className="font-medium">Rogger Brosco</span>
           </div>
 
-          <div className="flex items-center gap-4 font-mono">
-            <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition">
+          <div className="flex items-center gap-5 font-semibold text-slate-600">
+            <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition">
               EasyDev
             </a>
-            <a href="https://planner-sdr.broscotech.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition">
+            <a href="https://planner-sdr.broscotech.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition">
               Planner SDR
             </a>
-            <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition">
+            <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition">
               GitHub
+            </a>
+            <a href="https://wa.me/5541991747318" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition">
+              WhatsApp
             </a>
           </div>
         </div>
       </footer>
+
     </div>
   );
 }
