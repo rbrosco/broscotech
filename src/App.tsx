@@ -29,15 +29,12 @@ import {
   Moon,
   Sun,
   Activity,
-  Radio,
-  Sliders,
-  ChevronRight,
-  Flame
+  Sliders
 } from 'lucide-react';
 
 import Hero3DScene from './components/Hero3DScene.tsx';
 import BentoCard from './components/BentoCard.tsx';
-import FleetVisualizer3D from './components/FleetVisualizer3D.tsx';
+import AIAccelerationBanner from './components/AIAccelerationBanner.tsx';
 import LiveInteractiveTerminal from './components/LiveInteractiveTerminal.tsx';
 
 export default function App() {
@@ -65,7 +62,7 @@ export default function App() {
   const stats = [
     { label: 'Anos de Engenharia', value: '+7', subtitle: 'Arquitetura de Software', icon: Award },
     { label: 'SaaS em Produção', value: '+20', subtitle: 'Projetos de Alto Impacto', icon: Boxes },
-    { label: 'Frota de IA Ativa', value: '5 Agentes', subtitle: 'Orquestração Autônoma', icon: Bot },
+    { label: 'Entrega com IA', value: '5x', subtitle: 'Velocidade de Execução', icon: Zap },
     { label: 'SLA Operacional', value: '99.9%', subtitle: 'Alta Disponibilidade', icon: ShieldCheck },
   ];
 
@@ -170,13 +167,13 @@ export default function App() {
       category: 'Automação & IA',
       badge: 'Ativo 24/7',
       subtitle: 'Orquestração de 5 Agentes Autônomos de Alta Performance',
-      description: 'Frota coordenada de agentes autônomos (Orchestrator, Scout, Scribe, Reach, Dev) operando com persistência de memória, centro de comando por tópicos no Telegram e auditoria de logs em SQLite.',
+      description: 'Frota coordenada de agentes autônomos operando com persistência de memória, centro de comando por tópicos no Telegram e auditoria de logs em SQLite para execução contínua de tarefas.',
       tags: ['Hermes Agent', 'Python', 'SQLite', 'Telegram Bot API', 'Docker', 'Autonomous AI'],
       color: 'from-purple-600 to-pink-600',
       glow: 'rgba(168, 85, 247, 0.25)',
       highlights: [
-        'Roteamento inteligente por tópicos com perfis e SOUL.md independentes',
-        'Auditoria completa de logs e telemetria operacional com retenção inteligente',
+        'Roteamento autônomo com verificação formal e execução rápida',
+        'Auditoria completa de logs e telemetria operacional',
         'Execução autônoma de pesquisas, coding, testes e deploys em servidores',
         'Zero tolerância a erros e integração direta com ambientes produtivos'
       ]
@@ -242,12 +239,8 @@ export default function App() {
       
       {/* Dynamic Background Mesh & Glows */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Soft Indigo Top Light */}
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-gradient-to-b from-indigo-500/10 via-purple-500/5 to-transparent dark:from-indigo-600/15 dark:via-purple-600/10 dark:to-transparent rounded-full blur-[120px]" />
-        {/* Right Ambient Neon */}
-        <div className="absolute top-[40%] -right-40 w-[600px] h-[600px] bg-gradient-to-t from-cyan-500/10 via-blue-500/5 to-transparent dark:from-cyan-500/10 dark:via-blue-500/5 dark:to-transparent rounded-full blur-[140px]" />
-        {/* Left Ambient Neon */}
-        <div className="absolute top-[70%] -left-40 w-[600px] h-[600px] bg-gradient-to-t from-purple-500/10 to-transparent dark:from-purple-900/10 dark:to-transparent rounded-full blur-[140px]" />
+        <div className="absolute top-[45%] -right-40 w-[600px] h-[600px] bg-gradient-to-t from-cyan-500/10 via-blue-500/5 to-transparent dark:from-cyan-500/10 dark:via-blue-500/5 dark:to-transparent rounded-full blur-[140px]" />
       </div>
 
       {/* Floating Header */}
@@ -269,10 +262,7 @@ export default function App() {
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600 dark:text-slate-300">
             <a href="#about" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Sobre</a>
-            <a href="#fleet" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center gap-1">
-              <span>Frota IA</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-            </a>
+            <a href="#advantage" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Vantagens</a>
             <a href="#projects" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Projetos</a>
             <a href="#terminal" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Terminal</a>
             <a href="#skills" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Stack</a>
@@ -281,7 +271,6 @@ export default function App() {
 
           {/* Actions */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
               aria-label="Alternar Modo Escuro / Claro"
@@ -310,132 +299,89 @@ export default function App() {
       </header>
 
       {/* Main Container */}
-      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-24 space-y-32">
+      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-24 space-y-28">
 
-        {/* HERO SECTION WITH 3D CORE */}
-        <section id="about" className="pt-4">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        {/* HERO SECTION WITH 3D NEURAL WAVE BACKGROUND */}
+        <section id="about" className="relative rounded-3xl overflow-hidden min-h-[500px] sm:min-h-[560px] flex items-center p-6 sm:p-12 border border-slate-200/60 dark:border-slate-800/80 bg-gradient-to-b from-slate-900/40 via-slate-950/70 to-slate-900/90 backdrop-blur-md">
+          
+          {/* 3D Wave Canvas Layer */}
+          <Hero3DScene theme={theme} />
+
+          {/* Hero Foreground Content */}
+          <div className="relative z-10 max-w-3xl space-y-6">
             
-            {/* Left Column: Intro (6 cols) */}
-            <div className="lg:col-span-6 space-y-6">
-              
-              {/* Top Greeting & Live Status */}
-              <div className="flex flex-wrap items-center gap-2">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-800/80 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide shadow-xs">
-                  <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-pulse" />
-                  <span>ROGGER BROSCO</span>
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                  <span>5 AGENTES ONLINE</span>
-                </div>
+            {/* Top Greeting & Live Status */}
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-bold tracking-wide backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+                <span>ROGGER BROSCO</span>
               </div>
-
-              {/* Headline */}
-              <div className="space-y-3">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.08]">
-                  CTO & Full-Stack{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500 dark:from-indigo-400 dark:via-purple-400 dark:to-sky-400">
-                    Software Architect
-                  </span>
-                </h1>
-                <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl font-normal">
-                  Especialista em construir <strong>SaaS de alta escala</strong>, interfaces ultrarrápidas em <strong>Next.js 15 & React 19</strong>, modelagem relacional em <strong>PostgreSQL 17</strong> e <strong>frotas autônomas de Inteligência Artificial</strong>.
-                </p>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-semibold backdrop-blur-md">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                <span>DISPONÍVEL PARA PROJETOS</span>
               </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <a
-                  href="#projects"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/25 cursor-pointer"
-                >
-                  <span>Explorar Projetos & SaaS</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-
-                <a
-                  href="#fleet"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white dark:bg-slate-800/90 hover:bg-slate-50 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 font-semibold text-sm transition shadow-xs"
-                >
-                  <Bot className="w-4 h-4 text-indigo-500" />
-                  <span>Ver Frota de IA 3D</span>
-                </a>
-              </div>
-
-              {/* Core Stack Badges */}
-              <div className="pt-6 border-t border-slate-200 dark:border-slate-800">
-                <p className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3">Core Stack & Arquitetura</p>
-                <div className="flex flex-wrap items-center gap-2">
-                  {['Next.js 15', 'React 19', 'TypeScript', 'Bun', 'PostgreSQL 17', 'Docker', 'Three.js 3D', 'Vercel AI SDK', 'Tailwind v4'].map((tech, i) => (
-                    <span key={i} className="px-3 py-1 rounded-lg bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-2xs font-mono">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
             </div>
 
-            {/* Right Column: 3D Holographic Scene & Profile Core (6 cols) */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative rounded-3xl bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 backdrop-blur-xl shadow-2xl p-4 sm:p-6 overflow-hidden">
-                
-                {/* 3D WebGL Torus/Cage Scene */}
-                <div className="relative w-full h-[320px] sm:h-[380px] rounded-2xl overflow-hidden bg-gradient-to-b from-indigo-950/10 via-purple-950/5 to-transparent dark:from-[#090e1a] dark:to-[#050810] border border-slate-200/60 dark:border-slate-800">
-                  <Hero3DScene theme={theme} />
+            {/* Headline */}
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
+                CTO & Full-Stack{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-sky-400">
+                  Software Architect
+                </span>
+              </h1>
+              <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+                Especialista em construir <strong>SaaS de alta escala</strong>, interfaces ultrarrápidas em <strong>Next.js 15 & React 19</strong>, arquitetura relacional em <strong>PostgreSQL 17</strong> e <strong>automações com Inteligência Artificial</strong> para acelerar negócios.
+              </p>
+            </div>
 
-                  {/* Top Floating Glass Badge */}
-                  <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                    <span>3D QUANTUM CORE</span>
-                  </div>
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <a
+                href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20quero%20conversar%20sobre%20um%20novo%20projeto"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/30 cursor-pointer"
+              >
+                <span>Iniciar Meu Projeto</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
 
-                  {/* Bottom Float Telemetry Indicator */}
-                  <div className="absolute bottom-3.5 right-3.5 z-20 flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 text-[11px] font-mono text-slate-600 dark:text-slate-300">
-                    <Activity className="w-3.5 h-3.5 text-indigo-500" />
-                    <span>WEBGL • 60 FPS</span>
-                  </div>
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-slate-900/80 hover:bg-slate-800 border border-slate-700 text-slate-100 font-semibold text-sm transition shadow-sm backdrop-blur-md"
+              >
+                <Boxes className="w-4 h-4 text-indigo-400" />
+                <span>Ver Portfólio em Produção</span>
+              </a>
+            </div>
+
+            {/* Micro Profile Strip */}
+            <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-sky-400 p-[2px] shadow-sm shrink-0">
+                  <img
+                    src="/avatar.png"
+                    alt="Rogger Brosco"
+                    className="w-full h-full rounded-full object-cover bg-slate-900"
+                  />
                 </div>
-
-                {/* Profile Mini Bar */}
-                <div className="mt-4 flex flex-wrap items-center justify-between gap-4 p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800">
-                  <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-sky-400 p-[2px] shadow-sm shrink-0">
-                      <img
-                        src="/avatar.png"
-                        alt="Rogger Brosco"
-                        className="w-full h-full rounded-full object-cover bg-white dark:bg-slate-900"
-                      />
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-slate-900 dark:text-white">Rogger Brosco</div>
-                      <div className="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">CTO @ EasyDev • Lead Architect</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-xs font-mono">
-                    <a
-                      href="https://github.com/rbrosco"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition"
-                    >
-                      <Github className="w-3.5 h-3.5" />
-                      <span>rbrosco</span>
-                    </a>
-                    <a
-                      href="https://dev.easydev.com.br"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold flex items-center gap-1 transition shadow-xs"
-                    >
-                      <span>EasyDev</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
+                <div>
+                  <div className="text-sm font-bold text-white">Rogger Brosco</div>
+                  <div className="text-xs text-indigo-400 font-semibold">CTO @ EasyDev • Lead Architect</div>
                 </div>
+              </div>
 
+              <div className="flex items-center gap-2 text-xs font-mono">
+                <a
+                  href="https://github.com/rbrosco"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-slate-700 text-slate-200 flex items-center gap-1.5 transition"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>github.com/rbrosco</span>
+                </a>
               </div>
             </div>
 
@@ -461,9 +407,9 @@ export default function App() {
           </div>
         </section>
 
-        {/* HERMES MULTI-AGENT FLEET 3D SECTION */}
-        <section id="fleet" className="scroll-mt-28">
-          <FleetVisualizer3D theme={theme} />
+        {/* AI ACCELERATION COMMERCIAL BANNER */}
+        <section id="advantage" className="scroll-mt-28">
+          <AIAccelerationBanner />
         </section>
 
         {/* SERVICES / EXPERTISE */}
@@ -605,7 +551,7 @@ export default function App() {
               </h2>
             </div>
             <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md font-normal">
-              Execute comandos diretamente para consultar o status da frota, inspeção de stack e dados de latência.
+              Execute comandos diretamente para consultar o status da infraestrutura, inspeção de stack e latência.
             </p>
           </div>
 
@@ -836,7 +782,7 @@ export default function App() {
                   <input
                     type="text"
                     required
-                    placeholder="Ex: Desenvolvimento SaaS em Next.js / Arquitetura de IA"
+                    placeholder="Ex: Desenvolvimento SaaS em Next.js / Automação com IA"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-slate-100 focus:outline-hidden focus:border-indigo-600 transition"
