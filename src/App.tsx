@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Code2,
   Cpu,
@@ -28,13 +28,33 @@ import {
   TrendingUp,
   MapPin,
   Send,
-  UserCheck
+  Moon,
+  Sun
 } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'all' | 'frontend' | 'backend' | 'ai' | 'devops'>('all');
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [copied, setCopied] = useState(false);
+  
+  // Theme state
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(isDark ? 'dark' : 'light');
+  }, []);
+
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('broscotech-theme', 'dark');
+      setTheme('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('broscotech-theme', 'light');
+      setTheme('light');
+    }
+  };
 
   const stats = [
     { label: 'Anos de Experiência', value: '+7', subtitle: 'Engenharia de Software', icon: Award },
@@ -50,7 +70,7 @@ export default function App() {
       title: 'Arquitetura SaaS & Web Apps',
       description: 'Construção de plataformas completas e escaláveis utilizando Next.js 15 (App Router), React 19, TypeScript estrito e Tailwind CSS v4 com precisão de design.',
       color: 'from-indigo-500 to-blue-500',
-      tagColor: 'bg-indigo-50 text-indigo-700 border-indigo-100',
+      tagColor: 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-indigo-100 dark:border-indigo-800/60',
     },
     {
       icon: Database,
@@ -58,7 +78,7 @@ export default function App() {
       title: 'Engenharia Backend & Alta Performance',
       description: 'Desenvolvimento de APIs robustas com Node.js / Bun, modelagem relacional em PostgreSQL 17, otimização de queries, TypeORM e camadas de cache no Redis.',
       color: 'from-violet-500 to-purple-500',
-      tagColor: 'bg-violet-50 text-violet-700 border-violet-100',
+      tagColor: 'bg-violet-50 dark:bg-violet-950/60 text-violet-700 dark:text-violet-300 border-violet-100 dark:border-violet-800/60',
     },
     {
       icon: Bot,
@@ -66,7 +86,7 @@ export default function App() {
       title: 'Agentes Autônomos & IA com Reasoning',
       description: 'Implementação de pipelines com LLMs, Vercel AI SDK, orquestração multi-agente Hermes, automação de processos via n8n e integração com WhatsApp via Evolution API.',
       color: 'from-cyan-500 to-teal-500',
-      tagColor: 'bg-cyan-50 text-cyan-700 border-cyan-100',
+      tagColor: 'bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border-cyan-100 dark:border-cyan-800/60',
     },
     {
       icon: Server,
@@ -74,7 +94,7 @@ export default function App() {
       title: 'Infraestrutura Cloud & Confiabilidade',
       description: 'Conteinerização com Docker e Compose, servidores Linux Ubuntu, proxies reversos Nginx com SSL automático, tuning de kernel, swap e segurança com Fail2ban.',
       color: 'from-amber-500 to-orange-500',
-      tagColor: 'bg-amber-50 text-amber-700 border-amber-100',
+      tagColor: 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-100 dark:border-amber-800/60',
     },
   ];
 
@@ -109,7 +129,6 @@ export default function App() {
       tags: ['Next.js 15', 'React 19', 'PostgreSQL 17', 'TypeORM', 'Vercel AI SDK', 'Brevo SMTP', 'Tailwind v4'],
       link: 'https://planner-sdr.broscotech.com.br',
       color: 'from-indigo-600 to-violet-600',
-      bgGlow: 'bg-indigo-500/10',
       highlights: [
         'Relatórios de status executivos gerados por IA com reasoning transparente',
         'Board Kanban fluído com atualização em tempo real e drag-and-drop',
@@ -126,7 +145,6 @@ export default function App() {
       tags: ['Next.js 15', 'TypeScript', 'TypeORM', 'Docker', 'PostgreSQL', 'Tailwind CSS'],
       link: 'https://dev.easydev.com.br',
       color: 'from-blue-600 to-cyan-600',
-      bgGlow: 'bg-blue-500/10',
       highlights: [
         'Painel corporativo com rigor técnico de pixel-precision na interface',
         'Cálculo dinâmico e automatizado de taxas, faturamento e planos',
@@ -142,7 +160,6 @@ export default function App() {
       description: 'Frota coordenada de agentes autônomos (Orchestrator, Scout, Scribe, Reach, Dev) operando com persistência de memória, centro de comando por tópicos no Telegram e auditoria de logs em SQLite.',
       tags: ['Hermes Agent', 'Python', 'SQLite', 'Telegram Bot API', 'Docker', 'Autonomous AI'],
       color: 'from-purple-600 to-pink-600',
-      bgGlow: 'bg-purple-500/10',
       highlights: [
         'Roteamento inteligente por tópicos com perfis e SOUL.md independentes',
         'Auditoria completa de logs e telemetria operacional com retenção inteligente',
@@ -158,7 +175,6 @@ export default function App() {
       description: 'Ambiente conteinerizado de alta vazão unindo Evolution API v2 para instâncias de WhatsApp e pipelines visuais no n8n conectados a bancos de dados, webhooks e relays SMTP da Brevo.',
       tags: ['Evolution API', 'n8n', 'Redis', 'PostgreSQL 17', 'WebSockets', 'Docker Compose'],
       color: 'from-amber-600 to-orange-600',
-      bgGlow: 'bg-amber-500/10',
       highlights: [
         'Gateway de WhatsApp com WebSockets e envio transacional em tempo real',
         'Workflows no n8n com disparo de e-mails transacionais via Brevo',
@@ -207,54 +223,68 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F6FB] text-slate-800 relative overflow-x-hidden selection:bg-indigo-500/20 selection:text-indigo-900">
+    <div className="min-h-screen bg-[#F4F6FB] dark:bg-[#070B14] text-slate-800 dark:text-slate-100 relative overflow-x-hidden selection:bg-indigo-500/20 selection:text-indigo-900 dark:selection:text-indigo-200 transition-colors duration-300">
       
       {/* Dynamic Ambient Background Blobs */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Soft Lavender Orb */}
-        <div className="absolute -top-32 -left-32 w-[650px] h-[650px] bg-gradient-to-br from-indigo-200/50 via-purple-200/40 to-transparent rounded-full blur-[120px] animate-glow-1" />
-        {/* Soft Sky Blue Orb */}
-        <div className="absolute top-[35%] -right-40 w-[700px] h-[700px] bg-gradient-to-br from-sky-200/50 via-blue-200/30 to-transparent rounded-full blur-[140px] animate-glow-2" />
+        {/* Soft Lavender / Dark Indigo Orb */}
+        <div className="absolute -top-32 -left-32 w-[650px] h-[650px] bg-gradient-to-br from-indigo-200/50 via-purple-200/40 to-transparent dark:from-indigo-900/25 dark:via-purple-900/20 dark:to-transparent rounded-full blur-[120px] animate-glow-1 transition-colors duration-500" />
+        {/* Soft Sky Blue / Dark Cyan Orb */}
+        <div className="absolute top-[35%] -right-40 w-[700px] h-[700px] bg-gradient-to-br from-sky-200/50 via-blue-200/30 to-transparent dark:from-sky-900/25 dark:via-blue-950/20 dark:to-transparent rounded-full blur-[140px] animate-glow-2 transition-colors duration-500" />
         {/* Soft Violet Bottom Orb */}
-        <div className="absolute -bottom-40 left-[20%] w-[600px] h-[600px] bg-gradient-to-tr from-violet-200/40 via-pink-100/30 to-transparent rounded-full blur-[130px] animate-glow-1" />
+        <div className="absolute -bottom-40 left-[20%] w-[600px] h-[600px] bg-gradient-to-tr from-violet-200/40 via-pink-100/30 to-transparent dark:from-violet-950/25 dark:via-pink-950/15 dark:to-transparent rounded-full blur-[130px] animate-glow-1 transition-colors duration-500" />
       </div>
 
       {/* Floating Glass Header */}
       <header className="sticky top-4 z-50 max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="glass-panel rounded-full px-5 py-3 flex items-center justify-between shadow-sm">
+        <div className="glass-panel rounded-full px-4 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between shadow-sm">
           {/* Brand Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-sky-400 p-[2px] shadow-sm group-hover:scale-105 transition-transform duration-300">
-              <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
-                <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 font-mono text-sm tracking-tight">RB</span>
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-sky-400 p-[2px] shadow-sm group-hover:scale-105 transition-transform duration-300">
+              <div className="w-full h-full bg-white dark:bg-slate-900 rounded-full flex items-center justify-center">
+                <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 font-mono text-sm tracking-tight">RB</span>
               </div>
             </div>
             <div>
-              <span className="font-bold text-slate-900 text-sm tracking-tight group-hover:text-indigo-600 transition">Rogger Brosco</span>
-              <span className="text-[11px] text-slate-500 block font-medium">Broscotech</span>
+              <span className="font-bold text-slate-900 dark:text-white text-sm tracking-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition">Rogger Brosco</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 block font-medium">Broscotech</span>
             </div>
           </a>
 
           {/* Navigation Capsule */}
-          <nav className="hidden md:flex items-center gap-7 text-xs font-semibold text-slate-600">
-            <a href="#about" className="hover:text-indigo-600 transition">Sobre</a>
-            <a href="#services" className="hover:text-indigo-600 transition">Especialidades</a>
-            <a href="#projects" className="hover:text-indigo-600 transition">Projetos</a>
-            <a href="#skills" className="hover:text-indigo-600 transition">Stack</a>
-            <a href="#timeline" className="hover:text-indigo-600 transition">Carreira</a>
+          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600 dark:text-slate-300">
+            <a href="#about" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Sobre</a>
+            <a href="#services" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Especialidades</a>
+            <a href="#projects" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Projetos</a>
+            <a href="#skills" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Stack</a>
+            <a href="#timeline" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Carreira</a>
           </nav>
 
-          {/* Direct CTA */}
-          <div className="flex items-center gap-2">
+          {/* Actions: Theme Switcher & Direct CTA */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Alternar Modo Escuro / Claro"
+              className="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center transition border border-slate-200/80 dark:border-slate-700/80 cursor-pointer shadow-xs"
+              title={theme === 'dark' ? 'Mudar para Modo Claro' : 'Mudar para Modo Escuro'}
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-indigo-600" />
+              )}
+            </button>
+
             <a
               href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vi%20seu%20portf%C3%B3lio%20na%20Broscotech"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 hover:bg-indigo-600 text-white font-semibold text-xs transition duration-200 shadow-sm shadow-slate-900/10"
+              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-slate-900 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white font-semibold text-xs transition duration-200 shadow-sm"
             >
-              <Phone className="w-3.5 h-3.5 text-indigo-300" />
-              <span>Falar Comigo</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <Phone className="w-3.5 h-3.5 text-indigo-300 dark:text-white" />
+              <span className="hidden xs:inline">Falar Comigo</span>
+              <ArrowRight className="w-3.5 h-3.5 hidden sm:inline" />
             </a>
           </div>
         </div>
@@ -263,7 +293,7 @@ export default function App() {
       {/* Main Content Container */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-24 space-y-28">
 
-        {/* HERO SECTION - Refined Neo-Glassmorphism Layout */}
+        {/* HERO SECTION */}
         <section id="about" className="pt-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
@@ -271,20 +301,20 @@ export default function App() {
             <div className="lg:col-span-7 space-y-6">
               
               {/* Top Greeting Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-indigo-50/80 border border-indigo-100 text-indigo-700 text-xs font-bold tracking-wide shadow-sm">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-indigo-50/90 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
                 <span>👋 HELLO, I'M ROGGER BROSCO</span>
               </div>
 
               {/* Main Headline */}
               <div className="space-y-3">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1]">
                   CTO & Full-Stack{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500 dark:from-indigo-400 dark:via-purple-400 dark:to-sky-400">
                     Software Architect
                   </span>
                 </h1>
-                <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl font-normal">
+                <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl font-normal">
                   Especialista em construir <strong>SaaS de alta escala</strong>, interfaces ultrarrápidas em <strong>Next.js 15 & React 19</strong>, arquitetura de dados em <strong>PostgreSQL 17</strong> e <strong>sistemas autônomos de Inteligência Artificial</strong>.
                 </p>
               </div>
@@ -293,7 +323,7 @@ export default function App() {
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <a
                   href="#projects"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 hover:bg-indigo-600 text-white font-bold text-sm transition shadow-lg shadow-slate-900/15"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white font-bold text-sm transition shadow-lg shadow-slate-900/15 dark:shadow-indigo-600/20"
                 >
                   <span>Ver Projetos em Destaque</span>
                   <ArrowRight className="w-4 h-4" />
@@ -303,19 +333,19 @@ export default function App() {
                   href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vamos%20conversar%20sobre%20um%20projeto"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass-panel hover:bg-white text-slate-800 font-semibold text-sm transition shadow-sm"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass-panel hover:bg-white dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 font-semibold text-sm transition shadow-sm"
                 >
-                  <Phone className="w-4 h-4 text-emerald-600" />
+                  <Phone className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>(41) 99174-7318</span>
                 </a>
               </div>
 
               {/* Quick Trust Badges */}
-              <div className="pt-6 border-t border-slate-200/80">
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Core Stack & Especialidades</p>
+              <div className="pt-6 border-t border-slate-200/80 dark:border-slate-800">
+                <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3">Core Stack & Especialidades</p>
                 <div className="flex flex-wrap items-center gap-2">
                   {['Next.js 15', 'React 19', 'TypeScript', 'Bun', 'PostgreSQL 17', 'Docker', 'Vercel AI SDK', 'Tailwind v4'].map((tech, i) => (
-                    <span key={i} className="px-3 py-1 rounded-lg bg-white/80 border border-slate-200/80 text-xs font-semibold text-slate-700 shadow-xs">
+                    <span key={i} className="px-3 py-1 rounded-lg bg-white/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/70 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-2xs">
                       {tech}
                     </span>
                   ))}
@@ -328,7 +358,7 @@ export default function App() {
             <div className="lg:col-span-5 relative">
               
               {/* Ambient Glow behind card */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-purple-500/10 to-sky-400/20 rounded-3xl blur-2xl transform scale-95" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-purple-500/10 to-sky-400/20 dark:from-indigo-600/30 dark:via-purple-600/20 dark:to-sky-500/30 rounded-3xl blur-2xl transform scale-95" />
 
               {/* Main Profile Glass Showcase */}
               <div className="relative glass-panel rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
@@ -359,36 +389,36 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Floating Micro-Card 1: Experience & SLA */}
+                {/* Floating Micro-Card: Experience & SLA */}
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3.5 rounded-xl bg-white/90 border border-slate-100 shadow-xs flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                  <div className="p-3.5 rounded-xl bg-white/90 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700/70 shadow-2xs flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
                       <Award className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-base font-extrabold text-slate-900 font-mono">+7 Anos</div>
-                      <div className="text-[11px] text-slate-500 font-medium">Experiência Real</div>
+                      <div className="text-base font-extrabold text-slate-900 dark:text-white font-mono">+7 Anos</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Experiência Real</div>
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-white/90 border border-slate-100 shadow-xs flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                  <div className="p-3.5 rounded-xl bg-white/90 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700/70 shadow-2xs flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                       <ShieldCheck className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-base font-extrabold text-slate-900 font-mono">99.9% SLA</div>
-                      <div className="text-[11px] text-slate-500 font-medium">Em Produção</div>
+                      <div className="text-base font-extrabold text-slate-900 dark:text-white font-mono">99.9% SLA</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Em Produção</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Social & Contact Mini Links */}
-                <div className="flex items-center justify-between pt-2 border-t border-slate-200/70 text-xs font-semibold text-slate-600">
-                  <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-indigo-600 transition">
-                    <Github className="w-4 h-4 text-slate-800" />
+                <div className="flex items-center justify-between pt-2 border-t border-slate-200/70 dark:border-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                  <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition">
+                    <Github className="w-4 h-4 text-slate-800 dark:text-slate-200" />
                     <span>github.com/rbrosco</span>
                   </a>
-                  <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-indigo-600 hover:text-indigo-700 transition">
+                  <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 transition">
                     <span>EasyDev</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
@@ -408,31 +438,31 @@ export default function App() {
               const Icon = item.icon;
               return (
                 <div key={idx} className="space-y-1.5 text-center md:text-left">
-                  <div className="flex items-center justify-center md:justify-start gap-2 text-indigo-600">
+                  <div className="flex items-center justify-center md:justify-start gap-2 text-indigo-600 dark:text-indigo-400">
                     <Icon className="w-4 h-4" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400">{item.label}</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">{item.label}</span>
                   </div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-mono tracking-tight">{item.value}</div>
-                  <div className="text-xs text-slate-500 font-medium">{item.subtitle}</div>
+                  <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-mono tracking-tight">{item.value}</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">{item.subtitle}</div>
                 </div>
               );
             })}
           </div>
         </section>
 
-        {/* SERVICES / EXPERTISE SECTION (Matching reference 4 cards style) */}
+        {/* SERVICES / EXPERTISE SECTION */}
         <section id="services" className="space-y-8 scroll-mt-28">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide">
                 <Compass className="w-3.5 h-3.5" />
                 SOLUÇÕES & EXPERTISE
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-2">
                 O que construo com excelência
               </h2>
             </div>
-            <p className="text-slate-500 text-sm max-w-md font-normal">
+            <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md font-normal">
               Soluções completas desenhadas para performance extrema, segurança e zero tolerância a falhas em produção.
             </p>
           </div>
@@ -454,8 +484,8 @@ export default function App() {
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 tracking-tight">{srv.title}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed font-normal">{srv.description}</p>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">{srv.title}</h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed font-normal">{srv.description}</p>
                 </div>
               );
             })}
@@ -466,15 +496,15 @@ export default function App() {
         <section id="projects" className="space-y-8 scroll-mt-28">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide">
                 <Boxes className="w-3.5 h-3.5" />
                 PORTFÓLIO EM DESTAQUE
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-2">
                 Projetos & Aplicações em Produção
               </h2>
             </div>
-            <p className="text-slate-500 text-sm max-w-md font-normal">
+            <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md font-normal">
               Aplicações reais com arquiteturas de ponta a ponta e usuários ativos.
             </p>
           </div>
@@ -491,16 +521,16 @@ export default function App() {
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 font-mono">{proj.category}</span>
-                        <span className="text-slate-300">•</span>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">{proj.category}</span>
+                        <span className="text-slate-300 dark:text-slate-600">•</span>
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800/60">
                           {proj.badge}
                         </span>
                       </div>
-                      <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight mt-1 group-hover:text-indigo-600 transition">
+                      <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition">
                         {proj.title}
                       </h3>
-                      <p className="text-xs text-slate-500 font-medium">{proj.subtitle}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{proj.subtitle}</p>
                     </div>
 
                     {proj.link && (
@@ -508,7 +538,7 @@ export default function App() {
                         href={proj.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-slate-900 hover:bg-indigo-600 text-white flex items-center justify-center transition shrink-0 shadow-sm"
+                        className="w-10 h-10 rounded-full bg-slate-900 hover:bg-indigo-600 dark:bg-slate-800 dark:hover:bg-indigo-600 text-white flex items-center justify-center transition shrink-0 shadow-sm"
                         title="Visitar Aplicação"
                       >
                         <ExternalLink className="w-4 h-4" />
@@ -516,14 +546,14 @@ export default function App() {
                     )}
                   </div>
 
-                  <p className="text-slate-600 text-sm leading-relaxed">{proj.description}</p>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{proj.description}</p>
 
                   {/* Highlights Bullet Points */}
-                  <div className="space-y-2 pt-3 border-t border-slate-200/70">
-                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Principais Entregas:</span>
+                  <div className="space-y-2 pt-3 border-t border-slate-200/70 dark:border-slate-800">
+                    <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Principais Entregas:</span>
                     {proj.highlights.map((h, hIdx) => (
-                      <div key={hIdx} className="flex items-start gap-2 text-xs text-slate-700">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600 shrink-0 mt-0.5" />
+                      <div key={hIdx} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
                         <span>{h}</span>
                       </div>
                     ))}
@@ -532,11 +562,11 @@ export default function App() {
                 </div>
 
                 {/* Tech Tags Footer */}
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-200/70">
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-200/70 dark:border-slate-800">
                   {proj.tags.map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="px-2.5 py-1 rounded-md bg-white/90 border border-slate-200/80 text-slate-700 font-mono text-[11px] font-medium shadow-2xs"
+                      className="px-2.5 py-1 rounded-md bg-white/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/70 text-slate-700 dark:text-slate-300 font-mono text-[11px] font-medium shadow-2xs"
                     >
                       {tag}
                     </span>
@@ -550,13 +580,13 @@ export default function App() {
 
         {/* TECHNOLOGIES & SKILLS SECTION */}
         <section id="skills" className="space-y-8 scroll-mt-28">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide">
                 <Workflow className="w-3.5 h-3.5" />
                 STACK & FERRAMENTAS
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-2">
                 Tecnologias que domino
               </h2>
             </div>
@@ -576,7 +606,7 @@ export default function App() {
                   className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     activeTab === tab.id
                       ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/20'
-                      : 'bg-white/80 hover:bg-white text-slate-600 border border-slate-200'
+                      : 'bg-white/80 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/70'
                   }`}
                 >
                   {tab.label}
@@ -591,16 +621,16 @@ export default function App() {
               return (
                 <div
                   key={index}
-                  className="glass-card rounded-2xl p-4 flex items-center gap-3 hover:bg-white transition-all shadow-xs"
+                  className="glass-card rounded-2xl p-4 flex items-center gap-3 hover:bg-white dark:hover:bg-slate-800/80 transition-all shadow-2xs"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-800/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h4 className="font-bold text-slate-900 text-sm truncate">{skill.name}</h4>
-                    <div className="flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                    <h4 className="font-bold text-slate-900 dark:text-white text-sm truncate">{skill.name}</h4>
+                    <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-medium">
                       <span className="capitalize">{skill.category}</span>
-                      <span className="font-semibold text-indigo-600">{skill.level}</span>
+                      <span className="font-semibold text-indigo-600 dark:text-indigo-400">{skill.level}</span>
                     </div>
                   </div>
                 </div>
@@ -609,22 +639,22 @@ export default function App() {
           </div>
         </section>
 
-        {/* ENGINEERING PROCESS (5 Step Workflow) */}
+        {/* ENGINEERING PROCESS */}
         <section className="glass-panel rounded-3xl p-8 sm:p-10 space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide">
               MÉTODO DE ENGENHARIA
             </div>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Como eu entrego resultados</h2>
-            <p className="text-slate-500 text-sm">Processo rigoroso para garantir código limpo, arquitetura sólida e previsibilidade.</p>
+            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Como eu entrego resultados</h2>
+            <p className="text-slate-500 dark:text-slate-400 text-sm">Processo rigoroso para garantir código limpo, arquitetura sólida e previsibilidade.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-4">
             {processSteps.map((step, idx) => (
-              <div key={idx} className="p-5 rounded-2xl bg-white/70 border border-slate-100 space-y-2 shadow-2xs">
-                <div className="text-2xl font-extrabold text-indigo-600 font-mono">{step.num}</div>
-                <h4 className="font-bold text-slate-900 text-sm">{step.title}</h4>
-                <p className="text-slate-500 text-xs leading-relaxed">{step.desc}</p>
+              <div key={idx} className="p-5 rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-700/60 space-y-2 shadow-2xs">
+                <div className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono">{step.num}</div>
+                <h4 className="font-bold text-slate-900 dark:text-white text-sm">{step.title}</h4>
+                <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -632,11 +662,11 @@ export default function App() {
 
         {/* TIMELINE / CAREER HISTORY */}
         <section id="timeline" className="space-y-8 scroll-mt-28">
-          <div className="border-b border-slate-200 pb-6">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+          <div className="border-b border-slate-200 dark:border-slate-800 pb-6">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide">
               HISTÓRICO PROFISSIONAL
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-2">
               Trajetória & Liderança Técnica
             </h2>
           </div>
@@ -649,26 +679,26 @@ export default function App() {
               >
                 <div className="space-y-1.5 max-w-2xl">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="text-lg font-bold text-slate-900">{item.role}</h3>
-                    <span className="text-slate-300">•</span>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">{item.role}</h3>
+                    <span className="text-slate-300 dark:text-slate-600">•</span>
                     {item.companyUrl ? (
                       <a
                         href={item.companyUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-indigo-600 hover:text-indigo-700 font-bold text-sm inline-flex items-center gap-1 transition"
+                        className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-bold text-sm inline-flex items-center gap-1 transition"
                       >
                         {item.company}
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     ) : (
-                      <span className="text-indigo-600 font-bold text-sm">{item.company}</span>
+                      <span className="text-indigo-600 dark:text-indigo-400 font-bold text-sm">{item.company}</span>
                     )}
                   </div>
-                  <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{item.description}</p>
                 </div>
 
-                <div className="px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-bold font-mono self-start md:self-center shrink-0">
+                <div className="px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold font-mono self-start md:self-center shrink-0 border border-slate-200/60 dark:border-slate-700/60">
                   {item.period}
                 </div>
               </div>
@@ -676,21 +706,21 @@ export default function App() {
           </div>
         </section>
 
-        {/* CONTACT / CTA SECTION - Dual Form & Contact Card */}
+        {/* CONTACT / CTA SECTION */}
         <section id="contact" className="glass-panel rounded-3xl p-8 sm:p-12 scroll-mt-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             
             {/* Contact Details Left (5 cols) */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 text-indigo-700 text-xs font-bold tracking-wide">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide">
                 VAMOS CONVERSAR?
               </div>
               
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Pronto para transformar sua ideia em um produto de alto impacto.
               </h2>
               
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                 Disponível para novos projetos SaaS, liderança de engenharia, arquiteturas com inteligência artificial autônoma e consultoria técnica.
               </p>
 
@@ -700,100 +730,100 @@ export default function App() {
                   href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vamos%20conversar%20sobre%20um%20projeto"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/80 border border-slate-200/80 hover:bg-white text-slate-800 transition group shadow-2xs"
+                  className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/70 hover:bg-white dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 transition group shadow-2xs"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-bold text-slate-400 uppercase">WhatsApp Direto</div>
-                    <div className="text-sm font-bold text-slate-900 font-mono">(41) 99174-7318</div>
+                    <div className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase">WhatsApp Direto</div>
+                    <div className="text-sm font-bold text-slate-900 dark:text-white font-mono">(41) 99174-7318</div>
                   </div>
                 </a>
 
                 <a
                   href="mailto:contato@broscotech.com.br"
-                  className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/80 border border-slate-200/80 hover:bg-white text-slate-800 transition group shadow-2xs"
+                  className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/70 hover:bg-white dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 transition group shadow-2xs"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-bold text-slate-400 uppercase">E-mail Profissional</div>
-                    <div className="text-sm font-bold text-slate-900 font-mono">contato@broscotech.com.br</div>
+                    <div className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase">E-mail Profissional</div>
+                    <div className="text-sm font-bold text-slate-900 dark:text-white font-mono">contato@broscotech.com.br</div>
                   </div>
                 </a>
 
-                <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/80 border border-slate-200/80 text-slate-800 shadow-2xs">
-                  <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+                <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/70 text-slate-800 dark:text-slate-100 shadow-2xs">
+                  <div className="w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-950/80 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-bold text-slate-400 uppercase">Localização</div>
-                    <div className="text-sm font-bold text-slate-900">Curitiba / São Paulo, Brasil (Remoto Global)</div>
+                    <div className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase">Localização</div>
+                    <div className="text-sm font-bold text-slate-900 dark:text-white">Curitiba / São Paulo, Brasil (Remoto Global)</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Direct Form Right (7 cols) */}
-            <div className="lg:col-span-7 bg-white/85 rounded-2xl p-6 sm:p-8 border border-slate-100 shadow-sm">
-              <h3 className="text-xl font-bold text-slate-900 tracking-tight mb-2">Envie uma Mensagem Direta</h3>
-              <p className="text-xs text-slate-500 mb-6">Preencha os campos abaixo para abrir a conversa estruturada no WhatsApp.</p>
+            <div className="lg:col-span-7 bg-white/85 dark:bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-100 dark:border-slate-700/80 shadow-sm">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight mb-2">Envie uma Mensagem Direta</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-6">Preencha os campos abaixo para abrir a conversa estruturada no WhatsApp.</p>
 
               <form onSubmit={handleWhatsAppSend} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700">Seu Nome</label>
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Seu Nome</label>
                     <input
                       type="text"
                       required
                       placeholder="Ex: Carlos Silva"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-hidden focus:border-indigo-500 focus:bg-white transition"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-800 dark:text-slate-100 focus:outline-hidden focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700">Seu E-mail</label>
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Seu E-mail</label>
                     <input
                       type="email"
                       required
                       placeholder="Ex: carlos@empresa.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-hidden focus:border-indigo-500 focus:bg-white transition"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-800 dark:text-slate-100 focus:outline-hidden focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700">Tipo de Projeto / Assunto</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Tipo de Projeto / Assunto</label>
                   <input
                     type="text"
                     required
                     placeholder="Ex: Desenvolvimento SaaS em Next.js / Arquitetura de IA"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-hidden focus:border-indigo-500 focus:bg-white transition"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-800 dark:text-slate-100 focus:outline-hidden focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700">Detalhes da Mensagem</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Detalhes da Mensagem</label>
                   <textarea
                     rows={4}
                     required
                     placeholder="Conte um pouco sobre as necessidades técnicas, prazos ou objetivos..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-hidden focus:border-indigo-500 focus:bg-white transition resize-none"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-800 dark:text-slate-100 focus:outline-hidden focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white font-bold text-sm transition flex items-center justify-center gap-2 shadow-md shadow-slate-900/10 cursor-pointer"
+                  className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white font-bold text-sm transition flex items-center justify-center gap-2 shadow-md shadow-slate-900/10 dark:shadow-indigo-600/20 cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
                   <span>Enviar Mensagem via WhatsApp</span>
@@ -807,26 +837,26 @@ export default function App() {
       </main>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-200 bg-white/70 py-8 relative z-10 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 py-8 relative z-10 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-slate-800 font-mono">Broscotech</span>
+            <span className="font-bold text-slate-800 dark:text-slate-200 font-mono">Broscotech</span>
             <span>© {new Date().getFullYear()}</span>
             <span>•</span>
             <span className="font-medium">Rogger Brosco</span>
           </div>
 
-          <div className="flex items-center gap-5 font-semibold text-slate-600">
-            <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition">
+          <div className="flex items-center gap-5 font-semibold text-slate-600 dark:text-slate-300">
+            <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">
               EasyDev
             </a>
-            <a href="https://planner-sdr.broscotech.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition">
+            <a href="https://planner-sdr.broscotech.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">
               Planner SDR
             </a>
-            <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition">
+            <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">
               GitHub
             </a>
-            <a href="https://wa.me/5541991747318" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 transition">
+            <a href="https://wa.me/5541991747318" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition">
               WhatsApp
             </a>
           </div>
