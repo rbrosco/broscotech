@@ -19,7 +19,7 @@ import {
   Phone,
   FileCode2,
   GitBranch,
-  Terminal,
+  Terminal as TerminalIcon,
   Compass,
   Workflow,
   Boxes,
@@ -27,13 +27,23 @@ import {
   MapPin,
   Send,
   Moon,
-  Sun
+  Sun,
+  Activity,
+  Radio,
+  Sliders,
+  ChevronRight,
+  Flame
 } from 'lucide-react';
+
+import Hero3DScene from './components/Hero3DScene.tsx';
+import BentoCard from './components/BentoCard.tsx';
+import FleetVisualizer3D from './components/FleetVisualizer3D.tsx';
+import LiveInteractiveTerminal from './components/LiveInteractiveTerminal.tsx';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'all' | 'frontend' | 'backend' | 'ai' | 'devops'>('all');
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
     const isDark = document.documentElement.classList.contains('dark');
@@ -53,9 +63,9 @@ export default function App() {
   };
 
   const stats = [
-    { label: 'Anos de Experiência', value: '+7', subtitle: 'Engenharia de Software', icon: Award },
+    { label: 'Anos de Engenharia', value: '+7', subtitle: 'Arquitetura de Software', icon: Award },
     { label: 'SaaS em Produção', value: '+20', subtitle: 'Projetos de Alto Impacto', icon: Boxes },
-    { label: 'Frota de IA Ativa', value: '5 Agentes', subtitle: 'Automação Operacional', icon: Bot },
+    { label: 'Frota de IA Ativa', value: '5 Agentes', subtitle: 'Orquestração Autônoma', icon: Bot },
     { label: 'SLA Operacional', value: '99.9%', subtitle: 'Alta Disponibilidade', icon: ShieldCheck },
   ];
 
@@ -67,6 +77,7 @@ export default function App() {
       description: 'Construção de plataformas completas e escaláveis utilizando Next.js 15 (App Router), React 19, TypeScript estrito e Tailwind CSS v4 com rigorosa precisão visual.',
       color: 'from-indigo-500 to-blue-500',
       badgeClass: 'bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-950/70 dark:text-indigo-300 dark:border-indigo-800/80',
+      glow: 'rgba(99, 102, 241, 0.2)'
     },
     {
       icon: Database,
@@ -75,6 +86,7 @@ export default function App() {
       description: 'Desenvolvimento de APIs robustas com Node.js / Bun, modelagem relacional em PostgreSQL 17, otimização de queries, TypeORM e camadas de cache no Redis.',
       color: 'from-violet-500 to-purple-500',
       badgeClass: 'bg-violet-50 text-violet-700 border-violet-200 dark:bg-violet-950/70 dark:text-violet-300 dark:border-violet-800/80',
+      glow: 'rgba(168, 85, 247, 0.2)'
     },
     {
       icon: Bot,
@@ -83,6 +95,7 @@ export default function App() {
       description: 'Implementação de pipelines com LLMs, Vercel AI SDK, orquestração multi-agente Hermes, automação de processos via n8n e integração com WhatsApp via Evolution API.',
       color: 'from-cyan-500 to-teal-500',
       badgeClass: 'bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-cyan-950/70 dark:text-cyan-300 dark:border-cyan-800/80',
+      glow: 'rgba(6, 182, 212, 0.2)'
     },
     {
       icon: Server,
@@ -91,13 +104,15 @@ export default function App() {
       description: 'Conteinerização com Docker e Compose, servidores Linux Ubuntu, proxies reversos Nginx com SSL automático, tuning de kernel, swap e segurança com Fail2ban.',
       color: 'from-amber-500 to-orange-500',
       badgeClass: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/70 dark:text-amber-300 dark:border-amber-800/80',
+      glow: 'rgba(245, 158, 11, 0.2)'
     },
   ];
 
   const skills = [
     { name: 'TypeScript', level: 'Especialista', category: 'frontend', icon: FileCode2, highlight: true },
     { name: 'React 19 & Next.js 15', level: 'Especialista', category: 'frontend', icon: Code2, highlight: true },
-    { name: 'Tailwind CSS v4', level: 'Especialista', category: 'frontend', icon: Sparkles, highlight: true },
+    { name: 'Three.js & WebGL 3D', level: 'Especialista', category: 'frontend', icon: Sparkles, highlight: true },
+    { name: 'Tailwind CSS v4', level: 'Especialista', category: 'frontend', icon: Sliders, highlight: true },
     { name: 'Bun & Node.js Runtime', level: 'Especialista', category: 'backend', icon: Zap, highlight: true },
     { name: 'PostgreSQL 17 & TypeORM', level: 'Especialista', category: 'backend', icon: Database, highlight: true },
     { name: 'Redis Cache & Queues', level: 'Avançado', category: 'backend', icon: Server, highlight: false },
@@ -107,7 +122,7 @@ export default function App() {
     { name: 'n8n Workflow Automation', level: 'Avançado', category: 'ai', icon: GitBranch, highlight: false },
     { name: 'Docker & Docker Compose', level: 'Especialista', category: 'devops', icon: Layers, highlight: true },
     { name: 'Nginx, Reverse Proxy & SSL', level: 'Avançado', category: 'devops', icon: Cloud, highlight: false },
-    { name: 'Linux Ubuntu / Oracle OCI', level: 'Avançado', category: 'devops', icon: Terminal, highlight: false },
+    { name: 'Linux Ubuntu / Oracle OCI', level: 'Avançado', category: 'devops', icon: TerminalIcon, highlight: false },
     { name: 'Segurança & Fail2ban', level: 'Avançado', category: 'devops', icon: ShieldCheck, highlight: false },
   ];
 
@@ -125,6 +140,7 @@ export default function App() {
       tags: ['Next.js 15', 'React 19', 'PostgreSQL 17', 'TypeORM', 'Vercel AI SDK', 'Brevo SMTP', 'Tailwind v4'],
       link: 'https://planner-sdr.broscotech.com.br',
       color: 'from-indigo-600 to-violet-600',
+      glow: 'rgba(99, 102, 241, 0.25)',
       highlights: [
         'Relatórios de status executivos gerados por IA com reasoning transparente',
         'Board Kanban fluído com atualização em tempo real e drag-and-drop',
@@ -137,10 +153,11 @@ export default function App() {
       category: 'Enterprise / Core',
       badge: 'Corporativo',
       subtitle: 'Ecossistema Integrado de Gestão e Microsserviços',
-      description: 'Plataforma robusta para gestão de desenvolvedores, controle financeiro de planos e descontos progressivos, CMS dinâmico de projetos e monitoramento de serviços em tempo real.',
+      description: 'Plataforma corporativa para gestão de desenvolvedores, controle financeiro de planos com desconto progressivo, CMS dinâmico de projetos e monitoramento de serviços em tempo real.',
       tags: ['Next.js 15', 'TypeScript', 'TypeORM', 'Docker', 'PostgreSQL', 'Tailwind CSS'],
       link: 'https://dev.easydev.com.br',
       color: 'from-blue-600 to-cyan-600',
+      glow: 'rgba(2, 132, 199, 0.25)',
       highlights: [
         'Painel corporativo com rigor técnico de pixel-precision na interface',
         'Cálculo dinâmico e automatizado de taxas, faturamento e planos',
@@ -156,6 +173,7 @@ export default function App() {
       description: 'Frota coordenada de agentes autônomos (Orchestrator, Scout, Scribe, Reach, Dev) operando com persistência de memória, centro de comando por tópicos no Telegram e auditoria de logs em SQLite.',
       tags: ['Hermes Agent', 'Python', 'SQLite', 'Telegram Bot API', 'Docker', 'Autonomous AI'],
       color: 'from-purple-600 to-pink-600',
+      glow: 'rgba(168, 85, 247, 0.25)',
       highlights: [
         'Roteamento inteligente por tópicos com perfis e SOUL.md independentes',
         'Auditoria completa de logs e telemetria operacional com retenção inteligente',
@@ -171,6 +189,7 @@ export default function App() {
       description: 'Ambiente conteinerizado de alta vazão unindo Evolution API v2 para instâncias de WhatsApp e pipelines visuais no n8n conectados a bancos de dados, webhooks e relays SMTP da Brevo.',
       tags: ['Evolution API', 'n8n', 'Redis', 'PostgreSQL 17', 'WebSockets', 'Docker Compose'],
       color: 'from-amber-600 to-orange-600',
+      glow: 'rgba(245, 158, 11, 0.25)',
       highlights: [
         'Gateway de WhatsApp com WebSockets e envio transacional em tempo real',
         'Workflows no n8n com disparo de e-mails transacionais via Brevo',
@@ -219,19 +238,21 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#080C16] text-slate-900 dark:text-slate-100 relative overflow-x-hidden selection:bg-indigo-500/20 selection:text-indigo-900 dark:selection:text-indigo-200 transition-colors duration-200">
+    <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#060911] text-slate-900 dark:text-slate-100 relative overflow-x-hidden selection:bg-indigo-500/20 selection:text-indigo-900 dark:selection:text-indigo-200 transition-colors duration-300">
       
-      {/* Background Subtle Gradient Accents */}
+      {/* Dynamic Background Mesh & Glows */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Soft Indigo Top Light */}
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-indigo-100/60 via-purple-50/40 to-transparent dark:from-indigo-950/20 dark:via-purple-950/10 dark:to-transparent rounded-full blur-[100px]" />
-        {/* Bottom Accent */}
-        <div className="absolute -bottom-40 right-10 w-[500px] h-[500px] bg-gradient-to-t from-blue-100/40 to-transparent dark:from-blue-950/15 dark:to-transparent rounded-full blur-[120px]" />
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-gradient-to-b from-indigo-500/10 via-purple-500/5 to-transparent dark:from-indigo-600/15 dark:via-purple-600/10 dark:to-transparent rounded-full blur-[120px]" />
+        {/* Right Ambient Neon */}
+        <div className="absolute top-[40%] -right-40 w-[600px] h-[600px] bg-gradient-to-t from-cyan-500/10 via-blue-500/5 to-transparent dark:from-cyan-500/10 dark:via-blue-500/5 dark:to-transparent rounded-full blur-[140px]" />
+        {/* Left Ambient Neon */}
+        <div className="absolute top-[70%] -left-40 w-[600px] h-[600px] bg-gradient-to-t from-purple-500/10 to-transparent dark:from-purple-900/10 dark:to-transparent rounded-full blur-[140px]" />
       </div>
 
       {/* Floating Header */}
       <header className="sticky top-4 z-50 max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-full px-4 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-full px-4 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between border border-slate-200/80 dark:border-slate-800/80 shadow-lg dark:shadow-2xl">
           {/* Brand Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 p-[2px] shadow-sm group-hover:scale-105 transition-transform duration-300">
@@ -246,10 +267,14 @@ export default function App() {
           </a>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-7 text-xs font-semibold text-slate-600 dark:text-slate-300">
+          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600 dark:text-slate-300">
             <a href="#about" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Sobre</a>
-            <a href="#services" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Especialidades</a>
+            <a href="#fleet" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center gap-1">
+              <span>Frota IA</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+            </a>
             <a href="#projects" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Projetos</a>
+            <a href="#terminal" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Terminal</a>
             <a href="#skills" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Stack</a>
             <a href="#timeline" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Carreira</a>
           </nav>
@@ -274,7 +299,7 @@ export default function App() {
               href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vi%20seu%20portf%C3%B3lio%20na%20Broscotech"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white font-semibold text-xs transition duration-200 shadow-sm"
+              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition duration-200 shadow-md shadow-indigo-600/20"
             >
               <Phone className="w-3.5 h-3.5 text-white" />
               <span className="hidden xs:inline">Falar Comigo</span>
@@ -285,31 +310,37 @@ export default function App() {
       </header>
 
       {/* Main Container */}
-      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-24 space-y-28">
+      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-24 space-y-32">
 
-        {/* HERO SECTION */}
-        <section id="about" className="pt-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        {/* HERO SECTION WITH 3D CORE */}
+        <section id="about" className="pt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
-            {/* Left Column: Intro (7 cols) */}
-            <div className="lg:col-span-7 space-y-6">
+            {/* Left Column: Intro (6 cols) */}
+            <div className="lg:col-span-6 space-y-6">
               
-              {/* Top Greeting Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-800/80 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse" />
-                <span>👋 HELLO, I'M ROGGER BROSCO</span>
+              {/* Top Greeting & Live Status */}
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-800/80 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-pulse" />
+                  <span>ROGGER BROSCO</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                  <span>5 AGENTES ONLINE</span>
+                </div>
               </div>
 
               {/* Headline */}
               <div className="space-y-3">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1]">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.08]">
                   CTO & Full-Stack{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500 dark:from-indigo-400 dark:via-purple-400 dark:to-sky-400">
                     Software Architect
                   </span>
                 </h1>
                 <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl font-normal">
-                  Especialista em construir <strong>SaaS de alta escala</strong>, interfaces ultrarrápidas em <strong>Next.js 15 & React 19</strong>, arquitetura de dados em <strong>PostgreSQL 17</strong> e <strong>sistemas autônomos de Inteligência Artificial</strong>.
+                  Especialista em construir <strong>SaaS de alta escala</strong>, interfaces ultrarrápidas em <strong>Next.js 15 & React 19</strong>, modelagem relacional em <strong>PostgreSQL 17</strong> e <strong>frotas autônomas de Inteligência Artificial</strong>.
                 </p>
               </div>
 
@@ -317,29 +348,27 @@ export default function App() {
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <a
                   href="#projects"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition shadow-md shadow-indigo-600/20"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/25 cursor-pointer"
                 >
-                  <span>Ver Projetos em Destaque</span>
+                  <span>Explorar Projetos & SaaS</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
 
                 <a
-                  href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20vamos%20conversar%20sobre%20um%20projeto"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 font-semibold text-sm transition shadow-xs"
+                  href="#fleet"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white dark:bg-slate-800/90 hover:bg-slate-50 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 font-semibold text-sm transition shadow-xs"
                 >
-                  <Phone className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>(41) 99174-7318</span>
+                  <Bot className="w-4 h-4 text-indigo-500" />
+                  <span>Ver Frota de IA 3D</span>
                 </a>
               </div>
 
               {/* Core Stack Badges */}
               <div className="pt-6 border-t border-slate-200 dark:border-slate-800">
-                <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3">Core Stack & Especialidades</p>
+                <p className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3">Core Stack & Arquitetura</p>
                 <div className="flex flex-wrap items-center gap-2">
-                  {['Next.js 15', 'React 19', 'TypeScript', 'Bun', 'PostgreSQL 17', 'Docker', 'Vercel AI SDK', 'Tailwind v4'].map((tech, i) => (
-                    <span key={i} className="px-3 py-1 rounded-lg bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-2xs">
+                  {['Next.js 15', 'React 19', 'TypeScript', 'Bun', 'PostgreSQL 17', 'Docker', 'Three.js 3D', 'Vercel AI SDK', 'Tailwind v4'].map((tech, i) => (
+                    <span key={i} className="px-3 py-1 rounded-lg bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-2xs font-mono">
                       {tech}
                     </span>
                   ))}
@@ -348,66 +377,63 @@ export default function App() {
 
             </div>
 
-            {/* Right Column: Hero Profile Card (5 cols) */}
-            <div className="lg:col-span-5 relative">
-              <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 space-y-6 border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl">
+            {/* Right Column: 3D Holographic Scene & Profile Core (6 cols) */}
+            <div className="lg:col-span-6 relative">
+              <div className="relative rounded-3xl bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 backdrop-blur-xl shadow-2xl p-4 sm:p-6 overflow-hidden">
                 
-                {/* Visual Profile Container */}
-                <div className="rounded-2xl p-7 text-center relative overflow-hidden bg-gradient-to-b from-indigo-50/90 via-slate-50/80 to-purple-50/50 dark:from-slate-800/80 dark:via-indigo-950/50 dark:to-slate-900 border border-indigo-100/80 dark:border-indigo-500/20 flex flex-col items-center justify-center">
-                  
-                  {/* Photo with gradient ring */}
-                  <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-sky-400 p-[3px] shadow-lg shadow-indigo-500/20 mb-4 group">
-                    <img
-                      src="/avatar.png"
-                      alt="Rogger Brosco"
-                      className="w-full h-full rounded-full object-cover bg-white dark:bg-slate-900 group-hover:scale-105 transition-transform duration-300"
-                    />
+                {/* 3D WebGL Torus/Cage Scene */}
+                <div className="relative w-full h-[320px] sm:h-[380px] rounded-2xl overflow-hidden bg-gradient-to-b from-indigo-950/10 via-purple-950/5 to-transparent dark:from-[#090e1a] dark:to-[#050810] border border-slate-200/60 dark:border-slate-800">
+                  <Hero3DScene theme={theme} />
+
+                  {/* Top Floating Glass Badge */}
+                  <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 shadow-sm">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                    <span>3D QUANTUM CORE</span>
                   </div>
 
-                  <div className="space-y-1">
-                    <h3 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">Rogger Brosco</h3>
-                    <p className="text-xs text-indigo-600 dark:text-indigo-400 font-bold">CTO @ EasyDev • Lead Architect</p>
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-[11px] font-bold mt-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      Disponível para Projetos
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* Floating Micro-Card: Experience & SLA */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 font-bold">
-                      <Award className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className="text-base font-extrabold text-slate-900 dark:text-white font-mono">+7 Anos</div>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Experiência Real</div>
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 font-bold">
-                      <ShieldCheck className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className="text-base font-extrabold text-slate-900 dark:text-white font-mono">99.9% SLA</div>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Em Produção</div>
-                    </div>
+                  {/* Bottom Float Telemetry Indicator */}
+                  <div className="absolute bottom-3.5 right-3.5 z-20 flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+                    <Activity className="w-3.5 h-3.5 text-indigo-500" />
+                    <span>WEBGL • 60 FPS</span>
                   </div>
                 </div>
 
-                {/* Mini Links */}
-                <div className="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-300">
-                  <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition">
-                    <Github className="w-4 h-4 text-slate-800 dark:text-slate-200" />
-                    <span>github.com/rbrosco</span>
-                  </a>
-                  <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 transition">
-                    <span>EasyDev</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
+                {/* Profile Mini Bar */}
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-4 p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-sky-400 p-[2px] shadow-sm shrink-0">
+                      <img
+                        src="/avatar.png"
+                        alt="Rogger Brosco"
+                        className="w-full h-full rounded-full object-cover bg-white dark:bg-slate-900"
+                      />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-slate-900 dark:text-white">Rogger Brosco</div>
+                      <div className="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">CTO @ EasyDev • Lead Architect</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-xs font-mono">
+                    <a
+                      href="https://github.com/rbrosco"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition"
+                    >
+                      <Github className="w-3.5 h-3.5" />
+                      <span>rbrosco</span>
+                    </a>
+                    <a
+                      href="https://dev.easydev.com.br"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold flex items-center gap-1 transition shadow-xs"
+                    >
+                      <span>EasyDev</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
                 </div>
 
               </div>
@@ -417,7 +443,7 @@ export default function App() {
         </section>
 
         {/* METRICS & STATS PANEL */}
-        <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <section className="bg-white dark:bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((item, idx) => {
               const Icon = item.icon;
@@ -425,7 +451,7 @@ export default function App() {
                 <div key={idx} className="space-y-1.5 text-center md:text-left">
                   <div className="flex items-center justify-center md:justify-start gap-2 text-indigo-600 dark:text-indigo-400">
                     <Icon className="w-4 h-4" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">{item.label}</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 font-sans">{item.label}</span>
                   </div>
                   <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-mono tracking-tight">{item.value}</div>
                   <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">{item.subtitle}</div>
@@ -435,13 +461,18 @@ export default function App() {
           </div>
         </section>
 
-        {/* SERVICES SECTION */}
+        {/* HERMES MULTI-AGENT FLEET 3D SECTION */}
+        <section id="fleet" className="scroll-mt-28">
+          <FleetVisualizer3D theme={theme} />
+        </section>
+
+        {/* SERVICES / EXPERTISE */}
         <section id="services" className="space-y-8 scroll-mt-28">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
                 <Compass className="w-3.5 h-3.5" />
-                SOLUÇÕES & EXPERTISE
+                SOLUÇÕES & ARQUITETURA
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-2">
                 O que construo com excelência
@@ -456,37 +487,36 @@ export default function App() {
             {services.map((srv, idx) => {
               const Icon = srv.icon;
               return (
-                <div
-                  key={idx}
-                  className="bg-white dark:bg-slate-900 rounded-3xl p-7 sm:p-8 space-y-4 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600/40 hover:shadow-md transition-all duration-200 group"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${srv.color} text-white flex items-center justify-center shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform`}>
-                      <Icon className="w-6 h-6" />
+                <BentoCard key={idx} glowColor={srv.glow}>
+                  <div className="p-7 sm:p-8 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${srv.color} text-white flex items-center justify-center shadow-md shadow-indigo-500/20`}>
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <span className={`text-[11px] font-bold px-3 py-1 rounded-full border ${srv.badgeClass}`}>
+                        {srv.badge}
+                      </span>
                     </div>
-                    <span className={`text-[11px] font-bold px-3 py-1 rounded-full border ${srv.badgeClass}`}>
-                      {srv.badge}
-                    </span>
-                  </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">{srv.title}</h3>
-                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed font-normal">{srv.description}</p>
-                </div>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">{srv.title}</h3>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed font-normal">{srv.description}</p>
+                  </div>
+                </BentoCard>
               );
             })}
           </div>
         </section>
 
-        {/* PROJECTS SECTION */}
+        {/* PROJECTS SECTION WITH 3D BENTO TILT */}
         <section id="projects" className="space-y-8 scroll-mt-28">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
                 <Boxes className="w-3.5 h-3.5" />
                 PORTFÓLIO EM DESTAQUE
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-2">
-                Projetos & Aplicações em Produção
+                Aplicações & SaaS em Produção
               </h2>
             </div>
             <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md font-normal">
@@ -496,78 +526,97 @@ export default function App() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {projects.map((proj, idx) => (
-              <div
-                key={idx}
-                className="bg-white dark:bg-slate-900 rounded-3xl p-7 sm:p-8 flex flex-col justify-between space-y-6 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600/40 hover:shadow-lg transition-all duration-200 group"
-              >
-                <div className="space-y-4">
-                  
-                  {/* Header */}
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">{proj.category}</span>
-                        <span className="text-slate-300 dark:text-slate-600">•</span>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                          {proj.badge}
-                        </span>
+              <BentoCard key={idx} glowColor={proj.glow}>
+                <div className="p-7 sm:p-8 flex flex-col justify-between h-full space-y-6">
+                  <div className="space-y-4">
+                    
+                    {/* Header */}
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">{proj.category}</span>
+                          <span className="text-slate-300 dark:text-slate-600">•</span>
+                          <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                            {proj.badge}
+                          </span>
+                        </div>
+                        <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+                          {proj.title}
+                        </h3>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{proj.subtitle}</p>
                       </div>
-                      <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition">
-                        {proj.title}
-                      </h3>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{proj.subtitle}</p>
+
+                      {proj.link && (
+                        <a
+                          href={proj.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 rounded-full bg-slate-900 hover:bg-indigo-600 dark:bg-slate-800 dark:hover:bg-indigo-600 text-white flex items-center justify-center transition shrink-0 shadow-sm"
+                          title="Visitar Aplicação"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
                     </div>
 
-                    {proj.link && (
-                      <a
-                        href={proj.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-slate-900 hover:bg-indigo-600 dark:bg-slate-800 dark:hover:bg-indigo-600 text-white flex items-center justify-center transition shrink-0 shadow-xs"
-                        title="Visitar Aplicação"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{proj.description}</p>
+
+                    {/* Highlights */}
+                    <div className="space-y-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+                      <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Principais Entregas:</span>
+                      {proj.highlights.map((h, hIdx) => (
+                        <div key={hIdx} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
+                          <span>{h}</span>
+                        </div>
+                      ))}
+                    </div>
+
                   </div>
 
-                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{proj.description}</p>
-
-                  {/* Highlights */}
-                  <div className="space-y-2 pt-3 border-t border-slate-100 dark:border-slate-800">
-                    <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Principais Entregas:</span>
-                    {proj.highlights.map((h, hIdx) => (
-                      <div key={hIdx} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
-                        <span>{h}</span>
-                      </div>
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-100 dark:border-slate-800">
+                    {proj.tags.map((tag, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-mono text-[11px] font-medium shadow-2xs"
+                      >
+                        {tag}
+                      </span>
                     ))}
                   </div>
 
                 </div>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-100 dark:border-slate-800">
-                  {proj.tags.map((tag, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-mono text-[11px] font-medium shadow-2xs"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-              </div>
+              </BentoCard>
             ))}
           </div>
+        </section>
+
+        {/* INTERACTIVE TELEMETRY TERMINAL SECTION */}
+        <section id="terminal" className="space-y-6 scroll-mt-28">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-xs font-bold tracking-wide border border-emerald-200/60 dark:border-emerald-800/60">
+                <TerminalIcon className="w-3.5 h-3.5" />
+                TELEMETRIA & INTERAÇÃO CLI
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-2">
+                Console Interativo Broscotech
+              </h2>
+            </div>
+            <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md font-normal">
+              Execute comandos diretamente para consultar o status da frota, inspeção de stack e dados de latência.
+            </p>
+          </div>
+
+          <LiveInteractiveTerminal />
         </section>
 
         {/* STACK & SKILLS */}
         <section id="skills" className="space-y-8 scroll-mt-28">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
                 <Workflow className="w-3.5 h-3.5" />
                 STACK & FERRAMENTAS
               </div>
@@ -580,7 +629,7 @@ export default function App() {
             <div className="flex flex-wrap gap-1.5">
               {[
                 { id: 'all', label: 'Todas' },
-                { id: 'frontend', label: 'Frontend' },
+                { id: 'frontend', label: 'Frontend & 3D' },
                 { id: 'backend', label: 'Backend & DB' },
                 { id: 'ai', label: 'IA & Automação' },
                 { id: 'devops', label: 'Cloud & Infra' },
@@ -590,7 +639,7 @@ export default function App() {
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     activeTab === tab.id
-                      ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/20'
+                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
                       : 'bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
                   }`}
                 >
@@ -606,7 +655,7 @@ export default function App() {
               return (
                 <div
                   key={index}
-                  className="bg-white dark:bg-slate-900 rounded-2xl p-4 flex items-center gap-3 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600/40 transition-all shadow-xs"
+                  className="bg-white dark:bg-slate-900/90 rounded-2xl p-4 flex items-center gap-3 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600/40 transition-all shadow-xs"
                 >
                   <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-800/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5" />
@@ -625,9 +674,9 @@ export default function App() {
         </section>
 
         {/* PROCESS */}
-        <section className="bg-white dark:bg-slate-900 rounded-3xl p-8 sm:p-10 space-y-8 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <section className="bg-white dark:bg-slate-900/90 rounded-3xl p-8 sm:p-10 space-y-8 border border-slate-200 dark:border-slate-800 shadow-sm">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
               MÉTODO DE ENGENHARIA
             </div>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Como eu entrego resultados</h2>
@@ -648,7 +697,7 @@ export default function App() {
         {/* TIMELINE */}
         <section id="timeline" className="space-y-8 scroll-mt-28">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-6">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
               HISTÓRICO PROFISSIONAL
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-2">
@@ -660,7 +709,7 @@ export default function App() {
             {timeline.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white dark:bg-slate-900 rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600/40 hover:shadow-sm transition"
+                className="bg-white dark:bg-slate-900/90 rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600/40 hover:shadow-sm transition"
               >
                 <div className="space-y-1.5 max-w-2xl">
                   <div className="flex flex-wrap items-center gap-2">
@@ -692,12 +741,12 @@ export default function App() {
         </section>
 
         {/* CONTACT SECTION */}
-        <section id="contact" className="bg-white dark:bg-slate-900 rounded-3xl p-8 sm:p-12 border border-slate-200 dark:border-slate-800 shadow-sm scroll-mt-28">
+        <section id="contact" className="bg-white dark:bg-slate-900/90 rounded-3xl p-8 sm:p-12 border border-slate-200 dark:border-slate-800 shadow-sm scroll-mt-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             
             {/* Contact Details Left (5 cols) */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
                 VAMOS CONVERSAR?
               </div>
               
@@ -808,7 +857,7 @@ export default function App() {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition flex items-center justify-center gap-2 shadow-md shadow-indigo-600/20 cursor-pointer"
+                  className="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition flex items-center justify-center gap-2 shadow-md shadow-indigo-600/20 cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
                   <span>Enviar Mensagem via WhatsApp</span>
