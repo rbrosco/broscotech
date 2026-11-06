@@ -255,7 +255,7 @@ export default function HermesConsultingSection() {
         <div className="flex flex-wrap items-center gap-2 pt-2 border-t-2 border-slate-900 dark:border-indigo-900/60 relative z-10">
           <button
             onClick={() => setActiveTab("fleets")}
-            className={`px-4 py-2 rounded-xl text-xs font-mono font-black transition border-2 cursor-pointer ${
+            className={`px-4 py-2.5 rounded-xl text-xs font-mono font-black transition border-2 cursor-pointer shrink-0 whitespace-nowrap ${
               activeTab === "fleets"
                 ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white border-black shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1]"
                 : "bg-white dark:bg-[#12162b] text-slate-700 dark:text-slate-300 border-slate-300 dark:border-indigo-900/60 hover:border-black"
@@ -266,7 +266,7 @@ export default function HermesConsultingSection() {
 
           <button
             onClick={() => setActiveTab("process")}
-            className={`px-4 py-2 rounded-xl text-xs font-mono font-black transition border-2 cursor-pointer ${
+            className={`px-4 py-2.5 rounded-xl text-xs font-mono font-black transition border-2 cursor-pointer shrink-0 whitespace-nowrap ${
               activeTab === "process"
                 ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white border-black shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1]"
                 : "bg-white dark:bg-[#12162b] text-slate-700 dark:text-slate-300 border-slate-300 dark:border-indigo-900/60 hover:border-black"
@@ -277,7 +277,7 @@ export default function HermesConsultingSection() {
 
           <button
             onClick={() => setActiveTab("terminal")}
-            className={`px-4 py-2 rounded-xl text-xs font-mono font-black transition border-2 cursor-pointer ${
+            className={`px-4 py-2.5 rounded-xl text-xs font-mono font-black transition border-2 cursor-pointer shrink-0 whitespace-nowrap ${
               activeTab === "terminal"
                 ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white border-black shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1]"
                 : "bg-white dark:bg-[#12162b] text-slate-700 dark:text-slate-300 border-slate-300 dark:border-indigo-900/60 hover:border-black"
@@ -306,7 +306,7 @@ export default function HermesConsultingSection() {
                   <span className="text-[10px] font-mono font-black uppercase text-indigo-400">
                     {role.badge}
                   </span>
-                  <span className="text-xs font-black truncate">
+                  <span className="text-xs font-black leading-snug">
                     {role.title.replace("Agente ", "")}
                   </span>
                 </button>

@@ -132,7 +132,7 @@ export default function AIAccelerationBanner() {
                 <Icon className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <div className="text-[11px] font-mono font-black text-slate-900 dark:text-white truncate">
+                <div className="text-[11px] font-mono font-black text-slate-900 dark:text-white leading-tight">
                   {b.label}
                 </div>
                 <div className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">

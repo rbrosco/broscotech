@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   MessageSquare,
   Boxes,
@@ -7,25 +7,16 @@ import {
   Bot,
   ArrowRight,
   ExternalLink,
-  CheckCircle2,
-  Sparkles,
   Phone,
-  ShieldCheck,
-  Zap,
-  TrendingUp,
-  Cpu,
-  Layers,
-  ChevronRight,
-  Check,
   Flame
-} from 'lucide-react';
+} from "lucide-react";
 import {
   EasyConnectMockup,
   PlannerSdrMockup,
   DripCastMockup,
   EasyDevCrmMockup
-} from './ProductMockups.tsx';
-import LiveInteractiveTerminal from './LiveInteractiveTerminal.tsx';
+} from "./ProductMockups.tsx";
+import LiveInteractiveTerminal from "./LiveInteractiveTerminal.tsx";
 
 interface ProductItem {
   id: string;
@@ -36,8 +27,8 @@ interface ProductItem {
   tabAccent: string;
   icon: any;
   headline: string;
-  problem: string;
-  solution: string;
+  summary: string;
+  focus: string;
   results: string[];
   features: string[];
   primaryCtaText: string;
@@ -48,152 +39,152 @@ interface ProductItem {
 
 const PRODUCTS: ProductItem[] = [
   {
-    id: 'easyconnect',
-    name: 'EasyConnect',
-    tag: 'Plataforma WhatsApp & Atendimento Omnichannel',
-    badge: 'Produção 24/7',
-    badgeColor: 'bg-[#25D366] text-black border-black',
-    tabAccent: 'bg-[#25D366] text-black border-black',
+    id: "easyconnect",
+    name: "EasyConnect",
+    tag: "WhatsApp & Atendimento Omnichannel",
+    badge: "Produção 24/7",
+    badgeColor: "bg-[#25D366] text-black border-black",
+    tabAccent: "bg-[#25D366] text-black border-black",
     icon: MessageSquare,
-    headline: 'Seu WhatsApp transformado em canal profissional de vendas e suporte com IA.',
-    problem: 'Atendimento desorganizado, clientes esperando horas por resposta e leads qualificados perdidos no limbo sem registro no CRM.',
-    solution: 'Múltiplos atendentes em um único número oficial, triagem automática com IA contextual, fila de espera inteligente e webhooks síncronos com seu banco de dados.',
+    headline: "Seu WhatsApp transformado em canal profissional de vendas e suporte com IA.",
+    summary: "Múltiplos atendentes em um único número oficial, triagem automática com IA contextual, fila inteligente e webhooks síncronos com seu banco de dados.",
+    focus: "Elimina perda de leads no WhatsApp, clientes esperando horas e histórico disperso em celulares de vendedores.",
     results: [
-      'Zero perda de leads por demora no primeiro contato (tempo médio < 15 segundos)',
-      'Aumento imediato de produtividade da equipe comercial e histórico 100% auditável',
-      'Encaminhamento automático para o vendedor certo baseado no perfil do cliente'
+      "Zero perda de leads por demora no primeiro contato (resposta < 15s)",
+      "Histórico 100% auditável centralizado no banco corporativo",
+      "Roteamento automático para o atendente certo por regras de negócio"
     ],
     features: [
-      'Multi-dispositivo e múltiplos atendentes simultâneos',
-      'Agente SDR de triagem inteligente com IA',
-      'Webhooks e integração direta com PostgreSQL/MySQL',
-      'Painel de métricas e tempo de resposta ao vivo'
+      "Multi-dispositivo e atendentes simultâneos",
+      "Agente de triagem inteligente com IA",
+      "Webhooks síncronos com PostgreSQL / MySQL",
+      "Painel de telemetria e fila ao vivo"
     ],
-    primaryCtaText: 'Quero o EasyConnect na Minha Empresa',
-    whatsappMessage: 'Olá Rogger, quero conhecer e implantar o EasyConnect na minha empresa'
+    primaryCtaText: "Quero o EasyConnect na Minha Empresa",
+    whatsappMessage: "Olá Rogger, quero conhecer e implantar o EasyConnect na minha empresa"
   },
   {
-    id: 'planner-sdr',
-    name: 'Planner SDR',
-    tag: 'Gestão de Tarefas, Vendas & Produtividade com IA',
-    badge: 'Demo Online Ativa',
-    badgeColor: 'bg-gradient-to-r from-violet-600 to-blue-600 text-white border-black',
-    tabAccent: 'bg-gradient-to-r from-violet-600 to-blue-600 text-white border-black',
+    id: "planner-sdr",
+    name: "Planner SDR",
+    tag: "Gestão de Tarefas, Vendas & Produtividade",
+    badge: "Demo Online Ativa",
+    badgeColor: "bg-gradient-to-r from-violet-600 to-blue-600 text-white border-black",
+    tabAccent: "bg-gradient-to-r from-violet-600 to-blue-600 text-white border-black",
     icon: Boxes,
-    headline: 'Controle total da operação sem planilhas perdidas e sem cobrança manual de equipe.',
-    problem: 'Tarefas descentralizadas, falta de clareza sobre prioridades da semana e horas perdidas em reuniões diárias de alinhamento.',
-    solution: 'Quadro Kanban dinâmico com IA explicável nativa, relatórios executivos semanais zero-input e lembretes automáticos via WhatsApp e E-mail.',
+    headline: "Controle total da operação sem planilhas perdidas e sem reuniões intermináveis.",
+    summary: "Quadro Kanban dinâmico com IA explicável nativa, relatórios executivos semanais automáticos e notificações síncronas via WhatsApp e E-mail.",
+    focus: "Resolve a falta de clareza nas prioridades da equipe e elimina horas semanais de cobrança e alinhamentos manuais.",
     results: [
-      'Redução de até 70% do tempo gasto em reuniões de acompanhamento e alinhamento',
-      'Visibilidade instantânea para diretoria do status de cada projeto e gargalo',
-      'Relatórios executivos gerados por IA com reasoning transparente'
+      "Redução de até 70% no tempo gasto em reuniões de alinhamento",
+      "Visibilidade instantânea para diretoria do status de cada projeto",
+      "Relatórios executivos semanais gerados por IA nativa"
     ],
     features: [
-      'Kanban interativo de alta precisão com drag-and-drop',
-      'Relatórios de status executivos gerados por IA nativa',
-      'Disparos automáticos de notificações via Brevo SMTP e WhatsApp',
-      'Ambiente multi-workspace com autenticação segura'
+      "Kanban interativo de alta precisão",
+      "Relatórios de status gerados por IA",
+      "Disparos automáticos via SMTP e WhatsApp",
+      "Ambiente multi-workspace isolado"
     ],
-    primaryCtaText: 'Licenciar Planner SDR',
-    whatsappMessage: 'Olá Rogger, quero uma demonstração do Planner SDR para minha empresa',
-    demoUrl: 'https://planner-sdr.broscotech.com.br',
-    demoLabel: 'Abrir Demonstração Real'
+    primaryCtaText: "Licenciar Planner SDR",
+    whatsappMessage: "Olá Rogger, quero uma demonstração do Planner SDR para minha empresa",
+    demoUrl: "https://planner-sdr.broscotech.com.br",
+    demoLabel: "Abrir Demonstração Real"
   },
   {
-    id: 'dripcast',
-    name: 'DripCast',
-    tag: 'Automação de Conteúdo & Fila Contínua',
-    badge: 'Fila Redis 7.2',
-    badgeColor: 'bg-[#00F0FF] text-black border-black',
-    tabAccent: 'bg-[#00F0FF] text-black border-black',
-    icon: Calendar,
-    headline: 'Presença digital recorrente para sua empresa sem precisar passar o dia criando posts.',
-    problem: 'Falta de consistência em publicações de negócios, esquecimento de postagens e horas manuais perdidas em plataformas individuais.',
-    solution: 'Central de ideias estruturada, motor de aprovação rápida e distribuição contínua agendada em múltiplos canais com motor de filas em Redis.',
-    results: [
-      'Campanhas e autoridade ativas por 30 dias sem esforço diário manual',
-      'Distribuição multicanal simultânea (LinkedIn, Instagram e X)',
-      'Eliminação total de esquecimento de cronograma de marketing'
-    ],
-    features: [
-      'Motor de geração de pautas com inteligência artificial',
-      'Fluxo de aprovação em um clique antes da publicação',
-      'Fila de background assíncrona tolerante a falhas',
-      'Histórico de engajamento e métricas de alcance'
-    ],
-    primaryCtaText: 'Quero Automação de Conteúdo',
-    whatsappMessage: 'Olá Rogger, quero saber mais sobre o DripCast para minhas redes e canais'
-  },
-  {
-    id: 'easydev-crm',
-    name: 'EasyDev CRM',
-    tag: 'CRM B2B & Gestão de Contratos Multimoeda',
-    badge: 'Multi-Moeda B2B',
-    badgeColor: 'bg-[#FF5500] text-white border-black',
-    tabAccent: 'bg-[#FF5500] text-white border-black',
+    id: "easydev-crm",
+    name: "EasyDev CRM",
+    tag: "CRM B2B & Gestão Multimoeda",
+    badge: "Multi-Moeda B2B",
+    badgeColor: "bg-[#FF5500] text-white border-black",
+    tabAccent: "bg-[#FF5500] text-white border-black",
     icon: DollarSign,
-    headline: 'Feche propostas mais rápido com um CRM desenhado para o ritmo real do seu comercial.',
-    problem: 'Propostas comerciais esquecidas em follow-up, dificuldade para gerenciar contratos em moedas estrangeiras (USD/EUR) e previsibilidade de caixa zero.',
-    solution: 'Pipeline visual de negócios sob medida, cálculo dinâmico de propostas, suporte nativo a multimoeda com câmbio em tempo real e automação de contratos.',
+    headline: "Feche propostas mais rápido com um CRM desenhado para o ritmo real do seu comercial.",
+    summary: "Pipeline visual de negócios sob medida, cálculo dinâmico de propostas, suporte nativo a multimoeda com câmbio em tempo real e automação de contratos.",
+    focus: "Elimina propostas esquecidas sem follow-up e simplifica contratos internacionais em USD, EUR e BRL.",
     results: [
-      'Aumento na taxa de conversão comercial e zero propostas esquecidas',
-      'Visão consolidada de pipeline em Real, Dólar e Euro no mesmo painel',
-      'Follow-up automático notificando os executivos sobre prazos críticos'
+      "Visão consolidada de pipeline em Real, Dólar e Euro no mesmo painel",
+      "Aumento imediato na taxa de conversão e follow-up pontual",
+      "Emissão ágil de propostas comerciais personalizadas"
     ],
     features: [
-      'Funil de vendas visual e customizável por linha de negócio',
-      'Suporte nativo a transações em BRL, USD e EUR',
-      'Geração automatizada de propostas e minutas de contrato',
-      'Integração com bancos relacionais e dashboards executivos'
+      "Pipeline visual drag-and-drop",
+      "Conversão de moedas em tempo real",
+      "Histórico integrado de interações",
+      "Geração automatizada de propostas e PDFs"
     ],
-    primaryCtaText: 'Conhecer o EasyDev CRM',
-    whatsappMessage: 'Olá Rogger, quero implantar o EasyDev CRM no meu setor comercial',
-    demoUrl: 'https://easydev.com.br',
-    demoLabel: 'Conhecer Portal EasyDev'
+    primaryCtaText: "Conhecer o CRM na EasyDev",
+    whatsappMessage: "Olá Rogger, quero implantar o EasyDev CRM no meu setor comercial",
+    demoUrl: "https://easydev.com.br",
+    demoLabel: "Conhecer Portal EasyDev"
   },
   {
-    id: 'hermes-fleet',
-    name: 'Hermes Fleet',
-    tag: 'Inteligência Artificial Autônoma 24/7',
-    badge: 'Multi-Agente Ativo',
-    badgeColor: 'bg-[#A855F7] text-white border-black',
-    tabAccent: 'bg-[#A855F7] text-white border-black',
-    icon: Bot,
-    headline: 'Agentes autônomos que pesquisam, codificam e executam tarefas contínuas no seu negócio.',
-    problem: 'Equipes sobrecarregadas com rotinas repetitivas de análise de dados, monitoramento de sistemas e operações manuais de TI.',
-    solution: 'Frota coordenada de agentes de IA com papéis especializados (Orchestrator, Dev, Scout, Scribe, Reach), memória duradoura e governança por Telegram e Discord.',
+    id: "dripcast",
+    name: "DripCast",
+    tag: "Automação de Conteúdo & Fila Contínua",
+    badge: "Fila Redis 7.2",
+    badgeColor: "bg-[#00F0FF] text-black border-black",
+    tabAccent: "bg-[#00F0FF] text-black border-black",
+    icon: Calendar,
+    headline: "Presença digital recorrente para sua empresa sem precisar passar o dia criando posts.",
+    summary: "Central de ideias estruturada, motor de aprovação rápida e distribuição contínua agendada em múltiplos canais com motor de filas em Redis.",
+    focus: "Acaba com a inconsistência nas postagens institucionais e centraliza a aprovação de conteúdo em um clique.",
     results: [
-      'Execução ininterrupta 24 horas por dia, 7 dias por semana',
-      'Automação de fluxos complexos de engenharia, deploys e monitoramento',
-      'Redução de custos operacionais com escala sob demanda'
+      "Campanhas ativas por 30 dias com distribuição programada",
+      "Disparo multicanal simultâneo (LinkedIn, Instagram e X)",
+      "Fila assíncrona tolerante a falhas de rede"
     ],
     features: [
-      'Orquestração determinística multi-agente',
-      'Persistência de memória contextual em SQLite e vetores',
-      'Interface de controle direto via Telegram Bot e Discord',
-      'Execução de scripts, testes de software e deploys em servidores'
+      "Motor de pautas com inteligência artificial",
+      "Fluxo de aprovação em um clique",
+      "Fila assíncrona tolerante a falhas (Redis)",
+      "Histórico de publicações e métricas"
     ],
-    primaryCtaText: 'Quero Agentes de IA na Minha Operação',
-    whatsappMessage: 'Olá Rogger, quero entender como agentes de IA podem rodar no meu negócio'
+    primaryCtaText: "Quero Automação de Conteúdo",
+    whatsappMessage: "Olá Rogger, quero saber mais sobre o DripCast para minhas redes e canais"
+  },
+  {
+    id: "hermes-fleet",
+    name: "Hermes Fleet",
+    tag: "Inteligência Artificial Autônoma 24/7",
+    badge: "Multi-Agente Ativo",
+    badgeColor: "bg-[#A855F7] text-white border-black",
+    tabAccent: "bg-[#A855F7] text-white border-black",
+    icon: Bot,
+    headline: "Agentes autônomos que pesquisam, codificam e executam tarefas contínuas no seu negócio.",
+    summary: "Frota coordenada de agentes de IA com papéis especializados (SDR, Suporte, DevOps, Scout), memória duradoura e governança por Telegram e Discord.",
+    focus: "Libera sua equipe de rotinas mecânicas de triagem, monitoramento de servidores e relatórios manuais repetitivos.",
+    results: [
+      "Operação ininterrupta 24 horas por dia, 7 dias por semana",
+      "Ações no mundo real com APIs, bancos relacionais e scripts",
+      "Logs 100% auditáveis e zero alucinação com guardrails rígidos"
+    ],
+    features: [
+      "Orquestração determinística multi-agente",
+      "Memória persistente em SQLite e vetores",
+      "Controle direto via Telegram e Discord",
+      "Ambiente Docker isolado em servidor privado"
+    ],
+    primaryCtaText: "Quero Agentes de IA na Minha Operação",
+    whatsappMessage: "Olá Rogger, quero entender como a frota de IA Hermes pode rodar no meu negócio"
   }
 ];
 
 export default function ProductShowcase() {
-  const [selectedProductId, setSelectedProductId] = useState<string>('easyconnect');
+  const [selectedProductId, setSelectedProductId] = useState<string>("easyconnect");
 
   const selectedProduct = PRODUCTS.find((p) => p.id === selectedProductId) || PRODUCTS[0];
 
   const renderMockup = (id: string) => {
     switch (id) {
-      case 'easyconnect':
+      case "easyconnect":
         return <EasyConnectMockup />;
-      case 'planner-sdr':
+      case "planner-sdr":
         return <PlannerSdrMockup />;
-      case 'dripcast':
+      case "dripcast":
         return <DripCastMockup />;
-      case 'easydev-crm':
+      case "easydev-crm":
         return <EasyDevCrmMockup />;
-      case 'hermes-fleet':
+      case "hermes-fleet":
         return (
           <div className="space-y-3">
             <div className="p-3 rounded-xl bg-slate-900 border-2 border-slate-700 flex items-center justify-between text-xs text-slate-300 shadow-[2px_2px_0px_#000]">
@@ -218,15 +209,15 @@ export default function ProductShowcase() {
       {/* Section Header */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-2">
         <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-gradient-to-r from-violet-600 to-blue-600 text-white text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
-            <Flame className="w-3.5 h-3.5 fill-white" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-gradient-to-r from-violet-600 to-blue-600 text-white text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000] shrink-0 whitespace-nowrap">
+            <Flame className="w-3.5 h-3.5 fill-white shrink-0" />
             <span>VITRINE DE SOFTWARES PRONTOS PARA USO</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
             Softwares reais. Prontos para rodar no seu negócio.
           </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
-            Chega de slide em PowerPoint e promessas vazias. Sistemas desenvolvidos com arquitetura sênior, operando com dados reais e disponíveis para implantação ou adaptação sob medida.
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed font-medium">
+            Sistemas desenvolvidos com arquitetura sênior, operando com dados reais e disponíveis para implantação ou adaptação sob medida pela EasyDev.
           </p>
         </div>
 
@@ -235,11 +226,11 @@ export default function ProductShowcase() {
           href="https://wa.me/5541991747318?text=Olá%20Rogger,%20quero%20um%20diagnóstico%20técnico%20gratuito%20para%20minha%20empresa"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white text-xs font-black transition border-2 border-black shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1] shrink-0 self-start lg:self-center"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white text-xs font-black transition border-2 border-black shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1] shrink-0 whitespace-nowrap self-start lg:self-center"
         >
-          <Phone className="w-4 h-4" />
+          <Phone className="w-4 h-4 shrink-0" />
           <span>Falar Direto no WhatsApp</span>
-          <ArrowRight className="w-3.5 h-3.5" />
+          <ArrowRight className="w-3.5 h-3.5 shrink-0" />
         </a>
       </div>
 
@@ -252,18 +243,18 @@ export default function ProductShowcase() {
             <button
               key={prod.id}
               onClick={() => setSelectedProductId(prod.id)}
-              className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-black transition whitespace-nowrap cursor-pointer border-2 ${
+              className={`flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-black transition whitespace-nowrap shrink-0 cursor-pointer border-2 ${
                 isSelected
                   ? `${prod.tabAccent} shadow-[3px_3px_0px_#000] translate-x-[-1px] translate-y-[-1px]`
-                  : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-900 dark:border-indigo-900/60 hover:bg-slate-100 dark:hover:bg-slate-800 shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#6366f1]'
+                  : "bg-white dark:bg-[#12162b] text-slate-700 dark:text-slate-300 border-slate-900 dark:border-indigo-900/60 hover:bg-slate-100 dark:hover:bg-[#181d38] shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#6366f1]"
               }`}
             >
               <Icon className="w-4 h-4 shrink-0" />
-              <span>{prod.name}</span>
+              <span className="shrink-0">{prod.name}</span>
               <span
-                className={`text-[9px] font-mono px-2 py-0.5 rounded border ${
+                className={`text-[9px] font-mono px-2 py-0.5 rounded border shrink-0 ${
                   isSelected
-                    ? 'bg-black/20 text-current border-current font-black'
+                    ? "bg-black/20 text-current border-current font-black"
                     : prod.badgeColor
                 }`}
               >
@@ -279,40 +270,32 @@ export default function ProductShowcase() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Left Column: Product Details & Value Proposition (6 cols) */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-6 space-y-5">
             <div className="space-y-2">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[11px] font-mono font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-400 dark:border-slate-600">
+                <span className="text-[11px] font-mono font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-400 dark:border-slate-600 shrink-0 whitespace-nowrap">
                   {selectedProduct.tag}
                 </span>
-                <span className={`text-[11px] font-mono font-black px-2.5 py-0.5 rounded border ${selectedProduct.badgeColor}`}>
+                <span className={`text-[11px] font-mono font-black px-2.5 py-0.5 rounded border shrink-0 whitespace-nowrap ${selectedProduct.badgeColor}`}>
                   {selectedProduct.badge}
                 </span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
                 {selectedProduct.headline}
               </h3>
             </div>
 
-            {/* Pain & Solution Grid */}
-            <div className="space-y-3">
-              <div className="p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/20 border-2 border-rose-300 dark:border-rose-900/60 space-y-1 shadow-xs">
-                <div className="text-[10px] font-mono font-black uppercase tracking-wider text-rose-700 dark:text-rose-400">
-                  ✕ O Gargalo que Resolve:
-                </div>
-                <p className="text-slate-800 dark:text-slate-200 text-xs leading-relaxed font-medium">
-                  {selectedProduct.problem}
-                </p>
-              </div>
+            {/* Clear Value Narrative */}
+            <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-medium">
+              {selectedProduct.summary}
+            </p>
 
-              <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 dark:border-emerald-600 space-y-1 shadow-xs">
-                <div className="text-[10px] font-mono font-black uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-                  ✓ A Solução em Produção:
-                </div>
-                <p className="text-slate-800 dark:text-slate-200 text-xs leading-relaxed font-semibold">
-                  {selectedProduct.solution}
-                </p>
-              </div>
+            {/* Focus / Gargalo que resolve */}
+            <div className="p-3.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/30 border-2 border-indigo-400/60 dark:border-indigo-800/80 text-xs text-slate-800 dark:text-slate-200 flex items-start gap-2.5">
+              <span className="font-mono font-black text-indigo-600 dark:text-cyan-400 shrink-0 uppercase text-[10px] pt-0.5 whitespace-nowrap">
+                O QUE RESOLVE:
+              </span>
+              <span className="font-medium leading-relaxed">{selectedProduct.focus}</span>
             </div>
 
             {/* Results Bullet Points */}
@@ -323,7 +306,7 @@ export default function ProductShowcase() {
               <div className="space-y-2">
                 {selectedProduct.results.map((res, idx) => (
                   <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
-                    <span className="w-4 h-4 rounded-full bg-emerald-500 text-black flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 border border-black">
+                    <span className="w-4 h-4 rounded-full bg-emerald-500 text-black flex items-center justify-center font-black text-[10px] shrink-0 mt-0.5 border border-black">
                       ✓
                     </span>
                     <span className="leading-snug font-medium">{res}</span>
@@ -335,13 +318,13 @@ export default function ProductShowcase() {
             {/* Features Chips */}
             <div className="space-y-2 pt-1">
               <div className="text-xs font-mono font-black uppercase tracking-wider text-slate-900 dark:text-white">
-                Especificações Técnicas:
+                Especificações de Engenharia:
               </div>
               <div className="flex flex-wrap gap-2">
                 {selectedProduct.features.map((feat, idx) => (
                   <span
                     key={idx}
-                    className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 border-2 border-slate-300 dark:border-indigo-900/60"
+                    className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-[#12162b] text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-indigo-900/60 shrink-0 whitespace-nowrap"
                   >
                     {feat}
                   </span>
@@ -355,11 +338,11 @@ export default function ProductShowcase() {
                 href={`https://wa.me/5541991747318?text=${encodeURIComponent(selectedProduct.whatsappMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-black transition border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white text-xs font-black transition border-2 border-black shadow-[3px_3px_0px_#000] shrink-0 whitespace-nowrap cursor-pointer"
               >
-                <Phone className="w-3.5 h-3.5 fill-white" />
+                <Phone className="w-3.5 h-3.5 fill-white shrink-0" />
                 <span>{selectedProduct.primaryCtaText}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 shrink-0" />
               </a>
 
               {selectedProduct.demoUrl && (
@@ -367,17 +350,17 @@ export default function ProductShowcase() {
                   href={selectedProduct.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-black transition border-2 border-black dark:border-indigo-900/60 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1] hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white dark:bg-[#12162b] text-slate-900 dark:text-white text-xs font-black transition border-2 border-black dark:border-indigo-900/60 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1] hover:bg-slate-100 dark:hover:bg-[#181d38] shrink-0 whitespace-nowrap"
                 >
-                  <span>{selectedProduct.demoLabel || 'Ver Demonstração'}</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-indigo-500" />
+                  <span>{selectedProduct.demoLabel || "Ver Demonstração"}</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
                 </a>
               )}
             </div>
 
           </div>
 
-          {/* Right Column: Interactive Browser Frame Mockup (6 cols) */}
+          {/* Right Column: Interactive Mockup (6 cols) */}
           <div className="lg:col-span-6 w-full">
             {renderMockup(selectedProduct.id)}
           </div>
