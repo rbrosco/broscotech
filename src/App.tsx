@@ -155,21 +155,98 @@ export default function App() {
       <div className="fixed bottom-1/4 right-10 w-[550px] h-[550px] bg-gradient-to-bl from-blue-600/15 via-cyan-600/10 to-purple-600/15 rounded-full blur-[150px] pointer-events-none -z-10" />
 
       {/* HEADER 100% FIXO NO TOPO - Acompanha a rolagem de ponta a ponta */}
-      <header className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-xl bg-white/90 dark:bg-[#070914]/90 border-b border-slate-200/80 dark:border-indigo-950/70 shadow-sm transition-all duration-200">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md bg-white/90 dark:bg-[#070914]/85 border-b border-slate-200/80 dark:border-indigo-900/40 shadow-sm transition-all duration-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           
-          {/* Logo & Autoridade Rogger Brosco */}
-          <a href="#" className="flex items-center gap-3 shrink-0 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-600 via-indigo-600 to-blue-600 text-white border-2 border-black flex items-center justify-center font-mono font-black text-xs shadow-[2px_2px_0px_#000]">
-              RB
+          {/* Logo & Autoridade Broscotech com Monograma Autoral B Futurista */}
+          <a href="#" className="flex items-center gap-2.5 sm:gap-3 shrink-0 group select-none">
+            {/* Monograma Autoral B Diferentaço Isométrico */}
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0">
+              <div className="absolute -inset-0.5 bg-gradient-to-tr from-violet-600 via-indigo-500 to-cyan-400 rounded-xl blur-[3px] opacity-75 group-hover:opacity-100 transition duration-300" />
+              <svg
+                viewBox="0 0 40 40"
+                className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 drop-shadow-[2px_2px_0px_#000]"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient id="brosco-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#8b5cf6" />
+                    <stop offset="50%" stopColor="#6366f1" />
+                    <stop offset="100%" stopColor="#06b6d4" />
+                  </linearGradient>
+                  <linearGradient id="brosco-grad-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#1e1b4b" />
+                    <stop offset="100%" stopColor="#090d1f" />
+                  </linearGradient>
+                  <linearGradient id="brosco-neon" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#c084fc" />
+                    <stop offset="100%" stopColor="#22d3ee" />
+                  </linearGradient>
+                </defs>
+                
+                {/* Moldura Neobrutalista Futurista */}
+                <rect
+                  x="2"
+                  y="2"
+                  width="36"
+                  height="36"
+                  rx="10"
+                  fill="url(#brosco-grad-dark)"
+                  stroke="#000000"
+                  strokeWidth="2"
+                />
+                
+                {/* Micro Circuitos */}
+                <path
+                  d="M5 14H11M29 26H35M14 5V11M26 29V35"
+                  stroke="url(#brosco-neon)"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  opacity="0.5"
+                />
+
+                {/* Tronco do B */}
+                <path
+                  d="M11 9H17C17 9 17 31 17 31H11C9.89543 31 9 30.1046 9 29V11C9 9.89543 9.89543 9 11 9Z"
+                  fill="url(#brosco-grad-1)"
+                  stroke="#000000"
+                  strokeWidth="1.5"
+                />
+
+                {/* Loop Superior B */}
+                <path
+                  d="M17 9H24C27.3137 9 30 11.4624 30 14.5C30 17.5376 27.3137 20 24 20H17V9Z"
+                  fill="url(#brosco-neon)"
+                  stroke="#000000"
+                  strokeWidth="1.5"
+                />
+                <circle cx="22.5" cy="14.5" r="2.2" fill="#090d1f" stroke="#000000" strokeWidth="1" />
+
+                {/* Loop Inferior B Mais Largo */}
+                <path
+                  d="M17 20H25.5C29.0899 20 32 22.4624 32 25.5C32 28.5376 29.0899 31 25.5 31H17V20Z"
+                  fill="url(#brosco-grad-1)"
+                  stroke="#000000"
+                  strokeWidth="1.5"
+                />
+                <circle cx="23.5" cy="25.5" r="2.5" fill="#090d1f" stroke="#000000" strokeWidth="1" />
+
+                {/* Ponto Neon Vértice */}
+                <circle cx="30" cy="11" r="1.5" fill="#22d3ee" />
+              </svg>
             </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-black text-sm tracking-tight text-slate-900 dark:text-white">ROGGER BROSCO</span>
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+
+            {/* Wordmark Broscotech */}
+            <div className="shrink-0 whitespace-nowrap">
+              <div className="flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+                <span className="font-black text-sm sm:text-base tracking-wider text-slate-900 dark:text-white uppercase font-mono group-hover:tracking-widest transition-all duration-300 shrink-0 whitespace-nowrap">
+                  BROSCO<span className="bg-gradient-to-r from-violet-500 via-indigo-400 to-cyan-400 bg-clip-text text-transparent">TECH</span>
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shrink-0" />
               </div>
-              <span className="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 block font-black leading-none">
-                CTO @ EASYDEV
+              <span className="text-[10px] font-mono text-slate-500 dark:text-indigo-300 font-bold block leading-none shrink-0 whitespace-nowrap">
+                por Rogger Brosco • CTO EasyDev
               </span>
             </div>
           </a>
@@ -584,8 +661,8 @@ export default function App() {
                         <Icon className="w-4 h-4 text-indigo-400" />
                       </div>
                       <div className="min-w-0">
-                        <div className="font-black text-slate-900 dark:text-white text-xs leading-snug">{skill.name}</div>
-                        <div className="text-[10px] text-slate-500 dark:text-indigo-300/80 font-mono font-bold">{skill.level}</div>
+                        <div className="font-black text-slate-900 dark:text-white text-xs whitespace-nowrap">{skill.name}</div>
+                        <div className="text-[10px] text-slate-500 dark:text-indigo-300/80 font-mono font-bold whitespace-nowrap">{skill.level}</div>
                       </div>
                     </div>
                   );

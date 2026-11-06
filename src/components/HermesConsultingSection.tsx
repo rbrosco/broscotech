@@ -292,21 +292,21 @@ export default function HermesConsultingSection() {
           <div className="space-y-6 relative z-10">
             
             {/* Seletor de Papéis */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
               {FLEET_ROLES.map((role) => (
                 <button
                   key={role.id}
                   onClick={() => setSelectedFleetId(role.id)}
-                  className={`p-3 rounded-xl border-2 text-left transition flex flex-col justify-between gap-1 cursor-pointer ${
+                  className={`px-4 py-2.5 rounded-xl border-2 transition flex items-center gap-2.5 cursor-pointer shrink-0 whitespace-nowrap ${
                     selectedFleetId === role.id
                       ? "bg-slate-900 text-white dark:bg-[#181d38] border-black dark:border-indigo-500 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1]"
                       : "bg-slate-50 dark:bg-[#101426] text-slate-700 dark:text-slate-300 border-slate-300 dark:border-indigo-900/60 hover:border-black"
                   }`}
                 >
-                  <span className="text-[10px] font-mono font-black uppercase text-indigo-400">
+                  <span className="text-[10px] font-mono font-black uppercase text-indigo-400 shrink-0 whitespace-nowrap">
                     {role.badge}
                   </span>
-                  <span className="text-xs font-black leading-snug">
+                  <span className="text-xs font-black shrink-0 whitespace-nowrap">
                     {role.title.replace("Agente ", "")}
                   </span>
                 </button>
