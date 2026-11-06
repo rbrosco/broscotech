@@ -15,12 +15,12 @@ export default function Hero3DScene({ theme }: Hero3DSceneProps) {
     // 1. Scene, Camera & WebGL Renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      55,
+      52,
       container.clientWidth / container.clientHeight,
       0.1,
       1000
     );
-    camera.position.set(0, 16, 28);
+    camera.position.set(0, 15, 26);
     camera.lookAt(0, -1, 0);
 
     const renderer = new THREE.WebGLRenderer({
@@ -34,19 +34,20 @@ export default function Hero3DScene({ theme }: Hero3DSceneProps) {
 
     const isDark = theme === 'dark';
 
-    // 2. High-Density Wave Grid (65 x 45 = 2,925 interactive nodes)
-    const cols = 65;
-    const rows = 45;
+    // 2. High-Precision Technical Isometric Matrix (60 x 40)
+    const cols = 60;
+    const rows = 40;
     const count = cols * rows;
-    const spacing = 0.95;
+    const spacing = 1.05;
 
     const positions = new Float32Array(count * 3);
     const originalPositions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
 
-    const color1 = new THREE.Color(isDark ? 0x6366f1 : 0x4f46e5); // Indigo
-    const color2 = new THREE.Color(isDark ? 0x06b6d4 : 0x0284c7); // Cyan
-    const color3 = new THREE.Color(isDark ? 0xa855f7 : 0x7c3aed); // Violet
+    // Architectural Engineering Colors: Emerald, Electric Lime & Cyber Cyan
+    const color1 = new THREE.Color(isDark ? 0x10b981 : 0x059669); // Emerald
+    const color2 = new THREE.Color(isDark ? 0x06b6d4 : 0x0891b2); // Cyan
+    const color3 = new THREE.Color(isDark ? 0x84cc16 : 0x65a30d); // Lime
 
     let idx = 0;
     for (let ix = 0; ix < cols; ix++) {
@@ -63,18 +64,18 @@ export default function Hero3DScene({ theme }: Hero3DSceneProps) {
         originalPositions[idx * 3 + 1] = y;
         originalPositions[idx * 3 + 2] = z;
 
-        // Dynamic Color Gradient across the 3D wave plane
+        // Mathematical coordinate shading
         const ratio = (ix / cols + iy / rows) * 0.5;
-        const finalColor = new THREE.Color();
+        const mixedColor = new THREE.Color();
         if (ratio < 0.5) {
-          finalColor.lerpColors(color1, color2, ratio * 2);
+          mixedColor.lerpColors(color1, color2, ratio * 2);
         } else {
-          finalColor.lerpColors(color2, color3, (ratio - 0.5) * 2);
+          mixedColor.lerpColors(color2, color3, (ratio - 0.5) * 2);
         }
 
-        colors[idx * 3] = finalColor.r;
-        colors[idx * 3 + 1] = finalColor.g;
-        colors[idx * 3 + 2] = finalColor.b;
+        colors[idx * 3] = mixedColor.r;
+        colors[idx * 3 + 1] = mixedColor.g;
+        colors[idx * 3 + 2] = mixedColor.b;
 
         idx++;
       }
@@ -84,19 +85,19 @@ export default function Hero3DScene({ theme }: Hero3DSceneProps) {
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-    // Particle Shader Material (Sharper, Glowing Particles)
+    // Crisp Tech Dots
     const material = new THREE.PointsMaterial({
-      size: isDark ? 0.22 : 0.18,
+      size: isDark ? 0.20 : 0.16,
       vertexColors: true,
       transparent: true,
-      opacity: isDark ? 0.95 : 0.75,
+      opacity: isDark ? 0.85 : 0.65,
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
     });
 
     const particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
-    // Glowing Wireframe Mesh Lines
+    // Blueprint Grid Lines
     const lineIndices: number[] = [];
     for (let ix = 0; ix < cols; ix++) {
       for (let iy = 0; iy < rows; iy++) {
@@ -118,23 +119,14 @@ export default function Hero3DScene({ theme }: Hero3DSceneProps) {
     const lineMaterial = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: isDark ? 0.28 : 0.14,
+      opacity: isDark ? 0.16 : 0.08,
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
     });
 
     const meshLines = new THREE.LineSegments(lineGeometry, lineMaterial);
     scene.add(meshLines);
 
-    // Dynamic Lights for 3D depth
-    const light1 = new THREE.PointLight(0x6366f1, isDark ? 6 : 3, 40);
-    light1.position.set(0, 15, 10);
-    scene.add(light1);
-
-    const light2 = new THREE.PointLight(0x06b6d4, isDark ? 5 : 2.5, 40);
-    light2.position.set(-15, 10, -5);
-    scene.add(light2);
-
-    // Mouse Tracking with smooth fluid dampening
+    // Interactive mouse tracking
     let mouseX = 0;
     let mouseY = 0;
     let targetMouseX = 0;
@@ -142,22 +134,26 @@ export default function Hero3DScene({ theme }: Hero3DSceneProps) {
 
     const handleMouseMove = (event: MouseEvent) => {
       const rect = container.getBoundingClientRect();
-      targetMouseX = ((event.clientX - rect.left) / rect.width - 0.5) * 16;
-      targetMouseY = ((event.clientY - rect.top) / rect.height - 0.5) * 10;
+      const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
+      targetMouseX = x * 14;
+      targetMouseY = y * 10;
     };
 
     window.addEventListener('mousemove', handleMouseMove);
 
     // Animation Loop
+    let clock = new THREE.Clock();
     let frameId: number;
-    const clock = new THREE.Clock();
 
     const animate = () => {
       frameId = requestAnimationFrame(animate);
-      const time = clock.getElapsedTime() * 1.5;
 
-      mouseX += (targetMouseX - mouseX) * 0.06;
-      mouseY += (targetMouseY - mouseY) * 0.06;
+      const delta = clock.getDelta();
+      const time = clock.getElapsedTime() * 0.7;
+
+      mouseX += (targetMouseX - mouseX) * 0.05;
+      mouseY += (targetMouseY - mouseY) * 0.05;
 
       const posAttr = geometry.attributes.position as THREE.BufferAttribute;
       const posArray = posAttr.array as Float32Array;
@@ -168,18 +164,17 @@ export default function Hero3DScene({ theme }: Hero3DSceneProps) {
           const origX = originalPositions[pIdx * 3];
           const origZ = originalPositions[pIdx * 3 + 2];
 
-          // Rich Multi-Harmonic Waves with enhanced amplitude
-          const wave1 = Math.sin(origX * 0.25 + time) * 1.6;
-          const wave2 = Math.cos(origZ * 0.32 + time * 0.9) * 1.3;
-          const wave3 = Math.sin((origX + origZ) * 0.18 + time * 1.3) * 0.9;
+          // Subdued architectural wave
+          const wave1 = Math.sin(origX * 0.22 + time) * 1.1;
+          const wave2 = Math.cos(origZ * 0.28 + time * 0.8) * 0.9;
 
-          // Interactive Cursor Vortex
+          // Cursor ripple
           const distToMouse = Math.sqrt(
             Math.pow(origX - mouseX, 2) + Math.pow(origZ - mouseY, 2)
           );
-          const mouseEffect = Math.exp(-distToMouse * 0.28) * 3.4;
+          const mouseEffect = Math.exp(-distToMouse * 0.35) * 2.2;
 
-          posArray[pIdx * 3 + 1] = wave1 + wave2 + wave3 + mouseEffect;
+          posArray[pIdx * 3 + 1] = wave1 + wave2 + mouseEffect;
           pIdx++;
         }
       }
@@ -187,9 +182,8 @@ export default function Hero3DScene({ theme }: Hero3DSceneProps) {
       posAttr.needsUpdate = true;
       (lineGeometry.attributes.position as THREE.BufferAttribute).needsUpdate = true;
 
-      // Dynamic Camera Swivel
-      camera.position.x = mouseX * 0.4;
-      camera.position.y = 16 - mouseY * 0.2;
+      camera.position.x = mouseX * 0.25;
+      camera.position.y = 15 - mouseY * 0.15;
       camera.lookAt(0, -1, 0);
 
       renderer.render(scene, camera);

@@ -1,112 +1,141 @@
 import React from 'react';
-import { Zap, Bot, ShieldCheck, Flame, MessageSquare, ArrowRight, Sparkles, CheckCircle2, TrendingUp } from 'lucide-react';
+import {
+  Zap,
+  Bot,
+  ShieldCheck,
+  Flame,
+  MessageSquare,
+  ArrowRight,
+  Sparkles,
+  CheckCircle2,
+  TrendingUp,
+  XCircle,
+  Check,
+  Cpu,
+  Layers,
+  Database
+} from 'lucide-react';
 
 export default function AIAccelerationBanner() {
-  const advantages = [
+  const comparison = [
     {
-      icon: Zap,
-      title: 'Entrega 5x Mais Rápida',
-      tag: 'TIME-TO-MARKET',
-      desc: 'Desenvolvimento acelerado por pipelines de IA. Arquiteturas robustas entregues em semanas com código limpo e sem débitos técnicos.',
-      badgeColor: 'text-amber-500 bg-amber-500/10 border-amber-500/20',
+      bad: 'Reuniões de 2 horas que poderiam ser um email com gerentes de conta que não codificam',
+      good: 'Alinhamento direto e objetivo com o arquiteto técnico sênior da sua aplicação',
     },
     {
-      icon: Bot,
-      title: 'Agentes Autônomos Integrados',
-      tag: 'INTELIGÊNCIA NATIVA',
-      desc: 'Seu produto já nasce com fluxos de IA embutidos (Vercel AI SDK, reasoning executivo, relatórios inteligentes e triagem automática).',
-      badgeColor: 'text-indigo-500 bg-indigo-500/10 border-indigo-500/20',
+      bad: '6 a 9 meses para entregar um MVP lento, engessado e repleto de débitos técnicos',
+      good: 'Sistemas funcionais e validados entregues em semanas com pipelines modernos de IA',
     },
     {
-      icon: MessageSquare,
-      title: 'Máquinas de Vendas no WhatsApp',
-      tag: 'CONVERSÃO & CRM',
-      desc: 'Automação de ponta a ponta com Evolution API e n8n. Disparos transacionais, atendimento inteligente e CRM sincronizado 24/7.',
-      badgeColor: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
+      bad: 'Código repassado para estagiários e desenvolvedores júnior sem supervisão sênior',
+      good: 'Arquitetura de missão crítica construída por quem já operou bancos de alta escala',
     },
     {
-      icon: ShieldCheck,
-      title: 'Engenharia de Missão Crítica',
-      tag: '99.9% SLA',
-      desc: 'PostgreSQL 17 relacional, Redis, Docker, proxies com SSL e monitoramento em tempo real. Estabilidade extrema sem surpresas.',
-      badgeColor: 'text-cyan-500 bg-cyan-500/10 border-cyan-500/20',
+      bad: 'Mensalidades abusivas por usuário (lock-in) em plataformas fechadas de terceiros',
+      good: 'O código-fonte e o banco de dados são 100% seus. Sem licença oculta por atendente',
     },
   ];
 
+  const badges = [
+    { label: 'TIME-TO-MARKET 5X', desc: 'Entregas em semanas, não semestres', icon: Zap, color: 'bg-[#D4FF00] text-black' },
+    { label: 'POSTGRESQL 17 ISOLADO', desc: 'Banco relacional dedicado por cliente', icon: Database, color: 'bg-[#00F0FF] text-black' },
+    { label: 'AGENTES IA 24/7', desc: 'Triagem, reasoning e automação real', icon: Bot, color: 'bg-[#A855F7] text-white' },
+    { label: 'SLA 99.9% GARANTIDO', desc: 'Infraestrutura Docker com zero downtime', icon: ShieldCheck, color: 'bg-[#FF5500] text-white' },
+  ];
+
   return (
-    <div className="relative rounded-3xl bg-gradient-to-b from-slate-900 via-indigo-950/40 to-slate-900 border border-slate-800 p-7 sm:p-10 shadow-2xl overflow-hidden">
-      {/* Background Decorative Glow */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-indigo-600/15 rounded-full blur-[100px] pointer-events-none" />
+    <div className="rounded-3xl border-2 border-slate-900 dark:border-slate-700 bg-white dark:bg-[#0b1120] p-6 sm:p-10 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#10b981] space-y-8 transition-all">
+      
+      {/* Header */}
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b-2 border-slate-900 dark:border-slate-700">
+        <div className="space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1">
+            <Flame className="w-3.5 h-3.5 fill-black" />
+            <span>MANIFESTO BROSCOTECH</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Engenharia de verdade vs. O modelo tradicional de agência.
+          </h2>
+          <p className="text-slate-600 dark:text-slate-300 text-sm max-w-2xl">
+            A maioria das empresas gasta fortunas com fábricas de software que entregam slides bonitos e código que quebra na primeira Black Friday. Aqui o jogo é outro.
+          </p>
+        </div>
 
-      <div className="relative z-10 space-y-8">
+        <a
+          href="https://wa.me/5541991747318?text=Olá%20Rogger,%20li%20o%20manifesto%20e%20quero%20conversar%20sobre%20um%20software%20robusto"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white dark:text-black font-black text-xs transition border-2 border-black shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#fff] shrink-0"
+        >
+          <span>Conversar com Rogger</span>
+          <ArrowRight className="w-4 h-4" />
+        </a>
+      </div>
+
+      {/* Comparison Grid: Old vs Broscotech */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        {/* The Old Way */}
+        <div className="p-5 sm:p-6 rounded-2xl bg-rose-50 dark:bg-rose-950/20 border-2 border-rose-300 dark:border-rose-900/60 space-y-4">
+          <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 font-mono font-black text-xs uppercase tracking-wider">
+            <XCircle className="w-4 h-4" />
+            <span>O Jeito Tradicional (Agências & Fábricas)</span>
+          </div>
+
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-bold font-mono tracking-wide">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400 animate-pulse" />
-              <span>VANTAGEM COMPETITIVA EM PRODUÇÃO</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
-              Construa com velocidade de elite e IA nativa.
-            </h2>
-            <p className="text-slate-400 text-sm max-w-2xl">
-              Não entregamos apenas código — entregamos plataformas escaláveis com automação contínua, desenhadas para gerar receita e superar a concorrência desde o primeiro dia.
-            </p>
-          </div>
-
-          <a
-            href="https://wa.me/5541991747318?text=Ol%C3%A1%20Rogger,%20quero%20um%20projeto%20com%20IA%20e%20alta%20performance"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/30 shrink-0 self-start lg:self-center cursor-pointer"
-          >
-            <span>Quero Acelerar Meu Projeto</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-
-        {/* 4 Conversion Pillars */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-          {advantages.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/40 transition-all space-y-3 group hover:bg-slate-800/60"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-slate-800 text-indigo-400 flex items-center justify-center group-hover:scale-105 transition">
-                    <Icon className="w-5 h-5 text-indigo-400" />
-                  </div>
-                  <span className={`text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full border ${item.badgeColor}`}>
-                    {item.tag}
-                  </span>
-                </div>
-
-                <h3 className="text-base font-bold text-white tracking-tight">{item.title}</h3>
-                <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+            {comparison.map((item, idx) => (
+              <div key={idx} className="flex items-start gap-2.5 text-xs text-rose-950 dark:text-rose-200">
+                <span className="font-bold text-rose-500 mt-0.5">✕</span>
+                <p className="leading-relaxed">{item.bad}</p>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
-        {/* Live Bottom Operational Strip */}
-        <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800/80 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400">
-          <div className="flex items-center gap-3">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="text-slate-300 font-semibold font-sans">Status Operacional: <strong>Disponível para novos projetos de alta escala</strong></span>
+        {/* The Broscotech Way */}
+        <div className="p-5 sm:p-6 rounded-2xl bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 dark:border-emerald-600 space-y-4 shadow-sm">
+          <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 font-mono font-black text-xs uppercase tracking-wider">
+            <Check className="w-4 h-4" />
+            <span>O Modelo Broscotech (Direto com o CTO)</span>
           </div>
-          <div className="flex items-center gap-5 text-[11px]">
-            <span>STACK: <strong className="text-indigo-400">Next.js 15 + Postgres 17</strong></span>
-            <span>AUTOMAÇÃO: <strong className="text-emerald-400">Multi-Agent Active</strong></span>
+
+          <div className="space-y-3">
+            {comparison.map((item, idx) => (
+              <div key={idx} className="flex items-start gap-2.5 text-xs text-emerald-950 dark:text-emerald-200">
+                <span className="font-black text-emerald-600 dark:text-emerald-400 mt-0.5">✓</span>
+                <p className="leading-relaxed font-semibold">{item.good}</p>
+              </div>
+            ))}
           </div>
         </div>
 
       </div>
+
+      {/* 4 Neo-Brutalist Badges */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
+        {badges.map((b, idx) => {
+          const Icon = b.icon;
+          return (
+            <div
+              key={idx}
+              className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#10b981] flex items-center gap-3"
+            >
+              <div className={`p-2 rounded-lg border-2 border-black ${b.color} shrink-0`}>
+                <Icon className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-[11px] font-mono font-black text-slate-900 dark:text-white truncate">
+                  {b.label}
+                </div>
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">
+                  {b.desc}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
     </div>
   );
 }

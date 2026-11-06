@@ -35,7 +35,8 @@ import {
   Clock,
   ArrowUpRight,
   Check,
-  Play
+  Flame,
+  X
 } from 'lucide-react';
 
 import Hero3DScene from './components/Hero3DScene.tsx';
@@ -46,7 +47,7 @@ import { PlannerSdrMockup, EasyConnectMockup, DripCastMockup } from './component
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'all' | 'frontend' | 'backend' | 'ai' | 'devops'>('all');
-  const [heroPreviewTab, setHeroPreviewTab] = useState<'planner' | 'easyconnect' | 'dripcast'>('planner');
+  const [heroPreviewTab, setHeroPreviewTab] = useState<'easyconnect' | 'planner' | 'dripcast'>('easyconnect');
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
@@ -58,338 +59,282 @@ export default function App() {
   const toggleTheme = () => {
     if (theme === 'light') {
       document.documentElement.classList.add('dark');
-      localStorage.setItem('broscotech-theme', 'dark');
       setTheme('dark');
     } else {
       document.documentElement.classList.remove('dark');
-      localStorage.setItem('broscotech-theme', 'light');
       setTheme('light');
     }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = `*Contato via Site Broscotech*%0A%0A*Nome:* ${formData.name}%0A*Email:* ${formData.email}%0A*Assunto:* ${formData.subject}%0A*Mensagem:* ${formData.message}`;
+    window.open(`https://wa.me/5541991747318?text=${text}`, '_blank');
+  };
+
   const stats = [
-    { label: 'Engenharia de Software', value: '+7 Anos', subtitle: 'Liderança Técnica & Produção', icon: Award },
-    { label: 'Softwares & Automações', value: '+20 Sistemas', subtitle: 'Operação Ativa Diária', icon: Boxes },
-    { label: 'Uptime & Estabilidade', value: '99.9%', subtitle: 'Monitoramento 24/7', icon: ShieldCheck },
-    { label: 'Sem Intermediários', value: 'Direto CTO', subtitle: 'Do Escopo ao Deploy', icon: Zap },
+    { label: 'Experiência Técnica', value: '7+ Anos', subtitle: 'Colocando sistemas em produção', icon: Code2 },
+    { label: 'Disponibilidade', value: '99.9%', subtitle: 'SLA em servidores Docker', icon: ShieldCheck },
+    { label: 'WhatsApp Integrado', value: '100%', subtitle: 'Comunicação oficial e automatizada', icon: MessageSquare },
+    { label: 'Intermediários', value: 'Zero', subtitle: 'Você fala direto com o arquiteto', icon: Zap },
   ];
 
   const pillars = [
     {
+      title: 'Máquinas de Vendas no WhatsApp',
+      badge: 'CRM & WHATSAPP',
+      badgeClass: 'bg-[#25D366] text-black border-black',
+      color: 'bg-emerald-500',
       icon: MessageSquare,
-      badge: 'OMNICHANNEL & BOT',
-      title: 'WhatsApp Comercial, Atendimento & IA',
-      problem: 'Atendimento desorganizado, clientes esperando horas por resposta e leads qualificados perdidos sem registro.',
-      solution: 'Motor Omnichannel no WhatsApp com triagem por IA, múltiplos operadores no mesmo número e webhook para seu CRM 24h por dia.',
-      color: 'from-emerald-500 to-teal-500',
-      badgeClass: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/70 dark:text-emerald-300 dark:border-emerald-800/80',
-      glow: 'rgba(16, 185, 129, 0.2)',
-      metric: 'Tempo de 1ª resposta < 15s'
+      problem: 'Leads perdidos por demora de resposta e vendedores usando WhatsApp pessoal sem registro no CRM.',
+      solution: 'EasyConnect com agentes de triagem rápida, múltiplos operadores no mesmo número e webhook para PostgreSQL.',
+      metric: 'Tempo de 1ª resposta < 15 segundos',
     },
     {
+      title: 'Gestão & Produtividade com IA',
+      badge: 'PRODUTIVIDADE',
+      badgeClass: 'bg-[#D4FF00] text-black border-black',
+      color: 'bg-indigo-600',
       icon: Boxes,
-      badge: 'SAAS & KANBAN',
-      title: 'Sistemas & Plataformas Sob Medida',
-      problem: 'Planilhas confusas, processos manuais e ferramentas prontas engessadas que não se adaptam à sua empresa.',
-      solution: 'Painéis Kanban, dashboards de gestão e rotinas construídos exatamente para a operação do cliente, eliminando retrabalho.',
-      color: 'from-indigo-500 to-blue-500',
-      badgeClass: 'bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-950/70 dark:text-indigo-300 dark:border-indigo-800/80',
-      glow: 'rgba(99, 102, 241, 0.2)',
-      metric: '-70% tempo em reuniões'
+      problem: 'Falta de clareza nas metas da equipe, planilhas desatualizadas e horas gastas em reuniões de alinhamento.',
+      solution: 'Planner SDR com Kanban de alta precisão, relatórios semanais gerados por IA e lembretes automáticos.',
+      metric: '70% menos reuniões operacionais',
     },
     {
-      icon: Calendar,
-      badge: 'MOTOR DE DISTRIBUIÇÃO',
-      title: 'Automação de Conteúdo e Campanhas',
-      problem: 'Tempo gasto postando manualmente e falta de consistência nas redes e canais de comunicação da empresa.',
-      solution: 'Motor que agenda, gera ideias e distribui conteúdo em múltiplos canais sem necessidade de intervenção manual diária.',
-      color: 'from-cyan-500 to-teal-500',
-      badgeClass: 'bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-cyan-950/70 dark:text-cyan-300 dark:border-cyan-800/80',
-      glow: 'rgba(6, 182, 212, 0.2)',
-      metric: '30 dias de autonomia'
+      title: 'Agentes Autônomos 24/7',
+      badge: 'HERMES FLEET',
+      badgeClass: 'bg-[#A855F7] text-white border-black',
+      color: 'bg-purple-600',
+      icon: Bot,
+      problem: 'Tarefas manuais e repetitivas de análise de dados, deploys e monitoramento sobrecarregando a equipe técnica.',
+      solution: 'Frota coordenada de agentes autônomos com memória duradoura e governança via Telegram/Discord.',
+      metric: 'Operação ininterrupta 24/7',
     },
     {
+      title: 'Infraestrutura de Missão Crítica',
+      badge: 'DOCKER & POSTGRESQL',
+      badgeClass: 'bg-[#FF5500] text-white border-black',
+      color: 'bg-orange-500',
       icon: Server,
-      badge: 'INFRA & BACKUP',
-      title: 'Infraestrutura Própria & Segura (Sem Sustos)',
-      problem: 'Sistemas lentos, dados em servidores compartilhados desconhecidos e quedas repentinas de operação.',
-      solution: 'Banco de dados isolado em PostgreSQL 17, rotinas automáticas de backup e monitoramento de integridade 24/7.',
-      color: 'from-amber-500 to-orange-500',
-      badgeClass: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/70 dark:text-amber-300 dark:border-amber-800/80',
-      glow: 'rgba(245, 158, 11, 0.2)',
-      metric: 'Latência < 25ms • 99.9% Uptime'
+      problem: 'Aplicações que travam na primeira oscilação de tráfego e bancos de dados sem backup confiável.',
+      solution: 'Bancos PostgreSQL 17 isolados, proxies reversos Nginx com SSL automático e monitoramento em tempo real.',
+      metric: 'SLA de 99.9% garantido em contrato',
     },
   ];
 
   const processSteps = [
     {
       num: '01',
-      title: 'Conversa Inicial (30 min)',
-      desc: 'Entendemos o gargalo principal da sua operação e exatamente onde você perde tempo ou faturamento hoje.',
-      tag: 'Diagnóstico Sem Custo'
+      title: 'Diagnóstico & Arquitetura',
+      tag: '30 MINUTOS',
+      desc: 'Alinhamos a regra de negócio direto no WhatsApp ou call rápida. Mapeamos as dores e definimos a arquitetura ideal.',
     },
     {
       num: '02',
-      title: 'Proposta Clara & Prazo Fixo',
-      desc: 'Apresento a solução recomendada, o valor fechado de implantação e o cronograma com escopo delimitado.',
-      tag: 'Sem Surpresas'
+      title: 'Protótipo Operacional Rápido',
+      tag: 'SEMANA 1',
+      desc: 'Primeira versão funcional navegável colocada no ar para você validar com sua equipe e dados reais.',
     },
     {
       num: '03',
-      title: 'Desenvolvimento Ágil & Testes',
-      desc: 'Você acompanha o sistema ganhando vida semanalmente em ambiente de homologação com dados reais.',
-      tag: 'Entregas Contínuas'
+      title: 'Homologação & Integração',
+      tag: 'SEMANA 2',
+      desc: 'Integração de APIs (WhatsApp, pagamentos, bancos de dados), testes de segurança e refinamento da experiência.',
     },
     {
       num: '04',
-      title: 'Implantação & Autonomia',
-      desc: 'Coloco no ar no seu servidor Linux ou nuvem gerenciada. O código e os dados são seus, com treinamento.',
-      tag: 'Código Proprietário'
+      title: 'Deploy em Produção & Suporte',
+      tag: 'GO-LIVE',
+      desc: 'Deploy em containers Docker isolados com SSL, monitoramento ativo e suporte contínuo direto com o arquiteto.',
+    },
+  ];
+
+  const timeline = [
+    {
+      role: 'Chief Technology Officer (CTO)',
+      company: 'EasyDev CRM',
+      companyUrl: 'https://dev.easydev.com.br',
+      period: '2023 — Presente',
+      description: 'Liderança de engenharia da plataforma comercial multimoeda (BRL/USD/EUR), arquitetura de microsserviços e integrações WhatsApp.',
+    },
+    {
+      role: 'Fundador & Arquiteto de Software',
+      company: 'Broscotech',
+      period: '2020 — Presente',
+      description: 'Criação e sustentação dos produtos EasyConnect, Planner SDR, DripCast e desenvolvimento de softwares sob medida para empresas.',
+    },
+    {
+      role: 'Engenheiro de Automação & Full Stack',
+      company: 'Projetos Globais & B2B',
+      period: '2018 — 2023',
+      description: 'Construção de pipelines de automação, integrações com bancos relacionais e aplicações corporativas de alto tráfego.',
     },
   ];
 
   const skills = [
-    { name: 'TypeScript & React 19', level: 'Especialista', category: 'frontend', icon: FileCode2, highlight: true },
-    { name: 'Next.js 15 (App Router)', level: 'Especialista', category: 'frontend', icon: Code2, highlight: true },
-    { name: 'Three.js & WebGL 3D', level: 'Especialista', category: 'frontend', icon: Sparkles, highlight: true },
-    { name: 'Tailwind CSS v4', level: 'Especialista', category: 'frontend', icon: Sliders, highlight: true },
-    { name: 'Bun & Node.js Runtime', level: 'Especialista', category: 'backend', icon: Zap, highlight: true },
-    { name: 'PostgreSQL 17 & TypeORM', level: 'Especialista', category: 'backend', icon: Database, highlight: true },
-    { name: 'Redis Cache & Filas', level: 'Avançado', category: 'backend', icon: Server, highlight: false },
-    { name: 'Vercel AI SDK & LLMs', level: 'Especialista', category: 'ai', icon: Bot, highlight: true },
-    { name: 'Hermes Multi-Agent Fleet', level: 'Especialista', category: 'ai', icon: Cpu, highlight: true },
-    { name: 'Evolution API (WhatsApp)', level: 'Especialista', category: 'ai', icon: MessageSquare, highlight: true },
-    { name: 'n8n Workflow Automation', level: 'Avançado', category: 'ai', icon: GitBranch, highlight: false },
-    { name: 'Docker & Docker Compose', level: 'Especialista', category: 'devops', icon: Layers, highlight: true },
-    { name: 'Nginx, Reverse Proxy & SSL', level: 'Avançado', category: 'devops', icon: Cloud, highlight: false },
-    { name: 'Linux Ubuntu / Servidores VPS', level: 'Avançado', category: 'devops', icon: TerminalIcon, highlight: false },
-    { name: 'Segurança & Fail2ban', level: 'Avançado', category: 'devops', icon: ShieldCheck, highlight: false },
+    { name: 'TypeScript / React', category: 'frontend', level: 'Especialista', icon: Code2 },
+    { name: 'Next.js 15 & Vite', category: 'frontend', level: 'Avançado', icon: Layers },
+    { name: 'Tailwind CSS v4', category: 'frontend', level: 'Especialista', icon: Sparkles },
+    { name: 'Node.js & Bun', category: 'backend', level: 'Especialista', icon: Server },
+    { name: 'PostgreSQL 17 & Redis', category: 'backend', level: 'Avançado', icon: Database },
+    { name: 'REST & Webhooks', category: 'backend', level: 'Especialista', icon: Workflow },
+    { name: 'Hermes Fleet / Multi-Agent', category: 'ai', level: 'Pioneiro', icon: Bot },
+    { name: 'Vercel AI SDK & LLMs', category: 'ai', level: 'Avançado', icon: Zap },
+    { name: 'WhatsApp Bot Engine', category: 'ai', level: 'Especialista', icon: MessageSquare },
+    { name: 'Docker & Compose', category: 'devops', level: 'Especialista', icon: Boxes },
+    { name: 'Nginx & SSL Proxy', category: 'devops', level: 'Avançado', icon: ShieldCheck },
+    { name: 'Linux / Arch / Debian', category: 'devops', level: 'Especialista', icon: TerminalIcon },
   ];
 
-  const filteredSkills = activeTab === 'all'
-    ? skills
-    : skills.filter(s => s.category === activeTab);
-
-  const timeline = [
-    {
-      role: 'CTO & Co-Founder',
-      company: 'EasyDev',
-      companyUrl: 'https://dev.easydev.com.br',
-      period: '2023 — Presente',
-      description: 'Liderança técnica geral, definição de arquitetura de software de todas as plataformas corporativas, esteiras de IA, infraestrutura Docker conteinerizada e governança de código.'
-    },
-    {
-      role: 'Senior Technical Support Analyst',
-      company: 'UBVA',
-      period: 'Atuação Contínua',
-      description: 'Análise técnica avançada de infraestrutura e suporte a ambientes críticos de alta demanda, troubleshooting de banco de dados e garantia de estabilidade.'
-    },
-    {
-      role: 'Full-Stack Software Architect & Fundador',
-      company: 'Broscotech',
-      period: '2019 — Presente',
-      description: 'Criação e arquitetura de aplicações SaaS completas, sistemas escaláveis no ecossistema TypeScript/React, agentes autônomos de IA e servidores Linux em produção.'
-    }
-  ];
-
-  const handleWhatsAppSend = (e: React.FormEvent) => {
-    e.preventDefault();
-    const text = encodeURIComponent(
-      `Olá Rogger! Meu nome é ${formData.name || 'Cliente'}.\nE-mail: ${formData.email}\nAssunto: ${formData.subject}\n\nMensagem:\n${formData.message}`
-    );
-    window.open(`https://wa.me/5541991747318?text=${text}`, '_blank');
-  };
+  const filteredSkills = activeTab === 'all' ? skills : skills.filter((s) => s.category === activeTab);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#060911] text-slate-900 dark:text-slate-100 relative overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-900 dark:selection:text-emerald-200 transition-colors duration-300">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#060911] text-slate-900 dark:text-slate-100 font-sans selection:bg-[#D4FF00] selection:text-black transition-colors duration-200">
       
-      {/* Dynamic Background Mesh & Glows */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[950px] h-[600px] bg-gradient-to-b from-indigo-500/10 via-purple-500/5 to-transparent dark:from-indigo-600/15 dark:via-purple-600/10 dark:to-transparent rounded-full blur-[130px]" />
-        <div className="absolute top-[40%] -right-40 w-[600px] h-[600px] bg-gradient-to-t from-emerald-500/10 via-teal-500/5 to-transparent dark:from-emerald-500/10 dark:via-teal-500/5 dark:to-transparent rounded-full blur-[140px]" />
+      {/* Top Retro Engineering Tape */}
+      <div className="bg-[#D4FF00] text-black border-b-2 border-black py-1.5 px-4 font-mono font-black text-[11px] tracking-wider uppercase overflow-hidden whitespace-nowrap">
+        <div className="inline-block animate-marquee">
+          ⚡ 4 SOFTWARES REAIS EM PRODUÇÃO • ARQUITETURA SÊNIOR • POSTGRESQL 17 ISOLADO • WHATSAPP OFICIAL COM IA • SEM SLIDES EM POWERPOINT • DIRETO COM O CTO • CONTATO: +55 (41) 99174-7318 •
+        </div>
       </div>
 
-      {/* Floating Header */}
-      <header className="sticky top-4 z-50 max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl rounded-full px-4 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between border border-slate-200/80 dark:border-slate-800/80 shadow-lg dark:shadow-2xl">
+      {/* Floating Neo-Brutalist Header */}
+      <header className="sticky top-3 z-50 max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-md rounded-2xl px-4 sm:px-5 py-2.5 flex items-center justify-between border-2 border-slate-900 dark:border-slate-700 shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#10b981]">
+          
           {/* Brand Logo */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-emerald-500 p-[2px] shadow-sm group-hover:scale-105 transition-transform duration-300">
-              <div className="w-full h-full bg-white dark:bg-slate-900 rounded-full flex items-center justify-center">
-                <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-500 dark:from-indigo-400 dark:to-emerald-400 font-mono text-sm tracking-tight">RB</span>
-              </div>
+          <a href="#" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-black text-[#D4FF00] border-2 border-black flex items-center justify-center font-mono font-black text-xs shadow-[2px_2px_0px_#D4FF00]">
+              RB
             </div>
             <div>
-              <span className="font-bold text-slate-900 dark:text-white text-sm tracking-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition">Rogger Brosco</span>
-              <span className="text-[11px] text-slate-500 dark:text-slate-400 block font-medium">Broscotech • Softwares & IA</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-black text-sm tracking-tight text-slate-900 dark:text-white">BROSCOTECH</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              </div>
+              <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 block font-bold leading-none">
+                ROGER BROSCO • CTO
+              </span>
             </div>
           </a>
 
           {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600 dark:text-slate-300">
-            <a href="#solucoes" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Soluções</a>
-            <a href="#produtos" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition font-bold flex items-center gap-1">
-              <span>Vitrine de Softwares</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-ping" />
+          <nav className="hidden md:flex items-center gap-5 text-xs font-black text-slate-700 dark:text-slate-300">
+            <a href="#produtos" className="hover:text-emerald-500 transition flex items-center gap-1">
+              <span>Softwares [4]</span>
+              <span className="px-1.5 py-0.2 rounded bg-[#D4FF00] text-black text-[9px] font-mono font-black border border-black">
+                NOVO
+              </span>
             </a>
-            <a href="#processo" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Como Funciona</a>
-            <a href="#sobre" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Sobre</a>
-            <a href="#contato" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Contato</a>
+            <a href="#solucoes" className="hover:text-emerald-500 transition">Pilares</a>
+            <a href="#manifesto" className="hover:text-emerald-500 transition">Manifesto</a>
+            <a href="#processo" className="hover:text-emerald-500 transition">Como Funciona</a>
+            <a href="#sobre" className="hover:text-emerald-500 transition">Rogger Brosco</a>
           </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={toggleTheme}
-              aria-label="Alternar Modo Escuro / Claro"
-              className="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center transition border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs"
-              title={theme === 'dark' ? 'Mudar para Modo Claro' : 'Mudar para Modo Escuro'}
+              aria-label="Alternar Tema"
+              className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white flex items-center justify-center transition border-2 border-black dark:border-slate-700 cursor-pointer shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#10b981]"
             >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400" />
-              ) : (
-                <Moon className="w-4 h-4 text-indigo-600" />
-              )}
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-900" />}
             </button>
 
             <a
-              href="https://wa.me/5541991747318?text=Olá%20Rogger,%20vi%20seu%20site%20e%20quero%20entender%20como%20criar%20ou%20implantar%20um%20software%20no%20meu%20negócio"
+              href="https://wa.me/5541991747318?text=Olá%20Rogger,%20vi%20seu%20site%20e%20quero%20conversar%20sobre%20um%20software%20para%20minha%20empresa"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition duration-200 shadow-md shadow-emerald-600/20"
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl bg-[#D4FF00] hover:bg-yellow-300 text-black font-black text-xs transition border-2 border-black shadow-[2px_2px_0px_#000]"
             >
-              <Phone className="w-3.5 h-3.5 text-white" />
-              <span className="hidden xs:inline">Falar no WhatsApp</span>
-              <ArrowRight className="w-3.5 h-3.5 hidden sm:inline" />
+              <Phone className="w-3.5 h-3.5 fill-black" />
+              <span>Falar com Rogger ⚡</span>
             </a>
           </div>
         </div>
       </header>
 
       {/* Main Container */}
-      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-24 space-y-28">
+      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-24 space-y-24">
 
-        {/* 1. HERO SECTION (COPY V2 COM FOCO EM VENDAS & CONVERSÃO) */}
-        <section id="hero" className="relative rounded-3xl overflow-hidden min-h-[620px] sm:min-h-[680px] flex flex-col items-center justify-center text-center p-6 sm:p-12 border border-slate-200/60 dark:border-slate-800/80 bg-gradient-to-b from-slate-900/70 via-slate-950/90 to-slate-900/95 backdrop-blur-md shadow-2xl">
+        {/* 1. HERO SECTION (NEO-BRUTALIST & PUNCHY EDITORIAL) */}
+        <section id="hero" className="relative rounded-3xl overflow-hidden min-h-[640px] flex flex-col items-center justify-center text-center p-6 sm:p-12 border-2 border-slate-900 dark:border-slate-700 bg-white dark:bg-[#0b1120] shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#10b981]">
           
-          {/* 3D Wave Canvas Layer */}
+          {/* Interactive 3D Wireframe Scene */}
           <Hero3DScene theme={theme} />
 
-          {/* Hero Centered Content */}
+          {/* Hero Content */}
           <div className="relative z-10 max-w-3xl mx-auto space-y-6 flex flex-col items-center">
             
-            {/* Top Badge Superior */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold backdrop-blur-md shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>DISPONÍVEL PARA NOVOS PROJETOS E LICENCIAMENTO DE SOFTWARES</span>
+            {/* Sticker Badge Superior */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[3px_3px_0px_#000]">
+              <Flame className="w-3.5 h-3.5 fill-black" />
+              <span>SOFTWARES EM PRODUÇÃO • SEM ENROLAÇÃO</span>
             </div>
 
             {/* Main Headline H1 */}
             <div className="space-y-4">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
-                Softwares sob medida e automações que{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400">
-                  aceleram sua operação e faturam por você.
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1]">
+                Construo softwares de verdade que rodam o seu negócio.{' '}
+                <span className="bg-[#D4FF00] text-black px-2 py-0.5 rounded-lg border-2 border-black inline-block mt-1">
+                  Direto com quem programa.
                 </span>
               </h1>
               
               {/* Subtitle / Value Proposition */}
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal mx-auto pt-2">
-                Desenvolvo sistemas prontos para rodar, CRMs no WhatsApp e agentes inteligentes para o seu negócio — com arquitetura testada em produção, sem dependência de agências e sem complicação.
+              <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-medium mx-auto pt-2">
+                Chega de sistemas genéricos que quebram na primeira Black Friday ou de reuniões infinitas com gerentes de conta que não sabem o que é um banco de dados. Crio CRMs no WhatsApp, plataformas SaaS e agentes autônomos prontos para faturar.
               </p>
             </div>
 
             {/* CTAs Principais */}
             <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
               <a
-                href="https://wa.me/5541991747318?text=Olá%20Rogger,%20vi%20seu%20site%20e%20quero%20entender%20como%20criar%20ou%20implantar%20um%20software%20no%20meu%20negócio"
+                href="https://wa.me/5541991747318?text=Olá%20Rogger,%20quero%20um%20software%20para%20minha%20empresa"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition shadow-lg shadow-emerald-600/40 hover:scale-[1.02] cursor-pointer"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-black text-sm transition border-2 border-black shadow-[4px_4px_0px_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 cursor-pointer"
               >
-                <Phone className="w-4 h-4 text-white" />
-                <span>Quero um Software Para Minha Empresa</span>
+                <Phone className="w-4 h-4 fill-black" />
+                <span>Quero um Software Para Minha Empresa ⚡</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
 
               <a
                 href="#produtos"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-100 font-semibold text-sm transition shadow-sm backdrop-blur-md hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-black text-sm transition border-2 border-black dark:border-slate-700 shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#10b981] hover:-translate-x-0.5 hover:-translate-y-0.5"
               >
-                <Boxes className="w-4 h-4 text-emerald-400" />
-                <span>Ver Sistemas em Produção ↓</span>
+                <Boxes className="w-4 h-4 text-emerald-500" />
+                <span>Explorar Sistemas em Produção [4] ↓</span>
               </a>
             </div>
 
-            {/* Interactive Hero Preview Quick Tabs (Visual Slot) */}
-            <div className="w-full pt-8 max-w-2xl">
-              <div className="p-3 rounded-2xl bg-slate-900/90 border border-slate-800 backdrop-blur-md space-y-3">
-                <div className="flex items-center justify-between gap-2 border-b border-slate-800 pb-2.5">
-                  <div className="flex items-center gap-1.5 text-xs font-mono text-slate-400">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
-                    <span>Sistemas ativos em produção com clientes reais:</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-[11px] font-mono">
-                    <button
-                      onClick={() => setHeroPreviewTab('planner')}
-                      className={`px-2.5 py-1 rounded-lg transition ${
-                        heroPreviewTab === 'planner'
-                          ? 'bg-indigo-600 text-white font-bold'
-                          : 'text-slate-400 hover:text-white'
-                      }`}
-                    >
-                      Planner SDR
-                    </button>
-                    <button
-                      onClick={() => setHeroPreviewTab('easyconnect')}
-                      className={`px-2.5 py-1 rounded-lg transition ${
-                        heroPreviewTab === 'easyconnect'
-                          ? 'bg-emerald-600 text-white font-bold'
-                          : 'text-slate-400 hover:text-white'
-                      }`}
-                    >
-                      EasyConnect
-                    </button>
-                    <button
-                      onClick={() => setHeroPreviewTab('dripcast')}
-                      className={`px-2.5 py-1 rounded-lg transition ${
-                        heroPreviewTab === 'dripcast'
-                          ? 'bg-cyan-600 text-white font-bold'
-                          : 'text-slate-400 hover:text-white'
-                      }`}
-                    >
-                      DripCast
-                    </button>
-                  </div>
-                </div>
-
-                {/* Tab Preview View */}
-                <div className="text-left">
-                  {heroPreviewTab === 'planner' && <PlannerSdrMockup />}
-                  {heroPreviewTab === 'easyconnect' && <EasyConnectMockup />}
-                  {heroPreviewTab === 'dripcast' && <DripCastMockup />}
-                </div>
-              </div>
-            </div>
-
-            {/* Executive Identity & Public Github */}
-            <div className="pt-6 border-t border-slate-800/80 w-full flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-300">
-              <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 backdrop-blur-md">
+            {/* Rogger's Direct Author Bar */}
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-3 text-xs">
+              <div className="flex items-center gap-2.5 p-1.5 pr-3.5 rounded-xl bg-slate-100 dark:bg-slate-900 border-2 border-black dark:border-slate-700 shadow-[2px_2px_0px_#000]">
                 <img
                   src="/avatar.png"
                   alt="Rogger Brosco"
-                  className="w-6 h-6 rounded-full object-cover border border-emerald-400"
+                  className="w-7 h-7 rounded-lg object-cover border border-black"
                 />
-                <span className="text-white font-bold">Rogger Brosco</span>
-                <span className="text-slate-500">•</span>
-                <span className="text-emerald-400 font-semibold">CTO @ EasyDev & Arquiteto Broscotech</span>
+                <span className="font-black text-slate-900 dark:text-white">Rogger Brosco</span>
+                <span className="text-slate-400">•</span>
+                <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
+                  CTO & Arquiteto Técnico
+                </span>
               </div>
 
               <a
                 href="https://github.com/rbrosco"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition font-mono backdrop-blur-md"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-mono text-xs font-black transition border-2 border-black dark:border-slate-700 shadow-[2px_2px_0px_#000]"
               >
                 <Github className="w-3.5 h-3.5" />
                 <span>github.com/rbrosco</span>
@@ -397,63 +342,118 @@ export default function App() {
             </div>
 
           </div>
+
+          {/* Interactive Live Quick Mockup Switcher inside Hero */}
+          <div className="relative z-10 w-full max-w-4xl mx-auto mt-10 pt-6 border-t-2 border-slate-900 dark:border-slate-700 space-y-4 text-left">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono font-black uppercase text-slate-900 dark:text-white">
+                  Prévia em Tempo Real:
+                </span>
+                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
+                  (Selecione para ver o sistema funcionando)
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setHeroPreviewTab('easyconnect')}
+                  className={`px-3 py-1 rounded-lg text-xs font-black font-mono transition border-2 ${
+                    heroPreviewTab === 'easyconnect'
+                      ? 'bg-[#25D366] text-black border-black shadow-[2px_2px_0px_#000]'
+                      : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-400 dark:border-slate-700'
+                  }`}
+                >
+                  📱 EasyConnect (WhatsApp)
+                </button>
+                <button
+                  onClick={() => setHeroPreviewTab('planner')}
+                  className={`px-3 py-1 rounded-lg text-xs font-black font-mono transition border-2 ${
+                    heroPreviewTab === 'planner'
+                      ? 'bg-[#D4FF00] text-black border-black shadow-[2px_2px_0px_#000]'
+                      : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-400 dark:border-slate-700'
+                  }`}
+                >
+                  📊 Planner SDR (Kanban)
+                </button>
+                <button
+                  onClick={() => setHeroPreviewTab('dripcast')}
+                  className={`px-3 py-1 rounded-lg text-xs font-black font-mono transition border-2 ${
+                    heroPreviewTab === 'dripcast'
+                      ? 'bg-[#00F0FF] text-black border-black shadow-[2px_2px_0px_#000]'
+                      : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-400 dark:border-slate-700'
+                  }`}
+                >
+                  🚀 DripCast (Social)
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Render Frame */}
+            <div>
+              {heroPreviewTab === 'easyconnect' && <EasyConnectMockup />}
+              {heroPreviewTab === 'planner' && <PlannerSdrMockup />}
+              {heroPreviewTab === 'dripcast' && <DripCastMockup />}
+            </div>
+          </div>
         </section>
 
-        {/* 2. FAIXA DE CREDIBILIDADE & PROVA IMEDIATA */}
-        <section className="bg-white dark:bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {/* 2. FAIXA DE CREDIBILIDADE & PROVA TÉCNICA */}
+        <section className="bg-white dark:bg-[#0b1120] rounded-3xl p-6 sm:p-8 border-2 border-slate-900 dark:border-slate-700 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#10b981] space-y-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {stats.map((item, idx) => {
               const Icon = item.icon;
               return (
-                <div key={idx} className="space-y-1.5 text-center md:text-left">
-                  <div className="flex items-center justify-center md:justify-start gap-2 text-emerald-600 dark:text-emerald-400">
+                <div key={idx} className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#10b981] space-y-1">
+                  <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
                     <Icon className="w-4 h-4" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 font-sans">{item.label}</span>
+                    <span className="text-[10px] font-mono font-black uppercase text-slate-500 dark:text-slate-400">
+                      {item.label}
+                    </span>
                   </div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white font-mono tracking-tight">{item.value}</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">{item.subtitle}</div>
+                  <div className="text-2xl sm:text-3xl font-black font-mono text-slate-900 dark:text-white">
+                    {item.value}
+                  </div>
+                  <div className="text-xs text-slate-600 dark:text-slate-300 font-medium">
+                    {item.subtitle}
+                  </div>
                 </div>
               );
             })}
           </div>
 
           {/* Trust Strip: Logos & Tecnologias */}
-          <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
-            <span className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-[11px]">
-              Empresas & Tecnologias em Produção:
+          <div className="pt-4 border-t-2 border-slate-900 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+            <span className="font-black text-slate-900 dark:text-white uppercase text-[11px] bg-[#D4FF00] text-black px-2 py-0.5 rounded border border-black">
+              SOFTWARES & TECNOLOGIAS EM PRODUÇÃO:
             </span>
-            <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-slate-600 dark:text-slate-300 font-medium">
-              <span>EasyDev CRM</span>
-              <span>•</span>
-              <span>Planner SDR</span>
-              <span>•</span>
-              <span>Solar sem Fronteiras</span>
-              <span>•</span>
-              <span>Next.js 15</span>
-              <span>•</span>
-              <span>PostgreSQL 17</span>
-              <span>•</span>
-              <span>Docker</span>
-              <span>•</span>
-              <span>Hermes Agent Fleet</span>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 font-bold text-slate-700 dark:text-slate-300">
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">EasyDev CRM</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">Planner SDR</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">EasyConnect</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">DripCast</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">Next.js 15</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">PostgreSQL 17</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">Docker</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">Hermes Fleet</span>
             </div>
           </div>
         </section>
 
-        {/* 3. OS 4 PILARES DE SOLUÇÕES (COMO EU POSSO AJUDAR SUA EMPRESA) */}
-        <section id="solucoes" className="space-y-8 scroll-mt-28">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        {/* 3. OS 4 PILARES DE SOLUÇÕES (BENTO CARDS) */}
+        <section id="solucoes" className="space-y-6 scroll-mt-28">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-2">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
                 <Compass className="w-3.5 h-3.5" />
-                PILARES DE ENGENHARIA & AUTOMAÇÃO
+                <span>PILARES DE ENGENHARIA</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-2">
-                Como posso ajudar sua empresa a lucrar mais
+              <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mt-2">
+                Como ajudo sua empresa a faturar mais
               </h2>
             </div>
-            <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md font-normal">
-              Resolvo dores operacionais concretas com softwares sob medida, código limpo e arquitetura validada.
+            <p className="text-slate-600 dark:text-slate-300 text-sm max-w-md font-medium">
+              Elimino dores operacionais concretas com softwares sob medida, código limpo e arquitetura validada em produção.
             </p>
           </div>
 
@@ -461,36 +461,42 @@ export default function App() {
             {pillars.map((pil, idx) => {
               const Icon = pil.icon;
               return (
-                <BentoCard key={idx} glowColor={pil.glow}>
-                  <div className="p-7 sm:p-8 space-y-5 flex flex-col justify-between h-full">
+                <BentoCard key={idx}>
+                  <div className="p-6 sm:p-8 space-y-5 flex flex-col justify-between h-full">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${pil.color} text-white flex items-center justify-center shadow-md shadow-indigo-500/20`}>
-                          <Icon className="w-6 h-6" />
+                        <div className={`w-11 h-11 rounded-xl ${pil.color} text-white flex items-center justify-center border-2 border-black shadow-[2px_2px_0px_#000]`}>
+                          <Icon className="w-5 h-5" />
                         </div>
-                        <span className={`text-[11px] font-bold px-3 py-1 rounded-full border ${pil.badgeClass}`}>
+                        <span className={`text-[10px] font-mono font-black px-2.5 py-1 rounded-md border-2 ${pil.badgeClass}`}>
                           {pil.badge}
                         </span>
                       </div>
 
-                      <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">{pil.title}</h3>
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                        {pil.title}
+                      </h3>
 
                       {/* Problem & Solution Breakdown */}
                       <div className="space-y-2.5 text-xs pt-1">
-                        <div className="p-3 rounded-xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/60 dark:border-rose-900/30">
-                          <span className="font-bold text-rose-600 dark:text-rose-400 uppercase font-mono text-[10px] block">O Problema:</span>
-                          <p className="text-slate-700 dark:text-slate-300 mt-0.5">{pil.problem}</p>
+                        <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/20 border-2 border-rose-300 dark:border-rose-900/60">
+                          <span className="font-black text-rose-700 dark:text-rose-400 uppercase font-mono text-[10px] block">
+                            ✕ O Problema:
+                          </span>
+                          <p className="text-slate-800 dark:text-slate-200 mt-0.5 font-medium">{pil.problem}</p>
                         </div>
-                        <div className="p-3 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-900/30">
-                          <span className="font-bold text-emerald-600 dark:text-emerald-400 uppercase font-mono text-[10px] block">A Solução:</span>
-                          <p className="text-slate-700 dark:text-slate-300 mt-0.5">{pil.solution}</p>
+                        <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 dark:border-emerald-600">
+                          <span className="font-black text-emerald-700 dark:text-emerald-400 uppercase font-mono text-[10px] block">
+                            ✓ A Solução:
+                          </span>
+                          <p className="text-slate-800 dark:text-slate-200 mt-0.5 font-semibold">{pil.solution}</p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-mono">
-                      <span className="text-slate-400">Impacto Mensurável:</span>
-                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">{pil.metric}</span>
+                    <div className="pt-3 border-t-2 border-slate-900 dark:border-slate-700 flex items-center justify-between text-xs font-mono">
+                      <span className="text-slate-500 font-bold uppercase text-[10px]">Impacto Mensurável:</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-black">{pil.metric}</span>
                     </div>
                   </div>
                 </BentoCard>
@@ -499,80 +505,86 @@ export default function App() {
           </div>
         </section>
 
-        {/* 4. VITRINE DE SOFTWARES & PRODUTOS REAIS (O CORAÇÃO DA VENDA) */}
+        {/* 4. VITRINE DE SOFTWARES & PRODUTOS REAIS */}
         <ProductShowcase />
 
-        {/* 5. VANTAGEM COMPETITIVA COM IA NATIVA */}
-        <section id="vantagens" className="scroll-mt-28">
+        {/* 5. MANIFESTO DE ENGENHARIA DE VERDADE */}
+        <section id="manifesto" className="scroll-mt-28">
           <AIAccelerationBanner />
         </section>
 
-        {/* 6. COMO TRABALHAMOS (MÉTODO EM 4 ETAPAS SEM BUROCRACIA) */}
-        <section id="processo" className="bg-white dark:bg-slate-900/90 rounded-3xl p-8 sm:p-12 space-y-10 border border-slate-200 dark:border-slate-800 shadow-sm scroll-mt-28">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-xs font-bold tracking-wide border border-emerald-200/60 dark:border-emerald-800/60">
-              PROCESSO TRANSPARENTE
+        {/* 6. COMO TRABALHAMOS (PROCESSO EM 4 ETAPAS) */}
+        <section id="processo" className="bg-white dark:bg-[#0b1120] rounded-3xl p-6 sm:p-10 space-y-8 border-2 border-slate-900 dark:border-slate-700 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#10b981] scroll-mt-28">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-2">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
+                <span>MÉTODO SEM BUROCRACIA</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mt-2">
+                Como tiramos seu projeto do papel
+              </h2>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Como tiramos seu projeto do papel
-            </h2>
-            <p className="text-slate-500 dark:text-slate-400 text-sm">
-              Sem reuniões intermináveis e sem repasse de responsabilidade. Você fala direto com o arquiteto técnico.
+            <p className="text-slate-600 dark:text-slate-300 text-sm max-w-md font-medium">
+              Sem reuniões intermináveis e sem repasse de responsabilidade. Você fala direto com quem vai programar o sistema.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {processSteps.map((step, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 space-y-3 relative group hover:border-emerald-500/40 transition"
+                className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#10b981] space-y-3"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-extrabold text-indigo-600 dark:text-emerald-400 font-mono">
+                  <span className="text-3xl font-black text-indigo-600 dark:text-[#D4FF00] font-mono">
                     {step.num}
                   </span>
-                  <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                  <span className="text-[10px] font-mono font-black px-2 py-0.5 rounded bg-white dark:bg-slate-950 border border-black text-slate-700 dark:text-slate-300">
                     {step.tag}
                   </span>
                 </div>
-                <h4 className="font-bold text-slate-900 dark:text-white text-base tracking-tight">{step.title}</h4>
-                <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">{step.desc}</p>
+                <h4 className="font-black text-slate-900 dark:text-white text-base tracking-tight">
+                  {step.title}
+                </h4>
+                <p className="text-slate-700 dark:text-slate-300 text-xs leading-relaxed font-medium">
+                  {step.desc}
+                </p>
               </div>
             ))}
           </div>
 
           {/* Quick CTA inside process */}
-          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-            <div className="flex items-center gap-2.5 text-slate-800 dark:text-slate-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-              <span><strong>Garantia de Entrega:</strong> Escopo bem delimitado, código testado e suporte contínuo pós-lançamento.</span>
+          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-500 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div className="flex items-center gap-2.5 text-slate-900 dark:text-slate-100 font-bold">
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+              <span>Garantia de Entrega: Escopo delimitado, código testado e suporte contínuo pós-lançamento.</span>
             </div>
             <a
               href="https://wa.me/5541991747318?text=Olá%20Rogger,%20quero%20agendar%20a%20conversa%20inicial%20de%2030%20minutos"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition whitespace-nowrap shadow-xs"
+              className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-black transition border-2 border-black shadow-[2px_2px_0px_#000] shrink-0"
             >
               Agendar Conversa Inicial (30 min)
             </a>
           </div>
         </section>
 
-        {/* 7. SOBRE ROGGER BROSCO (AUTORIDADE COM PROXIMIDADE) */}
-        <section id="sobre" className="space-y-10 scroll-mt-28">
-          <div className="bg-white dark:bg-slate-900/90 rounded-3xl p-8 sm:p-12 border border-slate-200 dark:border-slate-800 shadow-sm space-y-8">
+        {/* 7. SOBRE ROGGER BROSCO (AUTORIDADE DIRETA) */}
+        <section id="sobre" className="space-y-8 scroll-mt-28">
+          <div className="bg-white dark:bg-[#0b1120] rounded-3xl p-6 sm:p-10 border-2 border-slate-900 dark:border-slate-700 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#10b981] space-y-8">
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wide border border-indigo-200/60 dark:border-indigo-800/60">
-                  AUTORIDADE TÉCNICA DIRETA
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
+                  <span>QUEM ESTÁ POR TRÁS</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
                   Engenharia sênior direto com quem constrói — sem intermediários ou repasse para estagiários.
                 </h3>
-                <div className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed space-y-3">
+                <div className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed space-y-3 font-medium">
                   <p>
-                    Sou CTO na EasyDev e fundador da Broscotech. Nos últimos 7 anos, projetei e coloquei em produção sistemas para empresas que precisavam de performance e estabilidade diária.
+                    Sou CTO na EasyDev e fundador da Broscotech. Nos últimos 7 anos, projetei e coloquei em produção sistemas para empresas que precisavam de performance, estabilidade e automação diária.
                   </p>
                   <p>
                     Quando você contrata um projeto comigo, você fala direto com o arquiteto técnico: da regra de negócio à linha final de deploy.
@@ -584,7 +596,7 @@ export default function App() {
                     href="https://github.com/rbrosco"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-mono text-xs font-bold transition border border-slate-200 dark:border-slate-700"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 font-mono text-xs font-black transition border-2 border-black shadow-[3px_3px_0px_#000]"
                   >
                     <Github className="w-4 h-4" />
                     <span>github.com/rbrosco (Código Aberto)</span>
@@ -593,50 +605,50 @@ export default function App() {
                     href="https://dev.easydev.com.br"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 text-xs font-bold transition border border-slate-200 dark:border-slate-700"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-white text-xs font-black transition border-2 border-black dark:border-slate-700 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#10b981]"
                   >
                     <ExternalLink className="w-3.5 h-3.5 text-indigo-500" />
-                    <span>Conhecer a EasyDev</span>
+                    <span>Conhecer a EasyDev CRM</span>
                   </a>
                 </div>
               </div>
 
               {/* Founder Avatar & Snapshot */}
-              <div className="lg:col-span-4 flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 space-y-3">
+              <div className="lg:col-span-4 flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#10b981] space-y-3">
                 <div className="relative">
                   <img
                     src="/avatar.png"
                     alt="Rogger Brosco"
-                    className="w-28 h-28 rounded-full object-cover border-4 border-emerald-500 shadow-xl"
+                    className="w-28 h-28 rounded-2xl object-cover border-3 border-black shadow-[4px_4px_0px_#000]"
                   />
-                  <span className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900 flex items-center justify-center">
-                    <Check className="w-3 h-3 text-white" />
+                  <span className="absolute -bottom-2 -right-2 px-2 py-0.5 rounded-md bg-[#D4FF00] text-black font-mono font-black text-[10px] border-2 border-black shadow-[2px_2px_0px_#000]">
+                    ONLINE ✓
                   </span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 dark:text-white text-base">Rogger Brosco</h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">CTO & Engenheiro de Software</p>
+                  <h4 className="font-black text-slate-900 dark:text-white text-base">Rogger Brosco</h4>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 font-bold">CTO & Engenheiro de Software</p>
                 </div>
-                <div className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                <div className="text-[11px] font-mono text-slate-900 dark:text-white font-black px-3 py-1 rounded-md bg-[#D4FF00] border-2 border-black">
                   Curitiba • Remoto Global
                 </div>
               </div>
             </div>
 
             {/* Trajetória Timeline */}
-            <div className="space-y-4 pt-6 border-t border-slate-100 dark:border-slate-800">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 font-mono">
+            <div className="space-y-4 pt-6 border-t-2 border-slate-900 dark:border-slate-700">
+              <h4 className="text-xs font-mono font-black uppercase tracking-wider text-slate-900 dark:text-white">
                 Trajetória Profissional em Destaque:
               </h4>
               <div className="space-y-3">
                 {timeline.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/70 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
+                    className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_#000] flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-slate-900 dark:text-white text-sm">{item.role}</span>
+                        <span className="font-black text-slate-900 dark:text-white text-sm">{item.role}</span>
                         <span className="text-slate-400">•</span>
                         {item.companyUrl ? (
                           <a
@@ -652,9 +664,9 @@ export default function App() {
                           <span className="font-bold text-indigo-600 dark:text-indigo-400">{item.company}</span>
                         )}
                       </div>
-                      <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{item.description}</p>
+                      <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-medium">{item.description}</p>
                     </div>
-                    <span className="px-3 py-1 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 font-mono text-[11px] font-bold self-start md:self-center shrink-0">
+                    <span className="px-3 py-1 rounded-md bg-white dark:bg-slate-950 border-2 border-black text-slate-900 dark:text-white font-mono text-[11px] font-black self-start md:self-center shrink-0">
                       {item.period}
                     </span>
                   </div>
@@ -663,13 +675,13 @@ export default function App() {
             </div>
 
             {/* Technical Stack Interativo */}
-            <div className="space-y-4 pt-6 border-t border-slate-100 dark:border-slate-800">
+            <div className="space-y-4 pt-6 border-t-2 border-slate-900 dark:border-slate-700">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 font-mono">
+                  <h4 className="text-xs font-mono font-black uppercase tracking-wider text-slate-900 dark:text-white">
                     Stack em Produção:
                   </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Tecnologias testadas em servidores reais.</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">Tecnologias testadas em servidores reais.</p>
                 </div>
 
                 <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
@@ -677,10 +689,10 @@ export default function App() {
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`px-3 py-1 rounded-full text-xs font-semibold capitalize transition cursor-pointer ${
+                      className={`px-3 py-1 rounded-lg text-xs font-black capitalize transition cursor-pointer border-2 ${
                         activeTab === tab
-                          ? 'bg-indigo-600 text-white'
-                          : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                          ? 'bg-slate-900 text-white dark:bg-[#D4FF00] dark:text-black border-black shadow-[2px_2px_0px_#000]'
+                          : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 hover:border-black'
                       }`}
                     >
                       {tab === 'all' ? 'Todos' : tab}
@@ -689,20 +701,20 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                 {filteredSkills.map((skill, idx) => {
                   const Icon = skill.icon;
                   return (
                     <div
                       key={idx}
-                      className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 flex items-center gap-2.5 shadow-2xs"
+                      className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_#000] flex items-center gap-2.5"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-black flex items-center justify-center shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
                       <div className="min-w-0">
-                        <div className="font-bold text-slate-900 dark:text-white text-xs truncate">{skill.name}</div>
-                        <div className="text-[10px] text-slate-400 font-mono">{skill.level}</div>
+                        <div className="font-black text-slate-900 dark:text-white text-xs truncate">{skill.name}</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono font-bold">{skill.level}</div>
                       </div>
                     </div>
                   );
@@ -713,169 +725,157 @@ export default function App() {
           </div>
         </section>
 
-        {/* 8. CHAMADA FINAL DE CONVERSÃO & FORMULÁRIO WHATSAPP (CTA BOTTOM BOX) */}
+        {/* 8. CONTATO & FORMULÁRIO WHATSAPP */}
         <section id="contato" className="scroll-mt-28">
-          <div className="relative rounded-3xl bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 border border-slate-800 p-8 sm:p-14 shadow-2xl overflow-hidden">
-            
-            {/* Ambient Lighting */}
-            <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-600/15 rounded-full blur-[120px] pointer-events-none" />
-            
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="rounded-3xl bg-white dark:bg-[#0b1120] border-2 border-slate-900 dark:border-slate-700 p-6 sm:p-12 shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#10b981] space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
               
               {/* Left Column (5 cols) */}
-              <div className="lg:col-span-5 space-y-6">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold tracking-wide">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span>VAMOS CONVERSAR SOBRE SEU PROJETO</span>
+              <div className="lg:col-span-5 space-y-5">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
+                  <span>VAMOS CONVERSAR SOBRE SEU SOFTWARE</span>
                 </div>
 
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
                   Tem um processo que toma tempo demais ou uma ideia de produto para colocar no ar?
                 </h2>
 
-                <p className="text-slate-300 text-sm leading-relaxed">
+                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-medium">
                   Não perca semanas com soluções genéricas que não atendem sua rotina. Vamos desenhar um software ou automação que gere resultados imediatos para sua empresa.
                 </p>
 
                 {/* Direct Contacts List */}
                 <div className="space-y-3 pt-2">
                   <a
-                    href="https://wa.me/5541991747318?text=Olá%20Rogger,%20vi%20seu%20site%20e%20quero%20conversar%20sobre%20um%20novo%20projeto"
+                    href="https://wa.me/5541991747318"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/40 text-white transition group shadow-sm"
+                    className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border-2 border-emerald-500 flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white shadow-[2px_2px_0px_#000]"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
-                      <Phone className="w-5 h-5" />
+                    <div className="flex items-center gap-2.5">
+                      <Phone className="w-4 h-4 text-emerald-600" />
+                      <span>WhatsApp Direto: +55 (41) 99174-7318</span>
                     </div>
-                    <div>
-                      <div className="text-[11px] font-bold text-slate-400 uppercase font-mono">WhatsApp Direto</div>
-                      <div className="text-sm font-bold text-white font-mono">(41) 99174-7318</div>
-                    </div>
+                    <span className="text-[10px] font-mono font-black text-emerald-700 dark:text-emerald-400 bg-emerald-200 dark:bg-emerald-900/60 px-2 py-0.5 rounded border border-emerald-500">
+                      RESPOSTA RÁPIDA ⚡
+                    </span>
                   </a>
 
-                  <a
-                    href="mailto:contato@broscotech.com.br"
-                    className="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/40 text-white transition group shadow-sm"
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
-                      <Mail className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className="text-[11px] font-bold text-slate-400 uppercase font-mono">E-mail Profissional</div>
-                      <div className="text-sm font-bold text-white font-mono">contato@broscotech.com.br</div>
-                    </div>
-                  </a>
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 flex items-center gap-2.5 text-xs font-bold text-slate-900 dark:text-white shadow-[2px_2px_0px_#000]">
+                    <Mail className="w-4 h-4 text-indigo-500" />
+                    <span>Email: contato@broscotech.com.br</span>
+                  </div>
 
-                  <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 text-slate-300">
-                    <div className="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
-                      <Clock className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className="text-[11px] font-bold text-slate-400 uppercase font-mono">Tempo Médio de Resposta</div>
-                      <div className="text-xs font-semibold text-emerald-400">Menos de 2 horas em horário comercial</div>
-                    </div>
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 flex items-center gap-2.5 text-xs font-bold text-slate-900 dark:text-white shadow-[2px_2px_0px_#000]">
+                    <MapPin className="w-4 h-4 text-rose-500" />
+                    <span>Sede: Curitiba, PR • Atendimento Global</span>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: Structured Direct Form (7 cols) */}
-              <div className="lg:col-span-7 bg-slate-900/90 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl">
-                <h3 className="text-xl font-bold text-white tracking-tight mb-1">Envie uma Mensagem Direta</h3>
-                <p className="text-xs text-slate-400 mb-6">
-                  Preencha os campos abaixo para abrir a conversa formatada no WhatsApp de Rogger Brosco.
-                </p>
-
-                <form onSubmit={handleWhatsAppSend} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-slate-300">Seu Nome</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="Ex: Carlos Silva"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-hidden focus:border-emerald-500 transition"
-                      />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-slate-300">Seu E-mail</label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="Ex: carlos@empresa.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-hidden focus:border-emerald-500 transition"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300">Assunto / Software de Interesse</label>
+              {/* Right Column: Interactive WhatsApp Dispatch Form (7 cols) */}
+              <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#10b981]">
+                <form onSubmit={handleSendMessage} className="space-y-4">
+                  <div className="space-y-1">
+                    <span className="text-xs font-mono font-black uppercase text-slate-900 dark:text-white">
+                      Seu Nome Completo:
+                    </span>
                     <input
                       type="text"
+                      name="name"
                       required
-                      placeholder="Ex: Implantação de EasyConnect / Planner SDR / Sistema sob medida"
-                      value={formData.subject}
-                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-hidden focus:border-emerald-500 transition"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Ex: Carlos Mendes"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-slate-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 shadow-inner"
                     />
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300">Detalhes da Necessidade</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <span className="text-xs font-mono font-black uppercase text-slate-900 dark:text-white">
+                        Seu Melhor Email:
+                      </span>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="carlos@empresa.com.br"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-slate-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 shadow-inner"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-xs font-mono font-black uppercase text-slate-900 dark:text-white">
+                        Tipo de Projeto:
+                      </span>
+                      <input
+                        type="text"
+                        name="subject"
+                        required
+                        value={formData.subject}
+                        onChange={handleInputChange}
+                        placeholder="Ex: Licenciar EasyConnect / Software Novo"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-slate-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 shadow-inner"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <span className="text-xs font-mono font-black uppercase text-slate-900 dark:text-white">
+                      Conte sobre sua empresa e seu desafio:
+                    </span>
                     <textarea
+                      name="message"
                       rows={4}
                       required
-                      placeholder="Descreva o que sua empresa precisa, gargalos atuais ou prazos desejados..."
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-hidden focus:border-emerald-500 transition resize-none"
+                      onChange={handleInputChange}
+                      placeholder="Qual o maior gargalo operacional hoje ou o que precisa automatizar?"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-slate-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 shadow-inner"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full py-3.5 rounded-xl bg-[#D4FF00] hover:bg-yellow-300 text-black font-black text-xs transition border-2 border-black shadow-[4px_4px_0px_#000] flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>Iniciar Conversa no WhatsApp</span>
+                    <Send className="w-4 h-4 fill-black" />
+                    <span>Enviar Mensagem Direta Para Rogger no WhatsApp ⚡</span>
                   </button>
                 </form>
               </div>
 
             </div>
-
           </div>
         </section>
 
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800/80 bg-white/50 dark:bg-slate-950/50 backdrop-blur-md py-10 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-slate-800 dark:text-slate-200">Broscotech</span>
-            <span>•</span>
-            <span>Rogger Brosco © {new Date().getFullYear()}</span>
-            <span>•</span>
-            <span className="text-emerald-500 font-mono">Softwares & Automações em Produção</span>
+      {/* Neo-Brutalist Clean Footer */}
+      <footer className="border-t-2 border-slate-900 dark:border-slate-700 bg-white dark:bg-[#060911] py-8 text-xs">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
+          <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-bold">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>© {new Date().getFullYear()} BROSCOTECH • ARQUITETURA & SOFTWARES SOB MEDIDA</span>
           </div>
 
-          <div className="flex items-center gap-4 font-medium">
-            <a href="https://planner-sdr.broscotech.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-500 transition">
-              Planner SDR
-            </a>
-            <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-500 transition">
-              EasyDev
-            </a>
-            <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-500 transition">
+          <div className="flex items-center gap-4 text-slate-600 dark:text-slate-400 font-bold">
+            <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition">
               GitHub
             </a>
-            <a href="#hero" className="hover:text-indigo-500 transition">
-              Topo ↑
+            <span>•</span>
+            <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition">
+              EasyDev CRM
+            </a>
+            <span>•</span>
+            <a href="https://planner-sdr.broscotech.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition">
+              Planner SDR
+            </a>
+            <span>•</span>
+            <a href="#hero" className="hover:text-black dark:hover:text-white transition">
+              Voltar ao Topo ↑
             </a>
           </div>
         </div>
