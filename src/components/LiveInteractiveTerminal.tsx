@@ -94,7 +94,7 @@ export default function LiveInteractiveTerminal() {
             <div className="text-indigo-400 font-bold">PROJETOS EM PRODUÇÃO:</div>
             <div className="text-xs font-mono space-y-1">
               <div>⚡ <strong className="text-white">Planner SDR:</strong> https://planner-sdr.broscotech.com.br</div>
-              <div>⚡ <strong className="text-white">EasyDev CRM:</strong> https://dev.easydev.com.br</div>
+              <div>⚡ <strong className="text-white">EasyDev CRM:</strong> https://easydev.com.br</div>
               <div>⚡ <strong className="text-white">Hermes Fleet:</strong> Orquestração multi-agente 24/7</div>
               <div>⚡ <strong className="text-white">Evolution Hub:</strong> Gateway WhatsApp + n8n</div>
             </div>

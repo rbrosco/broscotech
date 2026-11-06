@@ -38,13 +38,13 @@ export function ProductBrowserFrame({
   url = 'https://broscotech.com.br',
   title,
   badge = 'Produção Ativa',
-  badgeColor = 'bg-[#D4FF00] text-black border-black',
+  badgeColor = 'bg-gradient-to-r from-violet-600 to-blue-600 text-white border-black',
   children,
   actionUrl,
   actionLabel = 'Abrir Demonstração',
 }: BrowserFrameProps) {
   return (
-    <div className="rounded-2xl overflow-hidden border-2 border-slate-900 dark:border-slate-700 bg-white dark:bg-[#0b1120] shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#10b981] transition-all">
+    <div className="rounded-2xl overflow-hidden border-2 border-slate-900 dark:border-slate-700 bg-white dark:bg-[#0b1120] shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#6366f1] transition-all">
       {/* Top Browser Bar */}
       <div className="px-4 py-2.5 bg-slate-100 dark:bg-slate-900 border-b-2 border-slate-900 dark:border-slate-700 flex items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-1.5 shrink-0">
@@ -185,15 +185,15 @@ export function EasyConnectMockup() {
 
         {/* Live Operational Metrics Footer */}
         <div className="grid grid-cols-3 gap-2.5 text-center text-xs font-mono pt-1">
-          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#10b981]">
+          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#6366f1]">
             <div className="text-[10px] font-bold text-slate-500 uppercase">1ª Resposta</div>
             <div className="text-emerald-600 dark:text-emerald-400 font-black text-sm">&lt; 15s (Zero Fila)</div>
           </div>
-          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#10b981]">
+          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#6366f1]">
             <div className="text-[10px] font-bold text-slate-500 uppercase">Atendentes</div>
             <div className="text-indigo-600 dark:text-indigo-400 font-black text-sm">Multi-Operador</div>
           </div>
-          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#10b981]">
+          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#6366f1]">
             <div className="text-[10px] font-bold text-slate-500 uppercase">Banco de Dados</div>
             <div className="text-slate-900 dark:text-white font-black text-sm">PostgreSQL 17</div>
           </div>
@@ -210,7 +210,7 @@ export function PlannerSdrMockup() {
       url="planner-sdr.broscotech.com.br"
       title="Planner SDR — Gestão & Metas com IA"
       badge="DEMO AO VIVO"
-      badgeColor="bg-[#D4FF00] text-black border-black"
+      badgeColor="bg-gradient-to-r from-violet-600 to-blue-600 text-white border-black"
       actionUrl="https://planner-sdr.broscotech.com.br"
       actionLabel="Testar Demo Real"
     >
@@ -283,7 +283,7 @@ export function PlannerSdrMockup() {
 
             <div className="p-2.5 rounded-lg bg-white dark:bg-slate-950 border-2 border-indigo-500 space-y-2 shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-[9px] font-black font-mono px-1.5 py-0.5 rounded bg-[#D4FF00] text-black border border-black">
+                <span className="text-[9px] font-black font-mono px-1.5 py-0.5 rounded bg-gradient-to-r from-violet-600 to-blue-600 text-white border border-black">
                   PRIORIDADE MÁXIMA
                 </span>
                 <Clock className="w-3.5 h-3.5 text-indigo-500 animate-spin" />
@@ -342,7 +342,7 @@ export function PlannerSdrMockup() {
         {/* AI Executive Summary Chip & Direct Demo Link */}
         <div className="p-3 rounded-xl bg-slate-900 text-white border-2 border-black flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-[2px_2px_0px_#000]">
           <div className="flex items-center gap-2.5">
-            <Bot className="w-4 h-4 text-[#D4FF00] shrink-0" />
+            <Bot className="w-4 h-4 text-cyan-400 shrink-0" />
             <span className="text-xs text-slate-200">
               <strong className="text-white">Relatório Automático por IA:</strong> 70% menos reuniões operacionais e alinhamento direto no WhatsApp da liderança.
             </span>
@@ -352,7 +352,7 @@ export function PlannerSdrMockup() {
             href="https://planner-sdr.broscotech.com.br"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 rounded-lg bg-[#D4FF00] hover:bg-yellow-300 text-black font-black text-xs transition flex items-center justify-center gap-1.5 shrink-0 border-2 border-black shadow-[2px_2px_0px_#fff]"
+            className="px-4 py-2 rounded-lg bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white font-black text-xs transition flex items-center justify-center gap-1.5 shrink-0 border-2 border-black shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#6366f1]"
           >
             <span>Ver Demonstração Real</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -459,11 +459,11 @@ export function DripCastMockup() {
 export function EasyDevCrmMockup() {
   return (
     <ProductBrowserFrame
-      url="dev.easydev.com.br"
+      url="easydev.com.br"
       title="EasyDev CRM — Gestão Comercial B2B & Multimoeda"
       badge="MULTIMOEDA B2B"
       badgeColor="bg-[#FF5500] text-white border-black"
-      actionUrl="https://dev.easydev.com.br"
+      actionUrl="https://easydev.com.br"
       actionLabel="Acessar Portal"
     >
       <div className="space-y-3 font-sans">

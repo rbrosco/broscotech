@@ -77,8 +77,8 @@ const PRODUCTS: ProductItem[] = [
     name: 'Planner SDR',
     tag: 'Gestão de Tarefas, Vendas & Produtividade com IA',
     badge: 'Demo Online Ativa',
-    badgeColor: 'bg-[#D4FF00] text-black border-black',
-    tabAccent: 'bg-[#D4FF00] text-black border-black',
+    badgeColor: 'bg-gradient-to-r from-violet-600 to-blue-600 text-white border-black',
+    tabAccent: 'bg-gradient-to-r from-violet-600 to-blue-600 text-white border-black',
     icon: Boxes,
     headline: 'Controle total da operação sem planilhas perdidas e sem cobrança manual de equipe.',
     problem: 'Tarefas descentralizadas, falta de clareza sobre prioridades da semana e horas perdidas em reuniões diárias de alinhamento.',
@@ -148,7 +148,7 @@ const PRODUCTS: ProductItem[] = [
     ],
     primaryCtaText: 'Conhecer o EasyDev CRM',
     whatsappMessage: 'Olá Rogger, quero implantar o EasyDev CRM no meu setor comercial',
-    demoUrl: 'https://dev.easydev.com.br',
+    demoUrl: 'https://easydev.com.br',
     demoLabel: 'Conhecer Portal EasyDev'
   },
   {
@@ -218,8 +218,8 @@ export default function ProductShowcase() {
       {/* Section Header */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-2">
         <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
-            <Flame className="w-3.5 h-3.5 fill-black" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-gradient-to-r from-violet-600 to-blue-600 text-white text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
+            <Flame className="w-3.5 h-3.5 fill-white" />
             <span>VITRINE DE SOFTWARES PRONTOS PARA USO</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
@@ -235,7 +235,7 @@ export default function ProductShowcase() {
           href="https://wa.me/5541991747318?text=Olá%20Rogger,%20quero%20um%20diagnóstico%20técnico%20gratuito%20para%20minha%20empresa"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white dark:text-black text-xs font-black transition border-2 border-black shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#fff] shrink-0 self-start lg:self-center"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white text-xs font-black transition border-2 border-black shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1] shrink-0 self-start lg:self-center"
         >
           <Phone className="w-4 h-4" />
           <span>Falar Direto no WhatsApp</span>
@@ -255,7 +255,7 @@ export default function ProductShowcase() {
               className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-black transition whitespace-nowrap cursor-pointer border-2 ${
                 isSelected
                   ? `${prod.tabAccent} shadow-[3px_3px_0px_#000] translate-x-[-1px] translate-y-[-1px]`
-                  : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-900 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#10b981]'
+                  : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-900 dark:border-indigo-900/60 hover:bg-slate-100 dark:hover:bg-slate-800 shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#6366f1]'
               }`}
             >
               <Icon className="w-4 h-4 shrink-0" />
@@ -275,7 +275,7 @@ export default function ProductShowcase() {
       </div>
 
       {/* Main Selected Product Card Showcase */}
-      <div className="bg-white dark:bg-[#0b1120] rounded-3xl border-2 border-slate-900 dark:border-slate-700 p-6 sm:p-10 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#10b981] transition-all">
+      <div className="bg-white dark:bg-[#0c0e1e] rounded-3xl border-2 border-slate-900 dark:border-indigo-900/60 p-6 sm:p-10 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#6366f1] transition-all">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Left Column: Product Details & Value Proposition (6 cols) */}
@@ -341,7 +341,7 @@ export default function ProductShowcase() {
                 {selectedProduct.features.map((feat, idx) => (
                   <span
                     key={idx}
-                    className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 border-2 border-slate-300 dark:border-slate-700"
+                    className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 border-2 border-slate-300 dark:border-indigo-900/60"
                   >
                     {feat}
                   </span>
@@ -357,7 +357,7 @@ export default function ProductShowcase() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-black transition border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px]"
               >
-                <Phone className="w-3.5 h-3.5 fill-black" />
+                <Phone className="w-3.5 h-3.5 fill-white" />
                 <span>{selectedProduct.primaryCtaText}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
@@ -367,7 +367,7 @@ export default function ProductShowcase() {
                   href={selectedProduct.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-black transition border-2 border-black dark:border-slate-700 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#10b981] hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-black transition border-2 border-black dark:border-indigo-900/60 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1] hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   <span>{selectedProduct.demoLabel || 'Ver Demonstração'}</span>
                   <ExternalLink className="w-3.5 h-3.5 text-indigo-500" />

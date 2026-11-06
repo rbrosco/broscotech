@@ -45,9 +45,9 @@ export default function Hero3DScene({ theme }: Hero3DSceneProps) {
     const colors = new Float32Array(count * 3);
 
     // Architectural Engineering Colors: Emerald, Electric Lime & Cyber Cyan
-    const color1 = new THREE.Color(isDark ? 0x10b981 : 0x059669); // Emerald
-    const color2 = new THREE.Color(isDark ? 0x06b6d4 : 0x0891b2); // Cyan
-    const color3 = new THREE.Color(isDark ? 0x84cc16 : 0x65a30d); // Lime
+    const color1 = new THREE.Color(isDark ? 0x8b5cf6 : 0x7c3aed); // Emerald
+    const color2 = new THREE.Color(isDark ? 0x3b82f6 : 0x2563eb); // Cyan
+    const color3 = new THREE.Color(isDark ? 0x6366f1 : 0x4f46e5); // Lime
 
     let idx = 0;
     for (let ix = 0; ix < cols; ix++) {

@@ -36,13 +36,15 @@ import {
   ArrowUpRight,
   Check,
   Flame,
-  X
+  X,
+  Building2
 } from 'lucide-react';
 
 import Hero3DScene from './components/Hero3DScene.tsx';
-import BentoCard from './components/BentoCard.tsx';
 import AIAccelerationBanner from './components/AIAccelerationBanner.tsx';
 import ProductShowcase from './components/ProductShowcase.tsx';
+import HermesConsultingSection from './components/HermesConsultingSection.tsx';
+import ServicesSection from './components/ServicesSection.tsx';
 import { PlannerSdrMockup, EasyConnectMockup, DripCastMockup } from './components/ProductMockups.tsx';
 
 export default function App() {
@@ -73,106 +75,63 @@ export default function App() {
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `*Contato via Site Broscotech*%0A%0A*Nome:* ${formData.name}%0A*Email:* ${formData.email}%0A*Assunto:* ${formData.subject}%0A*Mensagem:* ${formData.message}`;
+    const text = `*Contato via Portfólio Rogger Brosco (EasyDev)*%0A%0A*Nome:* ${formData.name}%0A*Email:* ${formData.email}%0A*Assunto:* ${formData.subject}%0A*Mensagem:* ${formData.message}`;
     window.open(`https://wa.me/5541991747318?text=${text}`, '_blank');
   };
 
   const stats = [
     { label: 'Experiência Técnica', value: '7+ Anos', subtitle: 'Colocando sistemas em produção', icon: Code2 },
-    { label: 'Disponibilidade', value: '99.9%', subtitle: 'SLA em servidores Docker', icon: ShieldCheck },
-    { label: 'WhatsApp Integrado', value: '100%', subtitle: 'Comunicação oficial e automatizada', icon: MessageSquare },
-    { label: 'Intermediários', value: 'Zero', subtitle: 'Você fala direto com o arquiteto', icon: Zap },
-  ];
-
-  const pillars = [
-    {
-      title: 'Máquinas de Vendas no WhatsApp',
-      badge: 'CRM & WHATSAPP',
-      badgeClass: 'bg-[#25D366] text-black border-black',
-      color: 'bg-emerald-500',
-      icon: MessageSquare,
-      problem: 'Leads perdidos por demora de resposta e vendedores usando WhatsApp pessoal sem registro no CRM.',
-      solution: 'EasyConnect com agentes de triagem rápida, múltiplos operadores no mesmo número e webhook para PostgreSQL.',
-      metric: 'Tempo de 1ª resposta < 15 segundos',
-    },
-    {
-      title: 'Gestão & Produtividade com IA',
-      badge: 'PRODUTIVIDADE',
-      badgeClass: 'bg-[#D4FF00] text-black border-black',
-      color: 'bg-indigo-600',
-      icon: Boxes,
-      problem: 'Falta de clareza nas metas da equipe, planilhas desatualizadas e horas gastas em reuniões de alinhamento.',
-      solution: 'Planner SDR com Kanban de alta precisão, relatórios semanais gerados por IA e lembretes automáticos.',
-      metric: '70% menos reuniões operacionais',
-    },
-    {
-      title: 'Agentes Autônomos 24/7',
-      badge: 'HERMES FLEET',
-      badgeClass: 'bg-[#A855F7] text-white border-black',
-      color: 'bg-purple-600',
-      icon: Bot,
-      problem: 'Tarefas manuais e repetitivas de análise de dados, deploys e monitoramento sobrecarregando a equipe técnica.',
-      solution: 'Frota coordenada de agentes autônomos com memória duradoura e governança via Telegram/Discord.',
-      metric: 'Operação ininterrupta 24/7',
-    },
-    {
-      title: 'Infraestrutura de Missão Crítica',
-      badge: 'DOCKER & POSTGRESQL',
-      badgeClass: 'bg-[#FF5500] text-white border-black',
-      color: 'bg-orange-500',
-      icon: Server,
-      problem: 'Aplicações que travam na primeira oscilação de tráfego e bancos de dados sem backup confiável.',
-      solution: 'Bancos PostgreSQL 17 isolados, proxies reversos Nginx com SSL automático e monitoramento em tempo real.',
-      metric: 'SLA de 99.9% garantido em contrato',
-    },
+    { label: 'Disponibilidade', value: '99.9%', subtitle: 'SLA em servidores EasyDev', icon: ShieldCheck },
+    { label: 'Engenharia de IA', value: 'Hermes Fleet', subtitle: 'Frotas autônomas 24/7 sem alucinação', icon: Bot },
+    { label: 'Liderança Técnica', value: 'Sócio & CTO', subtitle: 'Engenharia sênior na EasyDev', icon: Zap },
   ];
 
   const processSteps = [
     {
       num: '01',
       title: 'Diagnóstico & Arquitetura',
-      tag: '30 MINUTOS',
-      desc: 'Alinhamos a regra de negócio direto no WhatsApp ou call rápida. Mapeamos as dores e definimos a arquitetura ideal.',
+      tag: 'DIRETO COM O CTO',
+      desc: 'Alinhamento objetivo da sua regra de negócio e gargalos operacionais. Desenho da arquitetura técnica sem intermediários.',
     },
     {
       num: '02',
-      title: 'Protótipo Operacional Rápido',
-      tag: 'SEMANA 1',
-      desc: 'Primeira versão funcional navegável colocada no ar para você validar com sua equipe e dados reais.',
+      title: 'Desenvolvimento Ágil na EasyDev',
+      tag: 'SEMANAS 1 E 2',
+      desc: 'Construção rápida de protótipo operacional navegável para sua equipe validar com dados reais.',
     },
     {
       num: '03',
-      title: 'Homologação & Integração',
-      tag: 'SEMANA 2',
-      desc: 'Integração de APIs (WhatsApp, pagamentos, bancos de dados), testes de segurança e refinamento da experiência.',
+      title: 'Integrações & Homologação',
+      tag: 'SEMANA 3',
+      desc: 'Conexão com WhatsApp Baileys, gateways de pagamento, APIs e banco PostgreSQL isolado com testes de estresse.',
     },
     {
       num: '04',
       title: 'Deploy em Produção & Suporte',
-      tag: 'GO-LIVE',
-      desc: 'Deploy em containers Docker isolados com SSL, monitoramento ativo e suporte contínuo direto com o arquiteto.',
+      tag: 'GO-LIVE CORPORATIVO',
+      desc: 'Deploy em containers Docker com SSL, backups automatizados e acompanhamento contínuo da equipe EasyDev.',
     },
   ];
 
   const timeline = [
     {
-      role: 'Chief Technology Officer (CTO)',
+      role: 'Sócio & Chief Technology Officer (CTO)',
       company: 'EasyDev CRM',
-      companyUrl: 'https://dev.easydev.com.br',
+      companyUrl: 'https://easydev.com.br',
       period: '2023 — Presente',
-      description: 'Liderança de engenharia da plataforma comercial multimoeda (BRL/USD/EUR), arquitetura de microsserviços e integrações WhatsApp.',
+      description: 'Liderança executiva de engenharia, arquitetura de microsserviços, inteligência artificial Hermes, integrações Baileys WhatsApp e CRM multimoeda em escala corporativa.',
     },
     {
       role: 'Fundador & Arquiteto de Software',
-      company: 'Broscotech',
+      company: 'Broscotech (Portfólio & Laboratório)',
       period: '2020 — Presente',
-      description: 'Criação e sustentação dos produtos EasyConnect, Planner SDR, DripCast e desenvolvimento de softwares sob medida para empresas.',
+      description: 'Desenvolvimento e ideação dos produtos EasyConnect, Planner SDR, DripCast e protótipos de tecnologia aplicada para empresas.',
     },
     {
       role: 'Engenheiro de Automação & Full Stack',
       company: 'Projetos Globais & B2B',
       period: '2018 — 2023',
-      description: 'Construção de pipelines de automação, integrações com bancos relacionais e aplicações corporativas de alto tráfego.',
+      description: 'Construção de pipelines de automação, integrações com bancos relacionais de alto tráfego e infraestrutura Linux Docker.',
     },
   ];
 
@@ -183,9 +142,9 @@ export default function App() {
     { name: 'Node.js & Bun', category: 'backend', level: 'Especialista', icon: Server },
     { name: 'PostgreSQL 17 & Redis', category: 'backend', level: 'Avançado', icon: Database },
     { name: 'REST & Webhooks', category: 'backend', level: 'Especialista', icon: Workflow },
-    { name: 'Hermes Fleet / Multi-Agent', category: 'ai', level: 'Pioneiro', icon: Bot },
+    { name: 'Hermes Fleet / Agentes IA', category: 'ai', level: 'Pioneiro', icon: Bot },
     { name: 'Vercel AI SDK & LLMs', category: 'ai', level: 'Avançado', icon: Zap },
-    { name: 'WhatsApp Bot Engine', category: 'ai', level: 'Especialista', icon: MessageSquare },
+    { name: 'WhatsApp Bot Baileys', category: 'ai', level: 'Especialista', icon: MessageSquare },
     { name: 'Docker & Compose', category: 'devops', level: 'Especialista', icon: Boxes },
     { name: 'Nginx & SSL Proxy', category: 'devops', level: 'Avançado', icon: ShieldCheck },
     { name: 'Linux / Arch / Debian', category: 'devops', level: 'Especialista', icon: TerminalIcon },
@@ -194,66 +153,82 @@ export default function App() {
   const filteredSkills = activeTab === 'all' ? skills : skills.filter((s) => s.category === activeTab);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#060911] text-slate-900 dark:text-slate-100 font-sans selection:bg-[#D4FF00] selection:text-black transition-colors duration-200">
+    <div className="min-h-screen bg-[#F8F9FE] dark:bg-[#070914] text-slate-900 dark:text-slate-100 font-sans selection:bg-violet-600 selection:text-white transition-colors duration-200 relative overflow-hidden">
       
-      {/* Top Retro Engineering Tape */}
-      <div className="bg-[#D4FF00] text-black border-b-2 border-black py-1.5 px-4 font-mono font-black text-[11px] tracking-wider uppercase overflow-hidden whitespace-nowrap">
+      {/* Aurora Ambient Glows (Fusão Fluida Roxo & Azul) */}
+      <div className="fixed top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-violet-600/15 via-indigo-600/15 to-blue-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="fixed bottom-1/4 right-10 w-[550px] h-[550px] bg-gradient-to-bl from-blue-600/15 via-cyan-600/10 to-purple-600/15 rounded-full blur-[150px] pointer-events-none -z-10" />
+
+      {/* Top Engineering Marquee com Gradiente Roxo & Azul */}
+      <div className="bg-gradient-to-r from-violet-700 via-indigo-600 to-blue-600 text-white border-b-2 border-black py-1.5 px-4 font-mono font-black text-[11px] tracking-wider uppercase overflow-hidden whitespace-nowrap shadow-sm">
         <div className="inline-block animate-marquee">
-          ⚡ 4 SOFTWARES REAIS EM PRODUÇÃO • ARQUITETURA SÊNIOR • POSTGRESQL 17 ISOLADO • WHATSAPP OFICIAL COM IA • SEM SLIDES EM POWERPOINT • DIRETO COM O CTO • CONTATO: +55 (41) 99174-7318 •
+          ⚡ ROGGER BROSCO • SÓCIO & CTO @ EASYDEV • IMPLANTAÇÃO DE AGENTES IA HERMES 24/7 • DESENVOLVIMENTO SAAS FULL-STACK • WHATSAPP BAILEYS & CRM • POSTGRESQL 17 ISOLADO • CONHEÇA AS SOLUÇÕES CORPORATIVAS NA EASYDEV (EASYDEV.COM.BR) • WHATSAPP: +55 (41) 99174-7318 •
         </div>
       </div>
 
-      {/* Floating Neo-Brutalist Header */}
-      <header className="sticky top-3 z-50 max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-md rounded-2xl px-4 sm:px-5 py-2.5 flex items-center justify-between border-2 border-slate-900 dark:border-slate-700 shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#10b981]">
+      {/* Floating Header */}
+      <header className="sticky top-3 z-50 max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="bg-white/90 dark:bg-[#0c0e1e]/90 backdrop-blur-md rounded-2xl px-4 sm:px-6 py-2.5 flex items-center justify-between border-2 border-slate-900 dark:border-indigo-900/70 shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#6366f1]">
           
-          {/* Brand Logo */}
-          <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-black text-[#D4FF00] border-2 border-black flex items-center justify-center font-mono font-black text-xs shadow-[2px_2px_0px_#D4FF00]">
+          {/* Brand Logo & Authority */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-600 via-indigo-600 to-blue-600 text-white border-2 border-black flex items-center justify-center font-mono font-black text-xs shadow-[2px_2px_0px_#000]">
               RB
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-black text-sm tracking-tight text-slate-900 dark:text-white">BROSCOTECH</span>
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="font-black text-sm tracking-tight text-slate-900 dark:text-white">ROGGER BROSCO</span>
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
               </div>
-              <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 block font-bold leading-none">
-                ROGER BROSCO • CTO
+              <span className="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 block font-black leading-none">
+                SÓCIO & CTO @ EASYDEV
               </span>
             </div>
           </a>
 
           {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-5 text-xs font-black text-slate-700 dark:text-slate-300">
-            <a href="#produtos" className="hover:text-emerald-500 transition flex items-center gap-1">
-              <span>Softwares [4]</span>
-              <span className="px-1.5 py-0.2 rounded bg-[#D4FF00] text-black text-[9px] font-mono font-black border border-black">
-                NOVO
+          <nav className="hidden lg:flex items-center gap-5 text-xs font-black text-slate-700 dark:text-slate-300">
+            <a href="#hermes-consultoria" className="hover:text-indigo-500 transition flex items-center gap-1 text-violet-600 dark:text-cyan-400">
+              <Bot className="w-3.5 h-3.5" />
+              <span>Consultoria Hermes</span>
+              <span className="px-1.5 py-0.2 rounded bg-gradient-to-r from-violet-600 to-blue-600 text-white text-[9px] font-mono font-black border border-black shadow-[1px_1px_0px_#000]">
+                IA 24/7
               </span>
             </a>
-            <a href="#solucoes" className="hover:text-emerald-500 transition">Pilares</a>
-            <a href="#manifesto" className="hover:text-emerald-500 transition">Manifesto</a>
-            <a href="#processo" className="hover:text-emerald-500 transition">Como Funciona</a>
-            <a href="#sobre" className="hover:text-emerald-500 transition">Rogger Brosco</a>
+            <a href="#servicos" className="hover:text-indigo-500 transition">Tudo Que Faço</a>
+            <a href="#produtos" className="hover:text-indigo-500 transition">Softwares [5]</a>
+            <a href="#manifesto" className="hover:text-indigo-500 transition">Manifesto</a>
+            <a href="#processo" className="hover:text-indigo-500 transition">Processo</a>
+            <a href="#sobre" className="hover:text-indigo-500 transition">Rogger Brosco</a>
           </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href="https://easydev.com.br"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-[#12162b] hover:bg-slate-200 dark:hover:bg-[#181d38] text-slate-800 dark:text-slate-200 font-mono font-bold text-xs transition border border-slate-300 dark:border-indigo-800"
+            >
+              <Building2 className="w-3.5 h-3.5 text-indigo-400" />
+              <span>EasyDev.com.br</span>
+            </a>
+
             <button
               onClick={toggleTheme}
               aria-label="Alternar Tema"
-              className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white flex items-center justify-center transition border-2 border-black dark:border-slate-700 cursor-pointer shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#10b981]"
+              className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#12162b] dark:hover:bg-[#181d38] text-slate-900 dark:text-white flex items-center justify-center transition border-2 border-black dark:border-indigo-800 cursor-pointer shadow-[2px_2px_0px_#000] dark:shadow-[2px_2px_0px_#6366f1]"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-900" />}
             </button>
 
             <a
-              href="https://wa.me/5541991747318?text=Olá%20Rogger,%20vi%20seu%20site%20e%20quero%20conversar%20sobre%20um%20software%20para%20minha%20empresa"
+              href="https://wa.me/5541991747318?text=Olá%20Rogger,%20vi%20seu%20portfólio%20e%20quero%20conversar%20sobre%20as%20soluções%20da%20EasyDev"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl bg-[#D4FF00] hover:bg-yellow-300 text-black font-black text-xs transition border-2 border-black shadow-[2px_2px_0px_#000]"
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white font-black text-xs transition border-2 border-black shadow-[2px_2px_0px_#000]"
             >
-              <Phone className="w-3.5 h-3.5 fill-black" />
+              <Phone className="w-3.5 h-3.5 fill-white" />
               <span>Falar com Rogger ⚡</span>
             </a>
           </div>
@@ -263,8 +238,8 @@ export default function App() {
       {/* Main Container */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-24 space-y-24">
 
-        {/* 1. HERO SECTION (NEO-BRUTALIST & PUNCHY EDITORIAL) */}
-        <section id="hero" className="relative rounded-3xl overflow-hidden min-h-[640px] flex flex-col items-center justify-center text-center p-6 sm:p-12 border-2 border-slate-900 dark:border-slate-700 bg-white dark:bg-[#0b1120] shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#10b981]">
+        {/* 1. HERO SECTION COM FOTO DO ROGGER EM EVIDÊNCIA */}
+        <section id="hero" className="relative rounded-3xl overflow-hidden min-h-[660px] flex flex-col items-center justify-center text-center p-6 sm:p-12 border-2 border-slate-900 dark:border-indigo-900/70 bg-white dark:bg-[#0c0e1e] shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#6366f1]">
           
           {/* Interactive 3D Wireframe Scene */}
           <Hero3DScene theme={theme} />
@@ -272,69 +247,81 @@ export default function App() {
           {/* Hero Content */}
           <div className="relative z-10 max-w-3xl mx-auto space-y-6 flex flex-col items-center">
             
+            {/* FOTO DO ROGGER EM DESTAQUE MÁXIMO COM MOLDURA ROXO/AZUL */}
+            <div className="relative group cursor-pointer">
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 blur opacity-75 group-hover:opacity-100 transition duration-300" />
+              <div className="relative p-1.5 rounded-2xl bg-white dark:bg-black border-2 border-black shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#6366f1]">
+                <img
+                  src="/avatar.png"
+                  alt="Rogger Brosco - Sócio & CTO EasyDev"
+                  className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover"
+                />
+                <span className="absolute -bottom-2 -right-2 px-2 py-0.5 rounded-md bg-gradient-to-r from-violet-600 to-blue-600 text-white font-mono font-black text-[10px] border-2 border-black shadow-[2px_2px_0px_#000] flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse" />
+                  ONLINE • CTO
+                </span>
+              </div>
+            </div>
+
             {/* Sticker Badge Superior */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[3px_3px_0px_#000]">
-              <Flame className="w-3.5 h-3.5 fill-black" />
-              <span>SOFTWARES EM PRODUÇÃO • SEM ENROLAÇÃO</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-md bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 text-white text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[3px_3px_0px_#000]">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>ROGGER BROSCO • SÓCIO & CTO @ EASYDEV</span>
             </div>
 
             {/* Main Headline H1 */}
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1]">
-                Construo softwares de verdade que rodam o seu negócio.{' '}
-                <span className="bg-[#D4FF00] text-black px-2 py-0.5 rounded-lg border-2 border-black inline-block mt-1">
-                  Direto com quem programa.
+                Arquiteto de Software & Engenharia de IA.{' '}
+                <span className="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 text-white px-3 py-0.5 rounded-xl border-2 border-black inline-block mt-1 shadow-[2px_2px_0px_#000]">
+                  Liderança Técnica na EasyDev.
                 </span>
               </h1>
               
-              {/* Subtitle / Value Proposition */}
+              {/* Subtitle / Positioning */}
               <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-medium mx-auto pt-2">
-                Chega de sistemas genéricos que quebram na primeira Black Friday ou de reuniões infinitas com gerentes de conta que não sabem o que é um banco de dados. Crio CRMs no WhatsApp, plataformas SaaS e agentes autônomos prontos para faturar.
+                Este é meu portfólio autoral de engenharia. Construo plataformas SaaS completas, frotas autônomas de IA (Hermes) e automações WhatsApp Baileys operadas e entregues oficialmente pela <strong className="text-indigo-600 dark:text-cyan-400">EasyDev</strong> para empresas que buscam escala real.
               </p>
             </div>
 
             {/* CTAs Principais */}
             <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
               <a
-                href="https://wa.me/5541991747318?text=Olá%20Rogger,%20quero%20um%20software%20para%20minha%20empresa"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-black text-sm transition border-2 border-black shadow-[4px_4px_0px_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 cursor-pointer"
+                href="#hermes-consultoria"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white font-black text-sm transition border-2 border-black shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#6366f1] hover:-translate-x-0.5 hover:-translate-y-0.5 cursor-pointer"
               >
-                <Phone className="w-4 h-4 fill-black" />
-                <span>Quero um Software Para Minha Empresa ⚡</span>
+                <Bot className="w-4 h-4" />
+                <span>Consultoria Hermes Agent 24/7 ⚡</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
 
               <a
-                href="#produtos"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-black text-sm transition border-2 border-black dark:border-slate-700 shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#10b981] hover:-translate-x-0.5 hover:-translate-y-0.5"
+                href="https://easydev.com.br"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white dark:bg-[#12162b] hover:bg-slate-100 dark:hover:bg-[#181d38] text-slate-900 dark:text-white font-black text-sm transition border-2 border-black dark:border-indigo-800 shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#6366f1] hover:-translate-x-0.5 hover:-translate-y-0.5"
               >
-                <Boxes className="w-4 h-4 text-emerald-500" />
-                <span>Explorar Sistemas em Produção [4] ↓</span>
+                <Building2 className="w-4 h-4 text-indigo-400" />
+                <span>Conhecer a EasyDev Oficial</span>
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
               </a>
             </div>
 
-            {/* Rogger's Direct Author Bar */}
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-3 text-xs">
-              <div className="flex items-center gap-2.5 p-1.5 pr-3.5 rounded-xl bg-slate-100 dark:bg-slate-900 border-2 border-black dark:border-slate-700 shadow-[2px_2px_0px_#000]">
-                <img
-                  src="/avatar.png"
-                  alt="Rogger Brosco"
-                  className="w-7 h-7 rounded-lg object-cover border border-black"
-                />
-                <span className="font-black text-slate-900 dark:text-white">Rogger Brosco</span>
-                <span className="text-slate-400">•</span>
-                <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
-                  CTO & Arquiteto Técnico
-                </span>
+            {/* Badges de Autoridade */}
+            <div className="pt-3 flex flex-wrap items-center justify-center gap-2.5 text-xs font-mono">
+              <div className="flex items-center gap-2 p-1.5 px-3 rounded-xl bg-slate-100 dark:bg-[#12162b] border-2 border-black dark:border-indigo-900/80 shadow-[2px_2px_0px_#000]">
+                <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                <span className="font-black text-slate-900 dark:text-white">Liderança Direta de Engenharia</span>
               </div>
-
+              <div className="flex items-center gap-2 p-1.5 px-3 rounded-xl bg-slate-100 dark:bg-[#12162b] border-2 border-black dark:border-indigo-900/80 shadow-[2px_2px_0px_#000]">
+                <span className="font-bold text-slate-600 dark:text-slate-300">Contratos & Operação via</span>
+                <strong className="text-indigo-600 dark:text-cyan-400">EasyDev</strong>
+              </div>
               <a
                 href="https://github.com/rbrosco"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-mono text-xs font-black transition border-2 border-black dark:border-slate-700 shadow-[2px_2px_0px_#000]"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-[#12162b] hover:bg-slate-200 dark:hover:bg-[#181d38] text-slate-900 dark:text-white font-mono text-xs font-black transition border-2 border-black dark:border-indigo-900/80 shadow-[2px_2px_0px_#000]"
               >
                 <Github className="w-3.5 h-3.5" />
                 <span>github.com/rbrosco</span>
@@ -343,48 +330,48 @@ export default function App() {
 
           </div>
 
-          {/* Interactive Live Quick Mockup Switcher inside Hero */}
-          <div className="relative z-10 w-full max-w-4xl mx-auto mt-10 pt-6 border-t-2 border-slate-900 dark:border-slate-700 space-y-4 text-left">
+          {/* Quick Mockup Switcher inside Hero */}
+          <div className="relative z-10 w-full max-w-4xl mx-auto mt-10 pt-6 border-t-2 border-slate-900 dark:border-indigo-900/60 space-y-4 text-left">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono font-black uppercase text-slate-900 dark:text-white">
-                  Prévia em Tempo Real:
+                  Sistemas em Produção:
                 </span>
-                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
-                  (Selecione para ver o sistema funcionando)
+                <span className="text-[10px] font-mono text-slate-500 dark:text-indigo-300/70">
+                  (Selecione para navegar no protótipo)
                 </span>
               </div>
 
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setHeroPreviewTab('easyconnect')}
-                  className={`px-3 py-1 rounded-lg text-xs font-black font-mono transition border-2 ${
+                  className={`px-3 py-1 rounded-lg text-xs font-black font-mono transition border-2 cursor-pointer ${
                     heroPreviewTab === 'easyconnect'
-                      ? 'bg-[#25D366] text-black border-black shadow-[2px_2px_0px_#000]'
-                      : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-400 dark:border-slate-700'
+                      ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-black shadow-[2px_2px_0px_#000]'
+                      : 'bg-white dark:bg-[#12162b] text-slate-700 dark:text-slate-300 border-slate-400 dark:border-indigo-900/60'
                   }`}
                 >
                   📱 EasyConnect (WhatsApp)
                 </button>
                 <button
                   onClick={() => setHeroPreviewTab('planner')}
-                  className={`px-3 py-1 rounded-lg text-xs font-black font-mono transition border-2 ${
+                  className={`px-3 py-1 rounded-lg text-xs font-black font-mono transition border-2 cursor-pointer ${
                     heroPreviewTab === 'planner'
-                      ? 'bg-[#D4FF00] text-black border-black shadow-[2px_2px_0px_#000]'
-                      : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-400 dark:border-slate-700'
+                      ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white border-black shadow-[2px_2px_0px_#000]'
+                      : 'bg-white dark:bg-[#12162b] text-slate-700 dark:text-slate-300 border-slate-400 dark:border-indigo-900/60'
                   }`}
                 >
-                  📊 Planner SDR (Kanban)
+                  📊 Planner SDR (Kanban IA)
                 </button>
                 <button
                   onClick={() => setHeroPreviewTab('dripcast')}
-                  className={`px-3 py-1 rounded-lg text-xs font-black font-mono transition border-2 ${
+                  className={`px-3 py-1 rounded-lg text-xs font-black font-mono transition border-2 cursor-pointer ${
                     heroPreviewTab === 'dripcast'
-                      ? 'bg-[#00F0FF] text-black border-black shadow-[2px_2px_0px_#000]'
-                      : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-400 dark:border-slate-700'
+                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-black shadow-[2px_2px_0px_#000]'
+                      : 'bg-white dark:bg-[#12162b] text-slate-700 dark:text-slate-300 border-slate-400 dark:border-indigo-900/60'
                   }`}
                 >
-                  🚀 DripCast (Social)
+                  🚀 DripCast (Social Feed)
                 </button>
               </div>
             </div>
@@ -398,16 +385,16 @@ export default function App() {
           </div>
         </section>
 
-        {/* 2. FAIXA DE CREDIBILIDADE & PROVA TÉCNICA */}
-        <section className="bg-white dark:bg-[#0b1120] rounded-3xl p-6 sm:p-8 border-2 border-slate-900 dark:border-slate-700 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#10b981] space-y-6">
+        {/* 2. FAIXA DE CREDIBILIDADE & MÉTRICAS EM PRODUÇÃO */}
+        <section className="bg-white dark:bg-[#0c0e1e] rounded-3xl p-6 sm:p-8 border-2 border-slate-900 dark:border-indigo-900/60 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#6366f1] space-y-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {stats.map((item, idx) => {
               const Icon = item.icon;
               return (
-                <div key={idx} className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#10b981] space-y-1">
-                  <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+                <div key={idx} className="p-4 rounded-xl bg-slate-50 dark:bg-[#12162b] border-2 border-slate-900 dark:border-indigo-900/70 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1] space-y-1">
+                  <div className="flex items-center gap-1.5 text-indigo-600 dark:text-cyan-400">
                     <Icon className="w-4 h-4" />
-                    <span className="text-[10px] font-mono font-black uppercase text-slate-500 dark:text-slate-400">
+                    <span className="text-[10px] font-mono font-black uppercase text-slate-500 dark:text-indigo-300/80">
                       {item.label}
                     </span>
                   </div>
@@ -422,110 +409,47 @@ export default function App() {
             })}
           </div>
 
-          {/* Trust Strip: Logos & Tecnologias */}
-          <div className="pt-4 border-t-2 border-slate-900 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-            <span className="font-black text-slate-900 dark:text-white uppercase text-[11px] bg-[#D4FF00] text-black px-2 py-0.5 rounded border border-black">
-              SOFTWARES & TECNOLOGIAS EM PRODUÇÃO:
+          {/* Trust Strip: Softwares da EasyDev */}
+          <div className="pt-4 border-t-2 border-slate-900 dark:border-indigo-900/60 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+            <span className="font-black text-white uppercase text-[11px] bg-gradient-to-r from-violet-600 to-blue-600 px-2 py-0.5 rounded border border-black shadow-[1px_1px_0px_#000]">
+              PRODUTOS & PROJETOS DA ENGENHARIA EASYDEV:
             </span>
-            <div className="flex flex-wrap items-center gap-2 sm:gap-4 font-bold text-slate-700 dark:text-slate-300">
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">EasyDev CRM</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">Planner SDR</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">EasyConnect</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">DripCast</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">Next.js 15</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">PostgreSQL 17</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">Docker</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-black">Hermes Fleet</span>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 font-bold text-slate-700 dark:text-slate-300">
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#151933] border border-black dark:border-indigo-900 text-indigo-400">EasyDev CRM Multimoeda</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#151933] border border-black dark:border-indigo-900">EasyConnect WhatsApp</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#151933] border border-black dark:border-indigo-900">Planner SDR</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#151933] border border-black dark:border-indigo-900">Hermes Fleet IA</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#151933] border border-black dark:border-indigo-900">PostgreSQL 17</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#151933] border border-black dark:border-indigo-900">Docker Privado</span>
             </div>
           </div>
         </section>
 
-        {/* 3. OS 4 PILARES DE SOLUÇÕES (BENTO CARDS) */}
-        <section id="solucoes" className="space-y-6 scroll-mt-28">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-2">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
-                <Compass className="w-3.5 h-3.5" />
-                <span>PILARES DE ENGENHARIA</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mt-2">
-                Como ajudo sua empresa a faturar mais
-              </h2>
-            </div>
-            <p className="text-slate-600 dark:text-slate-300 text-sm max-w-md font-medium">
-              Elimino dores operacionais concretas com softwares sob medida, código limpo e arquitetura validada em produção.
-            </p>
-          </div>
+        {/* 3. DESTAQUE PRINCIPAL: HERMES AGENT CONSULTORIA & IMPLANTAÇÃO */}
+        <HermesConsultingSection />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {pillars.map((pil, idx) => {
-              const Icon = pil.icon;
-              return (
-                <BentoCard key={idx}>
-                  <div className="p-6 sm:p-8 space-y-5 flex flex-col justify-between h-full">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className={`w-11 h-11 rounded-xl ${pil.color} text-white flex items-center justify-center border-2 border-black shadow-[2px_2px_0px_#000]`}>
-                          <Icon className="w-5 h-5" />
-                        </div>
-                        <span className={`text-[10px] font-mono font-black px-2.5 py-1 rounded-md border-2 ${pil.badgeClass}`}>
-                          {pil.badge}
-                        </span>
-                      </div>
+        {/* 4. TUDO QUE EU FAÇO / SERVIÇOS (PRÁTICO, SEM ENROLAÇÃO) */}
+        <ServicesSection />
 
-                      <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
-                        {pil.title}
-                      </h3>
-
-                      {/* Problem & Solution Breakdown */}
-                      <div className="space-y-2.5 text-xs pt-1">
-                        <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/20 border-2 border-rose-300 dark:border-rose-900/60">
-                          <span className="font-black text-rose-700 dark:text-rose-400 uppercase font-mono text-[10px] block">
-                            ✕ O Problema:
-                          </span>
-                          <p className="text-slate-800 dark:text-slate-200 mt-0.5 font-medium">{pil.problem}</p>
-                        </div>
-                        <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 dark:border-emerald-600">
-                          <span className="font-black text-emerald-700 dark:text-emerald-400 uppercase font-mono text-[10px] block">
-                            ✓ A Solução:
-                          </span>
-                          <p className="text-slate-800 dark:text-slate-200 mt-0.5 font-semibold">{pil.solution}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pt-3 border-t-2 border-slate-900 dark:border-slate-700 flex items-center justify-between text-xs font-mono">
-                      <span className="text-slate-500 font-bold uppercase text-[10px]">Impacto Mensurável:</span>
-                      <span className="text-emerald-600 dark:text-emerald-400 font-black">{pil.metric}</span>
-                    </div>
-                  </div>
-                </BentoCard>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* 4. VITRINE DE SOFTWARES & PRODUTOS REAIS */}
+        {/* 5. VITRINE DE SOFTWARES PRONTOS PARA USO */}
         <ProductShowcase />
 
-        {/* 5. MANIFESTO DE ENGENHARIA DE VERDADE */}
-        <section id="manifesto" className="scroll-mt-28">
-          <AIAccelerationBanner />
-        </section>
+        {/* 6. MANIFESTO DE ENGENHARIA DE VERDADE VS AGÊNCIAS */}
+        <AIAccelerationBanner />
 
-        {/* 6. COMO TRABALHAMOS (PROCESSO EM 4 ETAPAS) */}
-        <section id="processo" className="bg-white dark:bg-[#0b1120] rounded-3xl p-6 sm:p-10 space-y-8 border-2 border-slate-900 dark:border-slate-700 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#10b981] scroll-mt-28">
+        {/* 7. COMO TRABALHAMOS (PROCESSO EM 4 ETAPAS SEM BUROCRACIA) */}
+        <section id="processo" className="bg-white dark:bg-[#0c0e1e] rounded-3xl p-6 sm:p-10 space-y-8 border-2 border-slate-900 dark:border-indigo-900/60 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#6366f1] scroll-mt-28">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-2">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
-                <span>MÉTODO SEM BUROCRACIA</span>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-gradient-to-r from-violet-600 to-blue-600 text-white text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
+                <span>MÉTODO SEM BUROCRACIA • EASYDEV</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mt-2">
                 Como tiramos seu projeto do papel
               </h2>
             </div>
             <p className="text-slate-600 dark:text-slate-300 text-sm max-w-md font-medium">
-              Sem reuniões intermináveis e sem repasse de responsabilidade. Você fala direto com quem vai programar o sistema.
+              Sem reuniões intermináveis e sem repasse de responsabilidade. Você fala direto com quem vai desenhar e liderar a entrega do software.
             </p>
           </div>
 
@@ -533,10 +457,10 @@ export default function App() {
             {processSteps.map((step, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#10b981] space-y-3"
+                className="p-5 rounded-2xl bg-slate-50 dark:bg-[#12162b] border-2 border-slate-900 dark:border-indigo-900/70 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1] space-y-3"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-black text-indigo-600 dark:text-[#D4FF00] font-mono">
+                  <span className="text-3xl font-black text-indigo-600 dark:text-cyan-400 font-mono">
                     {step.num}
                   </span>
                   <span className="text-[10px] font-mono font-black px-2 py-0.5 rounded bg-white dark:bg-slate-950 border border-black text-slate-700 dark:text-slate-300">
@@ -554,89 +478,89 @@ export default function App() {
           </div>
 
           {/* Quick CTA inside process */}
-          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-500 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+          <div className="p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border-2 border-indigo-500 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
             <div className="flex items-center gap-2.5 text-slate-900 dark:text-slate-100 font-bold">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-              <span>Garantia de Entrega: Escopo delimitado, código testado e suporte contínuo pós-lançamento.</span>
+              <CheckCircle2 className="w-5 h-5 text-indigo-600 dark:text-cyan-400 shrink-0" />
+              <span>Garantia de Entrega EasyDev: Escopo claro, código testado, emissão de nota fiscal e suporte contínuo pós-lançamento.</span>
             </div>
             <a
-              href="https://wa.me/5541991747318?text=Olá%20Rogger,%20quero%20agendar%20a%20conversa%20inicial%20de%2030%20minutos"
+              href="https://wa.me/5541991747318?text=Olá%20Rogger,%20quero%20agendar%20uma%20conversa%20técnica%20de%2030%20minutos"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-black transition border-2 border-black shadow-[2px_2px_0px_#000] shrink-0"
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white font-black transition border-2 border-black shadow-[2px_2px_0px_#000] shrink-0"
             >
-              Agendar Conversa Inicial (30 min)
+              Agendar Conversa Técnica (30 min)
             </a>
           </div>
         </section>
 
-        {/* 7. SOBRE ROGGER BROSCO (AUTORIDADE DIRETA) */}
+        {/* 8. SOBRE ROGGER BROSCO (AUTORIDADE & CTO EASYDEV) */}
         <section id="sobre" className="space-y-8 scroll-mt-28">
-          <div className="bg-white dark:bg-[#0b1120] rounded-3xl p-6 sm:p-10 border-2 border-slate-900 dark:border-slate-700 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#10b981] space-y-8">
+          <div className="bg-white dark:bg-[#0c0e1e] rounded-3xl p-6 sm:p-10 border-2 border-slate-900 dark:border-indigo-900/60 shadow-[6px_6px_0px_0px_#000] dark:shadow-[6px_6px_0px_0px_#6366f1] space-y-8">
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-gradient-to-r from-violet-600 to-blue-600 text-white text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
                   <span>QUEM ESTÁ POR TRÁS</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-                  Engenharia sênior direto com quem constrói — sem intermediários ou repasse para estagiários.
+                  Engenharia sênior com liderança executiva — sem intermediários ou repasse de tarefas.
                 </h3>
                 <div className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed space-y-3 font-medium">
                   <p>
-                    Sou CTO na EasyDev e fundador da Broscotech. Nos últimos 7 anos, projetei e coloquei em produção sistemas para empresas que precisavam de performance, estabilidade e automação diária.
+                    Sou Sócio & CTO na <strong className="text-indigo-600 dark:text-cyan-400">EasyDev</strong> e fundador da Broscotech. Nos últimos 7 anos, projetei e coloquei em produção sistemas para empresas que precisavam de performance extrema, estabilidade e automação ininterrupta.
                   </p>
                   <p>
-                    Quando você contrata um projeto comigo, você fala direto com o arquiteto técnico: da regra de negócio à linha final de deploy.
+                    Minha missão na EasyDev é garantir que cada linha de código gere valor concreto para o negócio do cliente, desde a modelagem do banco de dados até a orquestração de frotas autônomas de IA.
                   </p>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-3 pt-2">
                   <a
+                    href="https://easydev.com.br"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 text-white hover:from-violet-500 hover:to-blue-500 font-mono text-xs font-black transition border-2 border-black shadow-[3px_3px_0px_#000]"
+                  >
+                    <Building2 className="w-4 h-4" />
+                    <span>Conhecer a EasyDev Corporativa</span>
+                  </a>
+                  <a
                     href="https://github.com/rbrosco"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 font-mono text-xs font-black transition border-2 border-black shadow-[3px_3px_0px_#000]"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-[#12162b] hover:bg-slate-100 dark:hover:bg-[#181d38] text-slate-900 dark:text-white text-xs font-black transition border-2 border-black dark:border-indigo-900 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#6366f1]"
                   >
-                    <Github className="w-4 h-4" />
-                    <span>github.com/rbrosco (Código Aberto)</span>
-                  </a>
-                  <a
-                    href="https://dev.easydev.com.br"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-white text-xs font-black transition border-2 border-black dark:border-slate-700 shadow-[3px_3px_0px_#000] dark:shadow-[3px_3px_0px_#10b981]"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5 text-indigo-500" />
-                    <span>Conhecer a EasyDev CRM</span>
+                    <Github className="w-4 h-4 text-indigo-400" />
+                    <span>github.com/rbrosco (Open Source)</span>
                   </a>
                 </div>
               </div>
 
               {/* Founder Avatar & Snapshot */}
-              <div className="lg:col-span-4 flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#10b981] space-y-3">
+              <div className="lg:col-span-4 flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 dark:bg-[#12162b] border-2 border-slate-900 dark:border-indigo-900/70 shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#6366f1] space-y-3">
                 <div className="relative">
                   <img
                     src="/avatar.png"
                     alt="Rogger Brosco"
                     className="w-28 h-28 rounded-2xl object-cover border-3 border-black shadow-[4px_4px_0px_#000]"
                   />
-                  <span className="absolute -bottom-2 -right-2 px-2 py-0.5 rounded-md bg-[#D4FF00] text-black font-mono font-black text-[10px] border-2 border-black shadow-[2px_2px_0px_#000]">
+                  <span className="absolute -bottom-2 -right-2 px-2 py-0.5 rounded-md bg-gradient-to-r from-violet-600 to-blue-600 text-white font-mono font-black text-[10px] border-2 border-black shadow-[2px_2px_0px_#000]">
                     ONLINE ✓
                   </span>
                 </div>
                 <div>
                   <h4 className="font-black text-slate-900 dark:text-white text-base">Rogger Brosco</h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-bold">CTO & Engenheiro de Software</p>
+                  <p className="text-xs text-indigo-600 dark:text-indigo-400 font-bold">Sócio & CTO @ EasyDev</p>
                 </div>
-                <div className="text-[11px] font-mono text-slate-900 dark:text-white font-black px-3 py-1 rounded-md bg-[#D4FF00] border-2 border-black">
+                <div className="text-[11px] font-mono text-white font-black px-3 py-1 rounded-md bg-slate-900 dark:bg-indigo-950 border-2 border-black dark:border-indigo-700">
                   Curitiba • Remoto Global
                 </div>
               </div>
             </div>
 
             {/* Trajetória Timeline */}
-            <div className="space-y-4 pt-6 border-t-2 border-slate-900 dark:border-slate-700">
+            <div className="space-y-4 pt-6 border-t-2 border-slate-900 dark:border-indigo-900/60">
               <h4 className="text-xs font-mono font-black uppercase tracking-wider text-slate-900 dark:text-white">
                 Trajetória Profissional em Destaque:
               </h4>
@@ -644,7 +568,7 @@ export default function App() {
                 {timeline.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_#000] flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
+                    className="p-4 rounded-xl bg-slate-50 dark:bg-[#12162b] border-2 border-slate-900 dark:border-indigo-900/70 shadow-[2px_2px_0px_#000] flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
@@ -655,13 +579,13 @@ export default function App() {
                             href={item.companyUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center gap-1"
+                            className="font-bold text-indigo-600 dark:text-cyan-400 hover:underline inline-flex items-center gap-1"
                           >
                             <span>{item.company}</span>
                             <ExternalLink className="w-3 h-3" />
                           </a>
                         ) : (
-                          <span className="font-bold text-indigo-600 dark:text-indigo-400">{item.company}</span>
+                          <span className="font-bold text-indigo-600 dark:text-cyan-400">{item.company}</span>
                         )}
                       </div>
                       <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-medium">{item.description}</p>
@@ -675,11 +599,11 @@ export default function App() {
             </div>
 
             {/* Technical Stack Interativo */}
-            <div className="space-y-4 pt-6 border-t-2 border-slate-900 dark:border-slate-700">
+            <div className="space-y-4 pt-6 border-t-2 border-slate-900 dark:border-indigo-900/60">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <h4 className="text-xs font-mono font-black uppercase tracking-wider text-slate-900 dark:text-white">
-                    Stack em Produção:
+                    Stack Técnica em Produção:
                   </h4>
                   <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">Tecnologias testadas em servidores reais.</p>
                 </div>
@@ -691,8 +615,8 @@ export default function App() {
                       onClick={() => setActiveTab(tab)}
                       className={`px-3 py-1 rounded-lg text-xs font-black capitalize transition cursor-pointer border-2 ${
                         activeTab === tab
-                          ? 'bg-slate-900 text-white dark:bg-[#D4FF00] dark:text-black border-black shadow-[2px_2px_0px_#000]'
-                          : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 hover:border-black'
+                          ? 'bg-gradient-to-r from-violet-600 to-blue-600 text-white border-black shadow-[2px_2px_0px_#000]'
+                          : 'bg-white dark:bg-[#12162b] text-slate-700 dark:text-slate-300 border-slate-300 dark:border-indigo-900/60 hover:border-black'
                       }`}
                     >
                       {tab === 'all' ? 'Todos' : tab}
@@ -707,14 +631,14 @@ export default function App() {
                   return (
                     <div
                       key={idx}
-                      className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_#000] flex items-center gap-2.5"
+                      className="p-3 rounded-xl bg-slate-50 dark:bg-[#12162b] border-2 border-slate-900 dark:border-indigo-900/70 shadow-[2px_2px_0px_#000] flex items-center gap-2.5"
                     >
                       <div className="w-8 h-8 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-black flex items-center justify-center shrink-0">
-                        <Icon className="w-4 h-4" />
+                        <Icon className="w-4 h-4 text-indigo-400" />
                       </div>
                       <div className="min-w-0">
                         <div className="font-black text-slate-900 dark:text-white text-xs truncate">{skill.name}</div>
-                        <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono font-bold">{skill.level}</div>
+                        <div className="text-[10px] text-slate-500 dark:text-indigo-300/80 font-mono font-bold">{skill.level}</div>
                       </div>
                     </div>
                   );
@@ -725,23 +649,23 @@ export default function App() {
           </div>
         </section>
 
-        {/* 8. CONTATO & FORMULÁRIO WHATSAPP */}
+        {/* 9. CONTATO & FORMULÁRIO WHATSAPP */}
         <section id="contato" className="scroll-mt-28">
-          <div className="rounded-3xl bg-white dark:bg-[#0b1120] border-2 border-slate-900 dark:border-slate-700 p-6 sm:p-12 shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#10b981] space-y-8">
+          <div className="rounded-3xl bg-white dark:bg-[#0c0e1e] border-2 border-slate-900 dark:border-indigo-900/60 p-6 sm:p-12 shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#6366f1] space-y-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
               
               {/* Left Column (5 cols) */}
               <div className="lg:col-span-5 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#D4FF00] text-black text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
-                  <span>VAMOS CONVERSAR SOBRE SEU SOFTWARE</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-gradient-to-r from-violet-600 to-blue-600 text-white text-xs font-mono font-black border-2 border-black -rotate-1 shadow-[2px_2px_0px_#000]">
+                  <span>VAMOS CONVERSAR SOBRE SEU PROJETO</span>
                 </div>
 
                 <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-                  Tem um processo que toma tempo demais ou uma ideia de produto para colocar no ar?
+                  Tem um processo que toma tempo demais ou uma demanda crítica de software?
                 </h2>
 
                 <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-medium">
-                  Não perca semanas com soluções genéricas que não atendem sua rotina. Vamos desenhar um software ou automação que gere resultados imediatos para sua empresa.
+                  Não perca semanas com soluções genéricas. Vamos desenhar um software, frota de IA ou automação que gere resultados imediatos para sua empresa através da estrutura corporativa da EasyDev.
                 </p>
 
                 {/* Direct Contacts List */}
@@ -750,31 +674,46 @@ export default function App() {
                     href="https://wa.me/5541991747318"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border-2 border-emerald-500 flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white shadow-[2px_2px_0px_#000]"
+                    className="p-3.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/30 border-2 border-indigo-500 flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white shadow-[2px_2px_0px_#000]"
                   >
                     <div className="flex items-center gap-2.5">
-                      <Phone className="w-4 h-4 text-emerald-600" />
+                      <Phone className="w-4 h-4 text-indigo-600 dark:text-cyan-400" />
                       <span>WhatsApp Direto: +55 (41) 99174-7318</span>
                     </div>
-                    <span className="text-[10px] font-mono font-black text-emerald-700 dark:text-emerald-400 bg-emerald-200 dark:bg-emerald-900/60 px-2 py-0.5 rounded border border-emerald-500">
+                    <span className="text-[10px] font-mono font-black text-white bg-gradient-to-r from-violet-600 to-blue-600 px-2 py-0.5 rounded border border-black">
                       RESPOSTA RÁPIDA ⚡
                     </span>
                   </a>
 
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 flex items-center gap-2.5 text-xs font-bold text-slate-900 dark:text-white shadow-[2px_2px_0px_#000]">
-                    <Mail className="w-4 h-4 text-indigo-500" />
+                  <a
+                    href="https://easydev.com.br"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#12162b] border-2 border-slate-900 dark:border-indigo-900/70 flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white shadow-[2px_2px_0px_#000]"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Building2 className="w-4 h-4 text-cyan-400" />
+                      <span>EasyDev Tecnologia Corporativa</span>
+                    </div>
+                    <span className="text-[10px] font-mono text-indigo-400 underline">
+                      easydev.com.br
+                    </span>
+                  </a>
+
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#12162b] border-2 border-slate-900 dark:border-indigo-900/70 flex items-center gap-2.5 text-xs font-bold text-slate-900 dark:text-white shadow-[2px_2px_0px_#000]">
+                    <Mail className="w-4 h-4 text-indigo-400" />
                     <span>Email: contato@broscotech.com.br</span>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 flex items-center gap-2.5 text-xs font-bold text-slate-900 dark:text-white shadow-[2px_2px_0px_#000]">
-                    <MapPin className="w-4 h-4 text-rose-500" />
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#12162b] border-2 border-slate-900 dark:border-indigo-900/70 flex items-center gap-2.5 text-xs font-bold text-slate-900 dark:text-white shadow-[2px_2px_0px_#000]">
+                    <MapPin className="w-4 h-4 text-violet-400" />
                     <span>Sede: Curitiba, PR • Atendimento Global</span>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: Interactive WhatsApp Dispatch Form (7 cols) */}
-              <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#10b981]">
+              {/* Right Column: WhatsApp Form */}
+              <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-slate-50 dark:bg-[#12162b] border-2 border-slate-900 dark:border-indigo-900/70 shadow-[4px_4px_0px_#000] dark:shadow-[4px_4px_0px_#6366f1]">
                 <form onSubmit={handleSendMessage} className="space-y-4">
                   <div className="space-y-1">
                     <span className="text-xs font-mono font-black uppercase text-slate-900 dark:text-white">
@@ -787,7 +726,7 @@ export default function App() {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Ex: Carlos Mendes"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-slate-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 shadow-inner"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-indigo-900 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 shadow-inner"
                     />
                   </div>
 
@@ -803,12 +742,12 @@ export default function App() {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="carlos@empresa.com.br"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-slate-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 shadow-inner"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-indigo-900 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 shadow-inner"
                       />
                     </div>
                     <div className="space-y-1">
                       <span className="text-xs font-mono font-black uppercase text-slate-900 dark:text-white">
-                        Tipo de Projeto:
+                        Tipo de Demanda:
                       </span>
                       <input
                         type="text"
@@ -816,15 +755,15 @@ export default function App() {
                         required
                         value={formData.subject}
                         onChange={handleInputChange}
-                        placeholder="Ex: Licenciar EasyConnect / Software Novo"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-slate-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 shadow-inner"
+                        placeholder="Ex: Consultoria Hermes / SaaS Novo"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-indigo-900 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 shadow-inner"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-1">
                     <span className="text-xs font-mono font-black uppercase text-slate-900 dark:text-white">
-                      Conte sobre sua empresa e seu desafio:
+                      Conte sobre sua empresa e o desafio:
                     </span>
                     <textarea
                       name="message"
@@ -832,16 +771,16 @@ export default function App() {
                       required
                       value={formData.message}
                       onChange={handleInputChange}
-                      placeholder="Qual o maior gargalo operacional hoje ou o que precisa automatizar?"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-slate-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 shadow-inner"
+                      placeholder="Qual o maior gargalo operacional hoje ou o que precisa ser construído?"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-950 border-2 border-slate-900 dark:border-indigo-900 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 shadow-inner"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-xl bg-[#D4FF00] hover:bg-yellow-300 text-black font-black text-xs transition border-2 border-black shadow-[4px_4px_0px_#000] flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white font-black text-xs transition border-2 border-black shadow-[4px_4px_0px_#000] flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <Send className="w-4 h-4 fill-black" />
+                    <Send className="w-4 h-4 fill-white" />
                     <span>Enviar Mensagem Direta Para Rogger no WhatsApp ⚡</span>
                   </button>
                 </form>
@@ -853,25 +792,25 @@ export default function App() {
 
       </main>
 
-      {/* Neo-Brutalist Clean Footer */}
-      <footer className="border-t-2 border-slate-900 dark:border-slate-700 bg-white dark:bg-[#060911] py-8 text-xs">
+      {/* Neo-Brutalist Footer */}
+      <footer className="border-t-2 border-slate-900 dark:border-indigo-900/60 bg-white dark:bg-[#070914] py-8 text-xs">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
           <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-bold">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>© {new Date().getFullYear()} BROSCOTECH • ARQUITETURA & SOFTWARES SOB MEDIDA</span>
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span>© {new Date().getFullYear()} ROGGER BROSCO • SÓCIO & CTO @ EASYDEV</span>
           </div>
 
           <div className="flex items-center gap-4 text-slate-600 dark:text-slate-400 font-bold">
+            <a href="https://easydev.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-white transition text-indigo-400 underline">
+              EasyDev Oficial
+            </a>
+            <span>•</span>
             <a href="https://github.com/rbrosco" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition">
               GitHub
             </a>
             <span>•</span>
-            <a href="https://dev.easydev.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition">
-              EasyDev CRM
-            </a>
-            <span>•</span>
-            <a href="https://planner-sdr.broscotech.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition">
-              Planner SDR
+            <a href="#hermes-consultoria" className="hover:text-black dark:hover:text-white transition">
+              Hermes IA
             </a>
             <span>•</span>
             <a href="#hero" className="hover:text-black dark:hover:text-white transition">

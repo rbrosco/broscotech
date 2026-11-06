@@ -17,8 +17,8 @@
   box-shadow: 4px 4px 0px 0px #000;
 }
 .dark .neo-box {
-  border: 2px solid #334155;
-  box-shadow: 4px 4px 0px 0px #10b981;
+  border: 2px solid #312e81;
+  box-shadow: 4px 4px 0px 0px #6366f1;
 }
 
 .neo-box-sm {
@@ -26,8 +26,8 @@
   box-shadow: 2px 2px 0px 0px #000;
 }
 .dark .neo-box-sm {
-  border: 2px solid #475569;
-  box-shadow: 2px 2px 0px 0px #10b981;
+  border: 2px solid #3730a3;
+  box-shadow: 2px 2px 0px 0px #6366f1;
 }
 
 .neo-btn {
@@ -46,15 +46,15 @@
 
 .dark .neo-btn {
   border: 2px solid #ffffff;
-  box-shadow: 3px 3px 0px 0px #10b981;
+  box-shadow: 3px 3px 0px 0px #8b5cf6;
 }
 .dark .neo-btn:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0px 0px #10b981;
+  box-shadow: 5px 5px 0px 0px #8b5cf6;
 }
 .dark .neo-btn:active {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px 0px #10b981;
+  box-shadow: 1px 1px 0px 0px #8b5cf6;
 }
 
 /* Marquee infinite scroll */
@@ -80,18 +80,18 @@
   background: #F1F5F9;
 }
 .dark ::-webkit-scrollbar-track {
-  background: #0B0F19;
+  background: #090a1a;
 }
 ::-webkit-scrollbar-thumb {
   background: #CBD5E1;
   border-radius: 4px;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #312e81;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
 }
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #4338ca;
 }
