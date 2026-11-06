@@ -158,95 +158,51 @@ export default function App() {
       <header className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md bg-white/90 dark:bg-[#070914]/85 border-b border-slate-200/80 dark:border-indigo-900/40 shadow-sm transition-all duration-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           
-          {/* Logo & Autoridade Broscotech com Monograma Autoral B Futurista */}
+          {/* Logo & Autoridade Broscotech com Símbolo Minimalista Abstrato e Geométrico */}
           <a href="#" className="flex items-center gap-2.5 sm:gap-3 shrink-0 group select-none">
-            {/* Monograma Autoral B Diferentaço Isométrico */}
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0">
-              <div className="absolute -inset-0.5 bg-gradient-to-tr from-violet-600 via-indigo-500 to-cyan-400 rounded-xl blur-[3px] opacity-75 group-hover:opacity-100 transition duration-300" />
+            {/* Símbolo Abstrato Geométrico Angular (Estilo Linear/Vercel: Monograma B em 2 trapézios facetados com corte cirúrgico) */}
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 flex items-center justify-center">
+              <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/30 via-indigo-600/20 to-cyan-500/30 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               <svg
-                viewBox="0 0 40 40"
-                className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 drop-shadow-[2px_2px_0px_#000]"
+                viewBox="0 0 32 32"
+                className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)] transition-transform duration-200 group-hover:scale-105"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <defs>
-                  <linearGradient id="brosco-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#8b5cf6" />
-                    <stop offset="50%" stopColor="#6366f1" />
+                  <linearGradient id="brosco-grad-top" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#7c3aed" />
+                    <stop offset="100%" stopColor="#4f46e5" />
+                  </linearGradient>
+                  <linearGradient id="brosco-grad-bot" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#6366f1" />
                     <stop offset="100%" stopColor="#06b6d4" />
                   </linearGradient>
-                  <linearGradient id="brosco-grad-dark" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#1e1b4b" />
-                    <stop offset="100%" stopColor="#090d1f" />
-                  </linearGradient>
-                  <linearGradient id="brosco-neon" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#c084fc" />
-                    <stop offset="100%" stopColor="#22d3ee" />
-                  </linearGradient>
                 </defs>
-                
-                {/* Moldura Neobrutalista Futurista */}
-                <rect
-                  x="2"
-                  y="2"
-                  width="36"
-                  height="36"
-                  rx="10"
-                  fill="url(#brosco-grad-dark)"
-                  stroke="#000000"
-                  strokeWidth="2"
-                />
-                
-                {/* Micro Circuitos */}
+
+                {/* Trapézio Superior Angular com Corte Cirúrgico */}
                 <path
-                  d="M5 14H11M29 26H35M14 5V11M26 29V35"
-                  stroke="url(#brosco-neon)"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  opacity="0.5"
+                  d="M 4 3 L 19 3 L 26 10 L 18 14 L 4 14 Z"
+                  fill="url(#brosco-grad-top)"
                 />
 
-                {/* Tronco do B */}
+                {/* Trapézio Inferior Angular com Corte Cirúrgico Paralelo */}
                 <path
-                  d="M11 9H17C17 9 17 31 17 31H11C9.89543 31 9 30.1046 9 29V11C9 9.89543 9.89543 9 11 9Z"
-                  fill="url(#brosco-grad-1)"
-                  stroke="#000000"
-                  strokeWidth="1.5"
+                  d="M 4 16.5 L 18 16.5 L 27.5 23 L 20.5 30 L 4 30 Z"
+                  fill="url(#brosco-grad-bot)"
                 />
-
-                {/* Loop Superior B */}
-                <path
-                  d="M17 9H24C27.3137 9 30 11.4624 30 14.5C30 17.5376 27.3137 20 24 20H17V9Z"
-                  fill="url(#brosco-neon)"
-                  stroke="#000000"
-                  strokeWidth="1.5"
-                />
-                <circle cx="22.5" cy="14.5" r="2.2" fill="#090d1f" stroke="#000000" strokeWidth="1" />
-
-                {/* Loop Inferior B Mais Largo */}
-                <path
-                  d="M17 20H25.5C29.0899 20 32 22.4624 32 25.5C32 28.5376 29.0899 31 25.5 31H17V20Z"
-                  fill="url(#brosco-grad-1)"
-                  stroke="#000000"
-                  strokeWidth="1.5"
-                />
-                <circle cx="23.5" cy="25.5" r="2.5" fill="#090d1f" stroke="#000000" strokeWidth="1" />
-
-                {/* Ponto Neon Vértice */}
-                <circle cx="30" cy="11" r="1.5" fill="#22d3ee" />
               </svg>
             </div>
 
             {/* Wordmark Broscotech */}
-            <div className="shrink-0 whitespace-nowrap">
+            <div className="flex flex-col justify-center shrink-0 whitespace-nowrap">
               <div className="flex items-center gap-1.5 shrink-0 whitespace-nowrap">
-                <span className="font-black text-sm sm:text-base tracking-wider text-slate-900 dark:text-white uppercase font-mono group-hover:tracking-widest transition-all duration-300 shrink-0 whitespace-nowrap">
+                <span className="font-bold text-sm sm:text-[15px] tracking-[0.14em] text-slate-900 dark:text-white uppercase font-sans group-hover:tracking-[0.16em] transition-all duration-300 shrink-0 whitespace-nowrap">
                   BROSCO<span className="bg-gradient-to-r from-violet-500 via-indigo-400 to-cyan-400 bg-clip-text text-transparent">TECH</span>
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shrink-0" />
               </div>
-              <span className="text-[10px] font-mono text-slate-500 dark:text-indigo-300 font-bold block leading-none shrink-0 whitespace-nowrap">
-                por Rogger Brosco • CTO EasyDev
+              <span className="text-[10px] font-sans text-slate-500 dark:text-slate-400 font-medium tracking-normal block leading-tight shrink-0 whitespace-nowrap">
+                by Rogger Brosco <span className="text-slate-400 dark:text-indigo-400/70">•</span> CTO EasyDev
               </span>
             </div>
           </a>
